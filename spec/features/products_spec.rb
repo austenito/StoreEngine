@@ -17,4 +17,9 @@ describe 'browsing products' do
     visit '/'
     page.should have_content('somedescription')
   end
+
+  it "has a buy button" do
+    visit '/'
+    page.should have_link('Buy!', href: '/checkout')
+  end
 end

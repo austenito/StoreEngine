@@ -1,6 +1,8 @@
 StoreEngine::Application.routes.draw do
   root :to => 'products#index'
 
+  match '/checkout' => 'checkout#view'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
