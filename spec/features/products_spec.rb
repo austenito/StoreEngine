@@ -18,8 +18,16 @@ describe 'browsing products' do
     page.should have_content('somedescription')
   end
 
-  it "has a buy button" do
-    visit '/'
-    page.should have_link('Buy!', href: '/checkout')
+  describe "buy link" do 
+    it "has a buy button" do
+      visit '/'
+      page.should have_link('Buy!', href: '/checkout')
+    end
+
+    it "redirects to the checkout page from the buy button" do 
+      visit '/'
+      click_link("Buy!")
+      current_path.should == '/checkout'
+    end 
   end
 end
