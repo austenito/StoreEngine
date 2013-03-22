@@ -1,20 +1,48 @@
-%table{id: 'products'}
-  %tr
-    %td cool beans
-    %td 1
-    %td $2.00
-    %td $2.00
-%form
+%table#cart-summary
+  %thead
+    %tr
+      %th Item Name
+      %th Price
+      %th Quantity
+      %th Total
+  %tbody
+    %tr
+      %td cool beans
+      %td $2.00
+      %td 1
+      %td $2.00
+
+%form#billing
+  %label{for: 'firstName'}First Name:
   %input{type: 'text', name: 'firstName'}
+  %br
+  %label{for: 'lastName'}Last Name:
   %input{type: 'text', name: 'lastName'}
+  %br
+  %label{for: 'Credit Card Number'}Credit Card Number:
   %input{type: 'text', name: 'creditCardNumber'}
+  %br
+  %label{for: 'Expiration Date'}Expiration Date:
   %input{type: 'text', name: 'expirationDate'}
+  %br
+  %label{for: 'addressLine1'}Address Line 1:
   %input{type: 'text', name: 'addressLine1'}
+  %br
+  %label{for: 'addressLine2'}Address Line 2:
   %input{type: 'text', name: 'addressLine2'}
+  %br
+  %label{for: 'city'}City:
   %input{type: 'text', name: 'city'}
+  %br
+  %label{for: 'state'}State:
   %input{type: 'text', name: 'state'}
+  %br
+  %label{for: 'zipcode'}Zipcode:
   %input{type: 'text', name: 'zipcode'}
+  %br
+  %label{for: 'email'}E-mail:
   %input{type: 'text', name: 'email'}
 
 %a{href: '/checkout_confirmation'}Checkout
+/= liink_to "Checkout", checkout_confirmation_path
 = link_to "Cancel", root_path

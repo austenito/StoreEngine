@@ -1,5 +1,9 @@
-= @products.first.name
-
-= @products.first.description
+#products
+  .thumbnail
+    %img{src: "http://placekitten.com/250/350"}
+  .name
+    = @products.first.name
+  .description
+    = @products.first.description
 
 %a{:href => '/checkout'}Buy!
