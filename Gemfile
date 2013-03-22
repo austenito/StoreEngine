@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'rspec-rails'
 gem 'capybara'
 gem 'haml-rails'
+gem 'rails-boilerplate'
 
 
 # Gems used only for assets and not required

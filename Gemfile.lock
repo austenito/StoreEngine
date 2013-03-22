@@ -88,6 +88,7 @@ GEM
       activesupport (= 3.2.12)
       bundler (~> 1.0)
       railties (= 3.2.12)
+    rails-boilerplate (0.1.9)
     railties (3.2.12)
       actionpack (= 3.2.12)
       activesupport (= 3.2.12)
@@ -148,6 +149,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   rails (= 3.2.12)
+  rails-boilerplate
   rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3
