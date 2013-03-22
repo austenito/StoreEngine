@@ -29,12 +29,23 @@ describe "checkout process" do
     page.should have_field("email")
   end 
 
-  it "has a buy button" do 
-    pending
+  context "buy button" do
+
+    it "has a buy button" do 
+      visit '/checkout'
+      page.should have_link("Checkout", href: '/checkout_confirmation')
+    end
+
+    it "redirects to the confirmation page" do
+      visit '/checkout'
+      click_link("Checkout")
+      current_path.should == '/checkout_confirmation'
+    end
   end
 
   it "has a cancel button" do 
     pending
+    visit '/checkout'
   end 
 
 end
