@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "checkout process" do
 
-  let(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
+  let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
 
   it "has a table of our current cart"  do
     visit '/checkout'
-    within(:xpath, '//table') do 
+    within(:xpath, '//table') do
       find(:xpath, '//tr/td[position()=1]').should have_content(product.name)
       find(:xpath, '//tr/td[position()=2]').should have_content('1')
       find(:xpath, '//tr/td[position()=3]').should have_content(product.price)
@@ -27,11 +27,11 @@ describe "checkout process" do
     page.should have_field("state")
     page.should have_field("zipcode")
     page.should have_field("email")
-  end 
+  end
 
   context "buy button" do
 
-    it "has a buy button" do 
+    it "has a buy button" do
       visit '/checkout'
       page.should have_link("Checkout", href: '/checkout_confirmation')
     end
@@ -43,10 +43,11 @@ describe "checkout process" do
     end
   end
 
-  it "has a cancel button" do 
-    pending
+  it "has a cancel button" do
     visit '/checkout'
-  end 
+    click_link("Cancel")
+    current_path.should == '/'
+  end
 
 end
 
