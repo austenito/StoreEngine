@@ -11,9 +11,11 @@ gem 'haml-rails'
 gem 'rails-boilerplate'
 gem 'pg'
 
-group :development do
+group :development, :test do
   gem 'heroku'
   gem 'sqlite3'
+# Use unicorn as the app server
+  gem 'unicorn'
 end
 
 
@@ -37,8 +39,6 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
