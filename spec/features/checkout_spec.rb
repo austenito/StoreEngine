@@ -15,30 +15,17 @@ describe "checkout process" do
     end
   end
 
-  it "has a form for user information" do
-    visit '/checkout'
-    page.should have_field("firstName")
-    page.should have_field("lastName")
-    page.should have_field("creditCardNumber")
-    page.should have_field("expirationDate")
-    page.should have_field("addressLine1")
-    page.should have_field("addressLine2")
-    page.should have_field("city")
-    page.should have_field("state")
-    page.should have_field("zipcode")
-    page.should have_field("email")
-  end
-
   it "has a cancel button" do
     visit '/checkout'
     click_link("Cancel")
     current_path.should == '/'
   end
 
-  context "billing information" do
+  context "when a user clicks checkout" do
 
-    context "valid billing info" do
-      it "goes to the confirmation page" do
+    context "and entered valid billing info" do
+
+      before(:each) do 
         visit '/checkout'
         fill_in('firstName', with: "Bob")
         fill_in('lastName', with: "Smith")
@@ -52,13 +39,18 @@ describe "checkout process" do
         fill_in('email', with: "bob_smith@gmail.com")
 
         click_button("Checkout")
-
-        current_path.should eq '/checkout_confirmation'
-
       end
+
+      it "then the user is sent to the confirmation page" do
+        current_path.should eq '/checkout_confirmation'
+      end
+
+      it "then creates a new order" do 
+         expect(Order.count).to eq 1
+      end
+      
     end
   end
-
 end
 
 

@@ -4,6 +4,7 @@ class CheckoutController < ApplicationController
   end
 
   def confirm
-
+    Order.create(product_id: 1, quantity: params[:quantity])
   end
+
 end
