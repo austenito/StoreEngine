@@ -4,7 +4,7 @@
     %td 1
     %td $2.00
     %td $2.00
-%form
+%form{action: '/checkout_confirmation', method: 'post'}
   %input{type: 'text', name: 'firstName'}
   %input{type: 'text', name: 'lastName'}
   %input{type: 'text', name: 'creditCardNumber'}
@@ -15,6 +15,6 @@
   %input{type: 'text', name: 'state'}
   %input{type: 'text', name: 'zipcode'}
   %input{type: 'text', name: 'email'}
+  %input{type: 'submit', value: 'Checkout'}
 
-%a{href: '/checkout_confirmation'}Checkout
 = link_to "Cancel", root_path

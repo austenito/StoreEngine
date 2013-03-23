@@ -29,24 +29,34 @@ describe "checkout process" do
     page.should have_field("email")
   end
 
-  context "buy button" do
-
-    it "has a buy button" do
-      visit '/checkout'
-      page.should have_link("Checkout", href: '/checkout_confirmation')
-    end
-
-    it "redirects to the confirmation page" do
-      visit '/checkout'
-      click_link("Checkout")
-      current_path.should == '/checkout_confirmation'
-    end
-  end
-
   it "has a cancel button" do
     visit '/checkout'
     click_link("Cancel")
     current_path.should == '/'
+  end
+
+  context "billing information" do
+
+    context "valid billing info" do
+      it "goes to the confirmation page" do
+        visit '/checkout'
+        fill_in('firstName', with: "Bob")
+        fill_in('lastName', with: "Smith")
+        fill_in('creditCardNumber', with: 4916618311549608)
+        fill_in('expirationDate', with: "05/12")
+        fill_in('addressLine1', with: "1062 Delaware Street")
+        fill_in('addressLine2', with: "")
+        fill_in('city', with: "Denver")
+        fill_in('state', with: "CO")
+        fill_in('zipcode', with: "80204")
+        fill_in('email', with: "bob_smith@gmail.com")
+
+        click_button("Checkout")
+
+        current_path.should eq '/checkout_confirmation'
+
+      end
+    end
   end
 
 end
