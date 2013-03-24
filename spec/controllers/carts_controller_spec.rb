@@ -3,6 +3,7 @@ require 'spec_helper'
 describe CartsController do
 
   let!(:product){Product.create!(name: 'name', description: 'description')}
+  let!(:product2){Product.create!(name: 'name2', description: 'description')}
 
   context "when a buy button has been clicked for a product" do 
 
@@ -31,4 +32,27 @@ describe CartsController do
     end
   end
 
+    context "adding the first item to the cart" do
+      it "adds the newly created cart id to the current session" do
+        post :add_item, { product_id: product.id }
+        expect(session[:cart_id]).to_not be_nil
+      end   
+    end
+
+    context "adding another item to an existing cart" do
+
+      it "adds to the cart" do
+        post :add_item, { product_id: product.id }
+        post :add_item, { product_id: product2.id }
+        items = [product, product2]
+        expect(Cart.find_by_id(session[:cart_id]).products).to match_array items
+      end
+
+      it "does not create a new cart" do
+        post :add_item, { product_id: product.id }
+        post :add_item, { product_id: product2.id }
+        expect(Cart.count).to eq 1
+      end
+
+    end
 end

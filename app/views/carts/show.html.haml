@@ -1,1 +1,14 @@
-Your cart is empty!
+%table
+  -@cart.products.each do |product|
+    %tr
+      %td 
+        = product.name
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity
+      %td
+        = product.price
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+
+
+
