@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Order do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "validation" do
+    it "is valid when it has a product" do
+    end
+
+    it "is valid when it has a quantity of positive value" do
+    end
+
+  end
+
 end

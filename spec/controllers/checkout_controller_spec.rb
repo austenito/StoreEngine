@@ -22,12 +22,27 @@ describe CheckoutController do
       end 
     end 
 
-    context "when the user information is valid" do 
+    context "when the order information is valid" do 
 
       it "then creates a new order" do 
-        pending
+        valid_params = {
+          firstName: "bob",
+          lastName: "Smith",
+          creditCardNumber: "4916618311549608",
+          expirationDate: "05/12",
+          addressLine1: "1062 Delaware Street",
+          addressLine2: "",
+          city: "Denver",
+          state: "CO",
+          zipcode: "80204",
+          email: "bob_smith@gmail.com"
+        }
+
+        post :confirm, valid_params
         expect(Order.count).to eq 1
       end
+
+      #TODO describe what is valid information
 
       it "redirects to checkout confirmation page" do 
         pending

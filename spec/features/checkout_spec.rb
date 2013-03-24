@@ -4,22 +4,23 @@ describe "checkout process" do
 
   let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
 
-  # it "has a table of our current cart"  do
-  #   visit '/checkout'
-  #   within(:xpath, '//table') do
-  #     find(:xpath, '//tr/td[position()=1]').should have_content(product.name)
-  #     find(:xpath, '//tr/td[position()=2]').should have_content('1')
-  #     find(:xpath, '//tr/td[position()=3]').should have_content(product.price)
-  #     quantity = 1
-  #     find(:xpath, '//tr/td[position()=4]').should have_content(quantity*product.price)
-  #   end
-  # end
+  it "has a table of our current cart"  do
+    visit '/checkout'
+    within(:xpath, '//table') do
+      pending "need to fix form"
+      find(:xpath, '//tr/td[position()=1]').should have_content(product.name)
+      find(:xpath, '//tr/td[position()=2]/input').should have_content('1')
+      find(:xpath, '//tr/td[position()=3]').should have_content(product.price)
+      quantity = 1
+      find(:xpath, '//tr/td[position()=4]').should have_content(quantity*product.price)
+    end
+  end
 
-  # it "has a cancel button" do
-  #   visit '/checkout'
-  #   click_link("Cancel")
-  #   current_path.should eq '/'
-  # end
+  it "has a cancel button" do
+    visit '/checkout'
+    click_link("Cancel")
+    current_path.should eq '/'
+  end
 
   context "when a user clicks checkout" do
 
