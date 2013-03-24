@@ -4,7 +4,7 @@ StoreEngine::Application.routes.draw do
   match '/checkout' => 'checkout#view'
   match '/checkout_confirmation' => 'checkout#confirm'
   match '/add_item' => 'carts#add_item'
-
+  match '/my_cart' => 'carts#show'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

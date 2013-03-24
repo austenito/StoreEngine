@@ -16,6 +16,19 @@ describe CartsController do
       cart = Cart.first
       expect(cart.products.first.id).to eq product.id
     end
+
+    it "stays on the index page" do 
+      post :add_item, { product_id: product.id }
+      cart = Cart.first
+      expect(response).to redirect_to root_path
+    end 
+
+    it "sends the user a notification that item was added" do
+      post :add_item, { product_id: product.id }
+      cart = Cart.first    
+
+      expect(flash[:success]).to_not be_nil
+    end
   end
 
 end
