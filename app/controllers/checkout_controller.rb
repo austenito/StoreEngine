@@ -12,9 +12,4 @@ class CheckoutController < ApplicationController
       Order.create(product: product, quantity: params[:quantity])
     end
   end
-
 end
-
-
-# CreditCardValidator::Validator.options[:test_numbers_are_valid] = true
-# CreditCardValidator::Validator.valid?(credit_card_number)

@@ -14,11 +14,4 @@ describe 'confirmation' do
       page.should have_content(product.price * order_1.quantity)
     end 
   end 
-
-
-
-
-
-
-
 end 
