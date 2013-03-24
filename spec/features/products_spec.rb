@@ -6,7 +6,6 @@ describe 'browsing products' do
   let!(:product2){Product.create!(name: 'name2', description: 'description')}
 
   it 'displays all products' do
-    Product.any_instance.should_receive(:name).and_return('name')
     visit '/'
     page.should have_content('name')
     page.should have_content('name2')
@@ -14,23 +13,28 @@ describe 'browsing products' do
 
   it "displays an image"
 
-
   it "displays a description" do
-    Product.any_instance.should_receive(:description).and_return('description')
     visit '/'
-    page.should have_content('description')
+    page.should have_content(product.description)
+    page.should have_content(product2.description)
   end
 
   describe "buy link" do
     it "has a buy button for each product" do
-      pending "Need to add buy for each item and add to a cart"
       visit '/'
-
-      page.should have_link('Buy!', href: '/checkout')
+        Product.all.each do |product|
+        page.should have_button('Buy!')
+      end
     end
 
-    it "user can click buy for multiple items" do 
-      pending
+    it "user can click buy and the items will be aded to their cart" do 
+      visit '/'
+      Product.all.each do |product|
+        # click_button("Buy!")
+      end
+
+      pending "create shopping cart controller and model before finishing this test"
+
     end
 
     it "redirects to the checkout page from the buy button" do

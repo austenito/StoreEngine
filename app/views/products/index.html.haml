@@ -1,5 +1,10 @@
-= @products.first.name
-
-= @products.first.description
-
-%a{:href => '/checkout'}Buy!
+%table
+  - @products.each do |product|
+    %tr
+      %td
+        = product.name
+      %td
+        = product.description
+      %td
+        %form
+          %input{type: "submit", value: "Buy!"}
