@@ -8,7 +8,7 @@ describe "user cart" do
 
     it "displays their cart page" do 
       visit '/my_cart'
-      expect(page).to have_xpath('//table/tr')
+      expect(page).to have_content('Your cart is empty')
     end
 
   end 
