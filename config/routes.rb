@@ -1,9 +1,8 @@
 StoreEngine::Application.routes.draw do
   root :to => 'products#index'
 
-  resource :checkout, :only => [:show] do 
+  resource :checkout, :only => [:create, :show] do 
     get :confirmation 
-    post :confirmation 
   end
 
   resource :cart, :only => [:show] do 
@@ -11,5 +10,5 @@ StoreEngine::Application.routes.draw do
     put :update_quantity
   end 
 
- 
+  resource :order
 end
