@@ -9,7 +9,7 @@ describe CheckoutsController do
     context "when the user information is not valid" do
 
       it "does not create an order with invalid credit card info" do 
-        post :confirmation, {creditCardNumber: "blahbadnumber"}
+        post :create, {creditCardNumber: "blahbadnumber"}
         expect(response).to redirect_to checkout_path
       end
 
@@ -23,9 +23,7 @@ describe CheckoutsController do
     end 
 
     context "when the order information is valid" do 
-
-      it "then creates a new order" do 
-        valid_params = {
+      let(:valid_params) do {
           firstName: "bob",
           lastName: "Smith",
           creditCardNumber: "4916618311549608",
@@ -36,16 +34,18 @@ describe CheckoutsController do
           state: "CO",
           zipcode: "80204",
           email: "bob_smith@gmail.com"
-        }
-
-        post :confirmation, valid_params
+          }
+        end
+      it "then creates a new order" do 
+        post :create, valid_params
         expect(Order.count).to eq 1
       end
 
       #TODO describe what is valid information
 
       it "redirects to checkout confirmation page" do 
-        pending
+        post :create, valid_params
+        expect(response).to redirect_to confirmation_checkout_path
       end
     end
   end
