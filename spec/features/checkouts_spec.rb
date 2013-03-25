@@ -5,7 +5,7 @@ describe "checkout process" do
   let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
 
   it "has a table of our current cart"  do
-    visit '/checkout'
+    visit checkout_path
     within(:xpath, '//table') do
       pending "need to fix form"
       find(:xpath, '//tr/td[position()=1]').should have_content(product.name)
@@ -17,7 +17,7 @@ describe "checkout process" do
   end
 
   it "has a cancel button" do
-    visit '/checkout'
+    visit checkout_path
     click_link("Cancel")
     current_path.should eq '/'
   end
@@ -39,7 +39,7 @@ describe "checkout process" do
         fill_in('zipcode', with: "80204")
         fill_in('email', with: "bob_smith@gmail.com")
         click_button("Checkout")
-        current_path.should eq '/checkout_confirmation'
+        current_path.should eq confirmation_checkout_path
       end
     end
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CheckoutController do
+describe CheckoutsController do
 
   describe "when a user clicks checkout" do 
 
@@ -9,8 +9,8 @@ describe CheckoutController do
     context "when the user information is not valid" do
 
       it "does not create an order with invalid credit card info" do 
-        post :confirm, {creditCardNumber: "blahbadnumber"}
-        expect(response).to redirect_to ('/checkout')
+        post :confirmation, {creditCardNumber: "blahbadnumber"}
+        expect(response).to redirect_to checkout_path
       end
 
       it "does not create an order with invalid email"
@@ -38,7 +38,7 @@ describe CheckoutController do
           email: "bob_smith@gmail.com"
         }
 
-        post :confirm, valid_params
+        post :confirmation, valid_params
         expect(Order.count).to eq 1
       end
 

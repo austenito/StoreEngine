@@ -5,6 +5,7 @@
         = product.name
       %td
         = @cart.cart_products.find_by_product_id(product.id).quantity
+        
       %td
         = product.price
       %td

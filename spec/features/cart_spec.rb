@@ -10,7 +10,7 @@ describe "user cart" do
     it "displays their cart page" do 
       pending
       
-      visit '/my_cart'
+      visit cart_path
       expect(page).to have_content('Your cart is empty')
     end
 
@@ -19,11 +19,11 @@ describe "user cart" do
   context "when a user visits their cart and they have items" do 
 
     it "has a table of our current cart"  do
-      visit '/'
+      visit root_path
       click_button(product.id)
       click_button(product2.id)
 
-      visit '/my_cart'
+      visit cart_path
       within(:xpath, '//table') do
         find(:xpath, '//tr[position()=1]/td[position()=1]').should have_content(product.name)
         find(:xpath, '//tr[position()=1]/td[position()=2]').should have_content('1')

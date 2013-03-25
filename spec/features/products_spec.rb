@@ -6,7 +6,7 @@ describe 'browsing products' do
   let!(:product2){Product.create!(name: 'name2', description: 'description')}
 
   it 'displays all products' do
-    visit '/'
+    visit root_path
     page.should have_content('name')
     page.should have_content('name2')
   end
@@ -14,21 +14,21 @@ describe 'browsing products' do
   it "displays an image"
 
   it "displays a description" do
-    visit '/'
+    visit root_path
     page.should have_content(product.description)
     page.should have_content(product2.description)
   end
 
   describe "buy link" do
     it "has a buy button for each product" do
-      visit '/'
+      visit root_path
         Product.all.each do |product|
         page.should have_button('Buy!')
       end
     end
 
     it "user can click buy and the items will be aded to their cart" do 
-      visit '/'
+      visit root_path
       Product.all.each do |product|
         # click_button("Buy!")
       end
@@ -39,7 +39,7 @@ describe 'browsing products' do
 
     it "redirects to the checkout page from the buy button" do
       pending
-      visit '/'
+      visit root_path
       click_link("Buy!")
       current_path.should == '/checkout'
     end
