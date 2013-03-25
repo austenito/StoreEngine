@@ -4,7 +4,7 @@ describe ProductsController do
 
   describe 'GET #index' do
     it "assigns product to a product" do
-      product = Product.create!(name: "sample")
+      product = Product.create!(name: "sample", description: "thing", price: 13.99)
 
       products = [product]
 
