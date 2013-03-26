@@ -1,12 +1,12 @@
-%form{action: confirmation_checkout_path, method: 'post'}
+%form{action: checkout_path, method: 'post'}
   -@cart.products.each do |product|
-  %table{id: 'products'}
-  %tr
-    %td= product.name
-    %td 
-      = @cart.cart_products.find_by_product_id(product.id).quantity
-    %td= product.price
-    %td @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+    %table{id: 'products'}
+      %tr
+        %td= product.name
+        %td 
+          = @cart.cart_products.find_by_product_id(product.id).quantity
+        %td= product.price
+        %td @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
   %input{type: 'text', name: 'firstName'}
   %input{type: 'text', name: 'lastName'}
@@ -19,4 +19,6 @@
   %input{type: 'text', name: 'zipcode'}
   %input{type: 'text', name: 'email'}
   %input{type: 'submit', value: 'Checkout'}
-  %input{type: 'hidden', name: 'product_id', value:@product.id}
+
+= link_to "Cancel", root_path
+

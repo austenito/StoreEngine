@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe CheckoutsController do
 
-  describe "when a user clicks checkout" do 
+  describe "when a user clicks checkout" do
 
     let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
 
     context "when the user information is not valid" do
 
-      it "does not create an order with invalid credit card info" do 
-        post :confirmation, {creditCardNumber: "blahbadnumber"}
+      it "does not create an order with invalid credit card info" do
+        post :create, {creditCardNumber: "blahbadnumber"}
         expect(response).to redirect_to checkout_path
       end
 
@@ -17,15 +17,13 @@ describe CheckoutsController do
 
       it "does not crate an order with 0 or less"
 
-      it "redirects to checkout with an error message " do 
+      it "redirects to checkout with an error message " do
         pending
-      end 
-    end 
+      end
+    end
 
-    context "when the order information is valid" do 
-
-      it "then creates a new order" do 
-        valid_params = {
+    context "when the order information is valid" do
+      let(:valid_params) do {
           firstName: "bob",
           lastName: "Smith",
           creditCardNumber: "4916618311549608",
@@ -35,17 +33,20 @@ describe CheckoutsController do
           city: "Denver",
           state: "CO",
           zipcode: "80204",
-          email: "bob_smith@gmail.com"
-        }
-
-        post :confirmation, valid_params
+          email: "bob_smith@gmail.com",
+          product_id: product.id
+          }
+        end
+      it "then creates a new order" do
+        post :create, valid_params
         expect(Order.count).to eq 1
       end
 
       #TODO describe what is valid information
 
-      it "redirects to checkout confirmation page" do 
-        pending
+      it "redirects to checkout confirmation page" do
+        post :create, valid_params
+        expect(response).to redirect_to confirmation_checkout_path
       end
     end
   end
