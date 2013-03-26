@@ -34,10 +34,12 @@ describe CheckoutsController do
           state: "CO",
           zipcode: "80204",
           email: "bob_smith@gmail.com",
-          product_id: product.id
           }
         end
+
       it "then creates a new order" do
+        cart = Cart.create
+        session[:cart_id] = cart.id
         post :create, valid_params
         expect(Order.count).to eq 1
       end
@@ -45,6 +47,8 @@ describe CheckoutsController do
       #TODO describe what is valid information
 
       it "redirects to checkout confirmation page" do
+        cart = Cart.create
+        session[:cart_id] = cart.id
         post :create, valid_params
         expect(response).to redirect_to confirmation_checkout_path
       end

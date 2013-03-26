@@ -8,10 +8,13 @@ class CheckoutsController < ApplicationController
     unless CreditCardValidator::Validator.valid?(params[:creditCardNumber])
       redirect_to checkout_path
     else
-      product = Product.find_by_id(params[:product_id])
-      #Order.create(product: product, quantity: params[:quantity])
+      cart = Cart.find_by_id(session[:cart_id])
       order = Order.create
-      order.products << product
+
+      cart.products.each do |product |
+        order.products << product
+      end
+
       order.save
       redirect_to confirmation_checkout_path
 
