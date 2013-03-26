@@ -11,4 +11,8 @@ StoreEngine::Application.routes.draw do
   end 
 
   resource :order
+
+  namespace :admin do 
+    resources :products
+  end 
 end
