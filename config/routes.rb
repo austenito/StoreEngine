@@ -10,7 +10,7 @@ StoreEngine::Application.routes.draw do
     put :update_quantity
   end 
 
-  resource :order
+  resources :orders
 
   namespace :admin do 
     resources :products
