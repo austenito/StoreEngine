@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'browsing products' do
 
-  let!(:product){Product.create!(name: 'name', description: 'description')}
-  let!(:product2){Product.create!(name: 'name2', description: 'description')}
+  let!(:product){Product.create!(name: 'name', description: 'description', price: 34.99)}
+  let!(:product2){Product.create!(name: 'name2', description: 'description', price: 12.99)}
 
   it 'displays all products' do
     visit root_path
@@ -27,7 +27,7 @@ describe 'browsing products' do
       end
     end
 
-    it "user can click buy and the items will be aded to their cart" do 
+    it "user can click buy and the items will be aded to their cart" do
       visit root_path
       Product.all.each do |product|
         # click_button("Buy!")
