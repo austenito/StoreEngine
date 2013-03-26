@@ -6,7 +6,7 @@
         %td 
           = @cart.cart_products.find_by_product_id(product.id).quantity
         %td= product.price
-        %td @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+        %td= @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
   %input{type: 'text', name: 'firstName'}
   %input{type: 'text', name: 'lastName'}
