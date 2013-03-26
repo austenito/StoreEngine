@@ -1,11 +1,12 @@
 %form{action: confirmation_checkout_path, method: 'post'}
+  -@cart.products.each do |product|
   %table{id: 'products'}
   %tr
-    %td= @product.name
+    %td= product.name
     %td 
-      %input{type: 'text', name: 'quantity', value: '1'}
-    %td= @product.price
-    %td $2.00
+      = @cart.cart_products.find_by_product_id(product.id).quantity
+    %td= product.price
+    %td @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
   %input{type: 'text', name: 'firstName'}
   %input{type: 'text', name: 'lastName'}
@@ -21,3 +22,19 @@
   %input{type: 'hidden', name: 'product_id', value:@product.id}
 
 = link_to "Cancel", root_path
+
+  %table
+    -@cart.products.each do |product|
+      %tr
+        %td 
+          = product.name
+        %td
+          %input{ type: 'text', name: 'quantity', value: '1' }       
+        %td
+          = product.price
+        %td
+          = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+        %td
+          %input{ type: 'submit', value: 'Update' }
+        %td
+          %input{ type: 'hidden', name: 'product_id', value: product.id}
