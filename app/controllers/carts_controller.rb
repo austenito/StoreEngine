@@ -13,4 +13,12 @@ class CartsController < ApplicationController
   def show
     @cart = Cart.find_by_id(session[:cart_id])
   end
+
+  def update_quantity
+    cart = Cart.find_by_id(session[:cart_id])
+    cart_product = cart.cart_products.find_by_product_id(params[:product_id])
+    cart_product.quantity = params[:quantity]
+    cart_product.save
+  end 
 end
+

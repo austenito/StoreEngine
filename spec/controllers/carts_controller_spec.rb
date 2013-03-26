@@ -53,6 +53,14 @@ describe CartsController do
         post :add_item, { product_id: product2.id }
         expect(Cart.count).to eq 1
       end
-
     end
+
+    context "updates quantity" do 
+      it "updates the quantity for a product" do 
+        post :add_item, { product_id: product.id }
+        put :update_quantity, { product_id: product.id, quantity: 2 }
+        @cart = Cart.find_by_id(session[:cart_id])
+        expect(@cart.cart_products.find_by_product_id(product.id).quantity).to eq 2
+      end 
+    end 
 end

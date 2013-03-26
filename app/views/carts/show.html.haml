@@ -1,15 +1,40 @@
-%table
-  -@cart.products.each do |product|
-    %tr
-      %td 
-        = product.name
-      %td
-        = @cart.cart_products.find_by_product_id(product.id).quantity
-        
-      %td
-        = product.price
-      %td
-        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+%form{ action: update_quantity_quantity, method: 'post' }
+  %table
+    -@cart.products.each do |product|
+      %tr
+        %td 
+          = product.name
+        %td
+          %input{ type: 'text', name: 'quantity', value: '1' }       
+        %td
+          = product.price
+        %td
+          = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+        %td
+          %input{ type: 'submit', value: 'Update' }
 
 
 
+%form{action: confirmation_checkout_path, method: 'post'}
+  %table{id: 'products'}
+  %tr
+    %td= @product.name
+    %td 
+      %input{type: 'text', name: 'quantity', value: '1'}
+    %td= @product.price
+    %td $2.00
+
+  %input{type: 'text', name: 'firstName'}
+  %input{type: 'text', name: 'lastName'}
+  %input{type: 'text', name: 'creditCardNumber'}
+  %input{type: 'text', name: 'expirationDate'}
+  %input{type: 'text', name: 'addressLine1'}
+  %input{type: 'text', name: 'addressLine2'}
+  %input{type: 'text', name: 'city'}
+  %input{type: 'text', name: 'state'}
+  %input{type: 'text', name: 'zipcode'}
+  %input{type: 'text', name: 'email'}
+  %input{type: 'submit', value: 'Checkout'}
+  %input{type: 'hidden', name: 'product_id', value:@product.id}
+
+= link_to "Cancel", root_path
