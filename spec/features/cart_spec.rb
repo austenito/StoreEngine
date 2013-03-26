@@ -25,13 +25,11 @@ describe "user cart" do
       visit cart_path
       within(:xpath, '//table') do
         find(:xpath, '//tr[position()=1]/td[position()=1]').should have_content(product.name)
-        # find(:xpath, '//tr[position()=1]/td[position()=2]/input[@value]').should have_content('1')
         find(:xpath, '//tr[position()=1]/td[position()=3]').should have_content(product.price)
         quantity = 1
         find(:xpath, '//tr[position()=1]/td[position()=4]').should have_content(quantity*product.price)
 
         find(:xpath, '//tr[position()=2]/td[position()=1]').should have_content(product2.name)
-        # find(:xpath, '//tr[position()=2]/td[position()=2]').should have_content('1')
         find(:xpath, '//tr[position()=2]/td[position()=3]').should have_content(product2.price)
         quantity = 1
         find(:xpath, '//tr[position()=2]/td[position()=4]').should have_content(quantity*product2.price)
