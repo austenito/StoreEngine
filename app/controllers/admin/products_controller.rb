@@ -7,6 +7,9 @@ class Admin::ProductsController < ActionController::Base
     @products = Product.all
   end 
 
+  def edit
+  end 
+
   def create
     @product = Product.new(name: params[:product_name], description: params[:description], price: params[:price])
     if @product.save

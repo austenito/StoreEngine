@@ -1,6 +1,21 @@
+%table
+  - @products.each do |product| 
+    %tr
+      %td 
+        = product.name
+      %td 
+        = product.description
+      %td 
+        = product.price
+      %td 
+        = form_for [:admin, product] do |f|
+          = f.hidden_field :id
+          = f.submit "Edit Product"
+
+
+
 %form{ action: new_admin_product_path, method: 'get' }
   %input{ type: "submit", value: "Create Product" }
-
 
 
 

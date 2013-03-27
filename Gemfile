@@ -10,6 +10,7 @@ gem 'rspec-rails'
 gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
+gem 'paperclip'
 
 
 # Gems used only for assets and not required
