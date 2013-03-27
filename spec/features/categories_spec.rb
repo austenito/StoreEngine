@@ -22,11 +22,13 @@ describe "category pages" do
 
   describe "modifying a category" do
     let!(:category){Category.create!(name: "shoes")}
-    before { visit edit_category_path }
+    before { visit '/categories/1/edit' }
 
     it "modifies the category name" do
-      fill_in "Name", with: "dogs"
-      expect{ }
+
+      fill_in "name", with: "dogs"
+      click_button "Submit"
+      expect(page).to have_content "dogs"
     end
 
   end
