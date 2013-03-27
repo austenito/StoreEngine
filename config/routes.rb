@@ -17,4 +17,7 @@ StoreEngine::Application.routes.draw do
 
   match "/create_account" => "users#new", :via => [:get]
   resources :users
+
+  match "/login" => "user_sessions#create", :via =>[:get]
+  #match "/dashboard" => "user_sessions#create", :via =>[:get]
 end

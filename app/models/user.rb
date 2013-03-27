@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :admin, :password_confirmation
   validates :email, :password, presence: true
 
   validates_confirmation_of :password, message: "should match confirmation"
