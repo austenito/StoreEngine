@@ -8,6 +8,7 @@ class Admin::ProductsController < ActionController::Base
   end 
 
   def edit
+    product = Product.find_by_id(params[:id])
   end 
 
   def create
@@ -17,5 +18,11 @@ class Admin::ProductsController < ActionController::Base
     else
       render action: "new"
     end 
+  end 
+
+  def update 
+    @product = Product.find_by_id(params[:id])
+    @product.update_attributes(params[:product])
+    redirect_to admin_products_path
   end 
 end
