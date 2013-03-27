@@ -16,4 +16,11 @@ class UserSessionsController < ApplicationController
       render :login_form
     end
   end
+
+  def destroy
+    logout
+    redirect_to root_path, :notice => "Logged out!"
+  end
+
+
 end
