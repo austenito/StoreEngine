@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325213412) do
+ActiveRecord::Schema.define(:version => 20130327200657) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -58,5 +58,18 @@ ActiveRecord::Schema.define(:version => 20130325213412) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                                           :null => false
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+    t.boolean  "admin",                        :default => false
+  end
+
+  add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end
