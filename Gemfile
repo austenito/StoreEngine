@@ -11,6 +11,7 @@ gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip'
+gem 'sorcery'
 
 
 # Gems used only for assets and not required

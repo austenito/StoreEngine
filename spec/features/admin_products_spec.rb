@@ -49,11 +49,13 @@ describe 'admin products page' do
       end
     end 
 
-    it "allows admins to edit products" do 
-      # Product.create!(name: 'name', description: 'description', price: 34.99)
-      # visit '/admin/products/1/edit'
-      # fill_in('description', with: 'new product description')
-      # expect(product.find_by_id(1).description).to eq 'new product description'
+    it "allows admins to edit products" do
+      pending 
+      Product.create!(name: 'name', description: 'description', price: 34.99)
+      visit admin_products_path
+      #click edit for the first product
+      fill_in('description', with: 'new product description')
+      expect(product.find_by_id(1).description).to eq 'new product description'
     end 
   end 
 end
