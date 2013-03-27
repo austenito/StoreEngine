@@ -1,4 +1,7 @@
 StoreEngine::Application.routes.draw do
+
+  resources :user_sessions, :only => [:new, :create]
+
   root :to => 'products#index'
 
   resource :checkout, :only => [:create, :show] do

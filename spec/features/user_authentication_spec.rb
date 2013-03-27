@@ -17,12 +17,12 @@ describe 'user authentication' do
 
       it 'creates a new account'
 
-      end
     end
 
     context 'registration is invalid'
   end
 
-
-
 end
+
+
+
