@@ -1,0 +1,11 @@
+Your Orders
+
+%table
+  - @orders.each do |order|
+    %tr
+      %td
+        = order.id
+      %td
+        = form_for [:admin, order] do |f|
+          = f.hidden_field :id
+          = f.submit "View Order"
