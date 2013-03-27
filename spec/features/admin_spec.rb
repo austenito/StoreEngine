@@ -9,6 +9,7 @@ describe "Admin abilties" do
       context "enters valid email and password" do
 
         it "allows them to login" do
+          pending "finish!"
           admin = User.create!(email: "admin@admin.com",
                                password: "pass",
                                password_confirmation: "pass",
