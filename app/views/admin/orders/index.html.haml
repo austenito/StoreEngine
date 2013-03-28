@@ -1,6 +1,14 @@
-Your Orders
+Orders Index
+
+%p
+
+Total Orders by Status
+
+%p
 
 %table{id: 'statusCount'}
+  %th Order Status
+  %th Number of Orders
   %tr
     %td
       = "shipped"
@@ -27,7 +35,26 @@ Your Orders
     %td
       = Order.find_all_by_status("returned").count
 
+%p
+
+= link_to "View All Orders", admin_orders_path
+= link_to "View Shipped Orders", admin_orders_path(status: "shipped")
+= link_to "View Cancelled Orders", admin_orders_path(status: "cancelled")
+= link_to "View Pending Orders", admin_orders_path(status: "pending")
+= link_to "View Paid Orders", admin_orders_path(status: "paid")
+= link_to "View Returned Orders", admin_orders_path(status: "returned")
+
+%p
+
+
+All Orders
+
+%p
+
 %table{id: 'all_orders'}
+  %th Order ID
+  %th Order Status
+  %th View Order
   - @orders.each do |order|
     %tr
       %td
@@ -35,5 +62,6 @@ Your Orders
       %td 
         = order.status
       %td
-        = link_to "View Order", admin_order_path(order), class: 'order', id: dom_id(order)
-
+        = form_for [:admin, order] do |f|
+          = f.hidden_field :id
+          = f.submit "View Order"
