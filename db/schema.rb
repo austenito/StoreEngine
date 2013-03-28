@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130327233218) do
-=======
-ActiveRecord::Schema.define(:version => 20130328035259) do
->>>>>>> 3f5403d04026ed3b321ffb643cde07b47f8d32ad
+ActiveRecord::Schema.define(:version => 20130328193731) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -39,17 +35,10 @@ ActiveRecord::Schema.define(:version => 20130328035259) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-<<<<<<< HEAD
-    t.string   "status"
-    t.string   "user_id"
-=======
     t.string   "user_id"
     t.string   "status"
->>>>>>> 3f5403d04026ed3b321ffb643cde07b47f8d32ad
   end
 
   create_table "products", :force => true do |t|
