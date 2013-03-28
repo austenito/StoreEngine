@@ -17,6 +17,7 @@ StoreEngine::Application.routes.draw do
   namespace :admin do
     resources :products
   end
+
   resource :order
 
   match "/create_account" => "users#new", :via => [:get]

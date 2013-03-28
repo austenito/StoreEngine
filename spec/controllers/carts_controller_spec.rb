@@ -32,35 +32,41 @@ describe CartsController do
     end
   end
 
-    context "adding the first item to the cart" do
-      it "adds the newly created cart id to the current session" do
-        post :add_item, { product_id: product.id }
-        expect(session[:cart_id]).to_not be_nil
-      end
+  context "adding the first item to the cart" do
+    it "adds the newly created cart id to the current session" do
+      post :add_item, { product_id: product.id }
+      expect(session[:cart_id]).to_not be_nil
+    end
+  end
+
+  context "adding another item to an existing cart" do
+
+    it "adds to the cart" do
+      post :add_item, { product_id: product.id }
+      post :add_item, { product_id: product2.id }
+      items = [product, product2]
+      expect(Cart.find_by_id(session[:cart_id]).products).to match_array items
     end
 
-    context "adding another item to an existing cart" do
-
-      it "adds to the cart" do
-        post :add_item, { product_id: product.id }
-        post :add_item, { product_id: product2.id }
-        items = [product, product2]
-        expect(Cart.find_by_id(session[:cart_id]).products).to match_array items
-      end
-
-      it "does not create a new cart" do
-        post :add_item, { product_id: product.id }
-        post :add_item, { product_id: product2.id }
-        expect(Cart.count).to eq 1
-      end
+    it "doesnt add a non exisiting item to the cart" do
+      post :add_item, { product_id: product.id }
+      post :add_item, { product_id: 123 }
+      expect(Cart.find_by_id(session[:cart_id]).products).to match_array [product]
     end
 
-    context "updates quantity" do 
-      it "updates the quantity for a product" do 
-        post :add_item, { product_id: product.id }
-        put :update_quantity, { product_id: product.id, quantity: 2 }
-        @cart = Cart.find_by_id(session[:cart_id])
-        expect(@cart.cart_products.find_by_product_id(product.id).quantity).to eq 2
-      end 
-    end 
+    it "does not create a new cart" do
+      post :add_item, { product_id: product.id }
+      post :add_item, { product_id: product2.id }
+      expect(Cart.count).to eq 1
+    end
+  end
+
+  context "updates quantity" do
+    it "updates the quantity for a product" do
+      post :add_item, { product_id: product.id }
+      put :update_quantity, { product_id: product.id, quantity: 2 }
+      @cart = Cart.find_by_id(session[:cart_id])
+      expect(@cart.cart_products.find_by_product_id(product.id).quantity).to eq 2
+    end
+  end
 end

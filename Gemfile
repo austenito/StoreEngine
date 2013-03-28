@@ -12,6 +12,7 @@ gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip'
 gem 'sorcery'
+gem 'cancan'
 
 
 # Gems used only for assets and not required
