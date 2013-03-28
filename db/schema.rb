@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130327233218) do
-=======
-ActiveRecord::Schema.define(:version => 20130327223906) do
->>>>>>> 18f65f8b392beff204639370f5af4919822a1f10
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -43,11 +39,8 @@ ActiveRecord::Schema.define(:version => 20130327223906) do
     t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-<<<<<<< HEAD
     t.string   "status"
-=======
     t.string   "user_id"
->>>>>>> 18f65f8b392beff204639370f5af4919822a1f10
   end
 
   create_table "products", :force => true do |t|

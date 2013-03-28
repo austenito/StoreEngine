@@ -1,23 +1,36 @@
 %table
-  - form_for[:admin, @order] do |f|
-    %tr
-      %td
-        = f.label :id
-        = f.text_field :id
-      %td
-        = f.label :created_at
-        = f.text_field :created_at
+  %tr
+    %th Order ID
+    %th Order Status
+    %th Order Date
+    %th Customer Email 
+    %th Order Total 
+  %tr
+    %td
+      = @order.id
+    %td
+      = @order.status
+    %td
+      = @order.created_at
+    %td
+      = @order.user.email
+    %td Calculate Order Price 
+
 
 %table
+  %tr
+    %th Product ID
+    %th Product Name
+    %th Quantity Purchased
+    %th Product Price
+    %th Subtotal 
   - @order.products.each do |product|
     %tr
-      %td
-        = f.label :name
-        = f.text_field product.name
-      %td
-        = f.label :quantity
-        = 
-      %td
-        = f.label :price
-        = f.text_field product.price 
+      %td 
+        = product.id
+      %td 
+        = link_to product.name, product_path(product)
+      %td 
+        = @order.order_products.find_by_product_id(product.id).quantity
+
 

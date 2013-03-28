@@ -49,13 +49,13 @@ describe 'admin products page' do
       end
     end 
 
-    it "allows admins to edit products" do
-      pending 
+    it "allows admins to visit an edit products page" do
+      #todo - fix redirect to product show page 
+      pending
       Product.create!(name: 'name', description: 'description', price: 34.99)
       visit admin_products_path
-      #click edit for the first product
-      fill_in('description', with: 'new product description')
-      expect(product.find_by_id(1).description).to eq 'new product description'
+      click_button("Edit Product")
+      expect(current_path).to eq '/admin/products/1'
     end 
   end 
 end
