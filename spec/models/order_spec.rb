@@ -13,6 +13,8 @@ describe Order do
       pending
     end
 
+    it "does not save an order that has an invalid status" do 
+      pending
+    end 
   end
-
 end

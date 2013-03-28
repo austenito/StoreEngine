@@ -1,10 +1,39 @@
 Your Orders
 
-%table
+%table{id: 'statusCount'}
+  %tr
+    %td
+      = "shipped"
+    %td
+      = Order.find_all_by_status("shipped").count
+  %tr
+    %td
+      ="cancelled"
+    %td
+      = Order.find_all_by_status("cancelled").count
+  %tr
+    %td
+      = "pending"
+    %td
+      = Order.find_all_by_status("pending").count
+  %tr
+    %td
+      = "paid"
+    %td
+      = Order.find_all_by_status("paid").count
+  %tr
+    %td
+      = "returned"
+    %td
+      = Order.find_all_by_status("returned").count
+
+%table{id: 'all_orders'}
   - @orders.each do |order|
     %tr
       %td
         = order.id
+      %td 
+        = order.status
       %td
         = form_for [:admin, order] do |f|
           = f.hidden_field :id
