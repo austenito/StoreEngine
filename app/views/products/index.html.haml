@@ -1,14 +1,12 @@
 .flash
   = flash.notice
 
-%table
-  - @products.each do |product|
-    %tr
-      %td
-        = product.name
-      %td
-        = product.description
-      %td
-        %form{action: add_item_cart_path, method: 'post'}
-          %input{type: "submit", value: "Buy!", id: product.id}
-          %input{type: "hidden", value: product.id, name: "product_id"}
+%table Products
+- @products.each do |product|
+  %tr= session[:cart_id]
+  %td= product.name
+  %td= product.description
+  %td
+    %form{action: add_item_cart_path, method: 'post'}
+      %input{type: "submit", value: "Buy!", id: product.id}
+      %input{type: "hidden", value: product.id, name: "product_id"}

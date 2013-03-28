@@ -1,6 +1,6 @@
 StoreEngine::Application.routes.draw do
 
-  resources :user_sessions, :only => [:new, :create]
+  resources :user_sessions
 
   root :to => 'products#index'
 
@@ -24,5 +24,6 @@ StoreEngine::Application.routes.draw do
   resources :users
 
   match "/login" => "user_sessions#create", :via =>[:get]
+  match "/logout" => "user_sessions#destroy", :via => [:get]
   #match "/dashboard" => "user_sessions#create", :via =>[:get]
 end
