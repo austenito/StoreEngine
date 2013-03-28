@@ -9,6 +9,7 @@ StoreEngine::Application.routes.draw do
 
   resource :cart, :only => [:show] do
     post :add_item
+    delete :delete_item
     put :update_quantity
   end
 

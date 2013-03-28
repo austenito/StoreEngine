@@ -69,4 +69,13 @@ describe CartsController do
       expect(@cart.cart_products.find_by_product_id(product.id).quantity).to eq 2
     end
   end
+
+  context "deletes an item" do
+    it "removed an item in a cart" do
+      post :add_item, { product_id: product.id }
+      delete :delete_item, { product_id: product.id}
+      @cart = Cart.find_by_id(session[:cart_id])
+      expect(@cart.cart_products.find_by_product_id(product.id)).to be_nil
+    end
+  end
 end

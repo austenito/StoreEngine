@@ -1,5 +1,17 @@
 class CartsController < ApplicationController
 
+	def delete_item
+    session[:cart_id] ||= Cart.create.id
+    cart = Cart.find_by_id(session[:cart_id])
+    product = Product.find_by_id(params[:product_id])
+
+    if product
+      cart.cart_products.find_by_product_id(product.id).delete
+    end
+
+    redirect_to cart_path
+  end
+
   def add_item
     session[:cart_id] ||= Cart.create.id
 
