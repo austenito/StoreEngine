@@ -37,11 +37,26 @@ describe Admin::OrdersController do
   context "an admin clicks to update an order" do
 
     it "edits that order when they click submit" do 
-      pending
-      new_product = Product.create(name: "banana", description: "yummy", price: 2.00)
-      order = Order.create(product_id: 1, quantity: 2, status: "shipped")
-      order.products << new_product
     end 
+  end 
+
+  context "an admin clicks to view orders by status" do 
+
+    it "filters orders by shipped status" do
+      order = Order.create(product_id: 1, quantity: 2, status: "shipped") 
+      shipped_orders = Order.find_all_by_status("shipped")
+      get :index, { status: "shipped"}
+      expect(assigns(:orders)).to eq shipped_orders
+    end 
+
+    it "filters all cancelled orders" do 
+      order = Order.create(product_id: 1, quantity: 2, status: "cancelled") 
+      other_order = Order.create(product_id: 1, quantity: 2, status: "shipped")
+      cancelled_orders = Order.find_all_by_status("cancelled")
+      get :index, { status: "cancelled"}
+      expect(assigns(:orders)).to eq cancelled_orders
+    end 
+
   end 
 end 
 

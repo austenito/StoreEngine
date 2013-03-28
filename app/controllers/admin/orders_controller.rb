@@ -1,7 +1,11 @@
 class Admin::OrdersController < ActionController::Base
 
   def index
-    @orders = Order.all
+    if params[:status] == nil
+      @orders = Order.all
+    else
+      @orders = Order.find_all_by_status(params[:status])
+    end
   end
 
   def show
