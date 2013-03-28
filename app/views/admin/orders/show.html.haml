@@ -29,8 +29,7 @@
       %td 
         = product.id
       %td 
-        = link_to product.name, product_path(product)
+        = link_to product.name, product_path(product), class: 'product', id: "product.id"
       %td 
         = @order.order_products.find_by_product_id(product.id).quantity
-
 
