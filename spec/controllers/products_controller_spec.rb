@@ -3,14 +3,21 @@ require 'spec_helper'
 describe ProductsController do
 
   describe 'GET #index' do
+<<<<<<< HEAD
     it "assigns product to a product" do
       Product.create!(name: "sample", description: "thing", price: 13.99)
       Product.create!(name: "sample", description: "thing2", price: 13.99, retired: true)
       products = Product.find_all_by_retired(false)
+=======
+    it "assigns @product to an array of all products" do
+      product = Product.create!(name: "sample", description: "thing", price: 13.99)
+      products = Product.all
+>>>>>>> create categories controller for Admin, start tests
       get :index
       expect(assigns(:products)).to match_array products
     end
   end
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -27,4 +34,20 @@ describe ProductsController do
     end
   end
 >>>>>>> add tests for updating products with categories
+=======
+
+  describe 'filter products by category' do
+    context 'when an unauth user wants to browse products by category' do
+      it 'assigns @product to an array of products with the category "shoes"' do
+        category = Category.create!(name: "shoes")
+        product1 = Product.create!(name: "Nike", description: "sneakers", price: 13.99)
+        product2 = Product.create!(name: "Addidas", description: "pants", price: 13.99)
+        product1.categories << category
+        get :index, {:filter_by_category => "shoes"}
+        products = [product1]
+        expect(assigns(:products)).to match_array products
+      end
+    end
+  end
+>>>>>>> create categories controller for Admin, start tests
 end

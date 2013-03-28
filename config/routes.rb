@@ -6,10 +6,13 @@ StoreEngine::Application.routes.draw do
   root :to => 'products#index'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   resources :products, :only => [:show]
 
 =======
 >>>>>>> add tests for updating products with categories
+=======
+>>>>>>> create categories controller for Admin, start tests
   resource :checkout, :only => [:create, :show] do
     get :confirmation
   end
@@ -17,13 +20,18 @@ StoreEngine::Application.routes.draw do
   resource :cart, :only => [:show] do
     post :add_item
 <<<<<<< HEAD
+<<<<<<< HEAD
     post :update_quantity
     post :delete_product
+=======
+    put :update_quantity
+>>>>>>> create categories controller for Admin, start tests
   end
 
   resources :orders
 
   namespace :admin do
+<<<<<<< HEAD
     resources :products do
       member do
         post :retire
@@ -60,4 +68,9 @@ StoreEngine::Application.routes.draw do
 =======
   resources :products
 >>>>>>> add tests for updating products with categories
+=======
+    resources :products
+    resources :categories
+  end
+>>>>>>> create categories controller for Admin, start tests
 end
