@@ -54,4 +54,28 @@ describe UserSessionsController do
     end
   end
 
+  describe "GET 'destroy'" do
+
+    context "a user is logged in" do
+      before do
+
+        valid_attributes = {
+          email: "email@email.com",
+          password: "password",
+          password_confirmation: "password"
+        }
+
+        user = User.create!(valid_attributes)
+
+        login_user(user)
+
+      end
+
+      it "logs out the user" do
+        delete :destroy
+        expect(controller).to_not be_logged_in
+      end
+    end
+  end
+
 end
