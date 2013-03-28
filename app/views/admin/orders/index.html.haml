@@ -61,15 +61,15 @@ All Orders
       %td 
         = order.status
       %td
-        = form_for [:admin, order] do |f|
-          = f.hidden_field :id
-          = f.submit "View Order"
+        = link_to "View Order", admin_order_path(order), class: 'order', id: dom_id(order)
       - if order.status == "pending"
         %td
           = button_to "Cancel Order", { action: "cancel", id: order.id }
       - if order.status == "shipped"
         %td 
           = button_to "Mark as Returned", { action: "return", id: order.id }
-        
+      - if order.status == "paid"
+        %td
+          = button_to "Mark as Shipped", { action: "ship", id: order.id }
 
    
