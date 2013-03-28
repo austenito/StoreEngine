@@ -2,10 +2,10 @@
   %table
     -@cart.products.each do |product|
       %tr
-        %td 
+        %td
           = product.name
         %td
-          %input{ type: 'text', name: 'quantity', value: '1' }       
+          %input{ type: 'text', name: 'quantity', value: '1' }
         %td
           = product.price
         %td
@@ -15,3 +15,5 @@
         %td
           %input{ type: 'hidden', name: 'product_id', value: product.id}
 
+%form{ action: checkout_path, method: 'get' }
+  %input{ type: 'submit', name: 'checkout', value: 'checkout'}

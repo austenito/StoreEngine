@@ -6,11 +6,20 @@ describe CheckoutsController do
 
     let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
 
-    context "when the user information is not valid" do
+    before do
+      user = User.create!(email: "email@email.com", password:"1234", password_confirmation:"1234")
+      login_user(user)
+      cart = Cart.create
+      session[:cart_id] = cart.id
+    end
+
+    context "when the billing information is not valid" do
 
       it "does not create an order with invalid credit card info" do
-        post :create, {creditCardNumber: "blahbadnumber"}
-        expect(response).to redirect_to checkout_path
+
+        expect {
+          post :create, {creditCardNumber: "123"}
+        }.to change(Order, :count).by(0)
       end
 
       it "does not create an order with invalid email"
@@ -18,7 +27,8 @@ describe CheckoutsController do
       it "does not crate an order with 0 or less"
 
       it "redirects to checkout with an error message " do
-        pending
+        post :create, {creditCardNumber: "123"}
+        expect(response).to redirect_to checkout_path
       end
     end
 
@@ -38,8 +48,6 @@ describe CheckoutsController do
         end
 
       it "then creates a new order" do
-        cart = Cart.create
-        session[:cart_id] = cart.id
         post :create, valid_params
         expect(Order.count).to eq 1
       end
@@ -47,8 +55,6 @@ describe CheckoutsController do
       #TODO describe what is valid information
 
       it "redirects to checkout confirmation page" do
-        cart = Cart.create
-        session[:cart_id] = cart.id
         post :create, valid_params
         expect(response).to redirect_to confirmation_checkout_path
       end
