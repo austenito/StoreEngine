@@ -1,0 +1,17 @@
+%table 
+  %tr
+    %th Product Name
+    %th Product Description 
+    %th Product Price 
+  %tr
+    %td
+      = @product.name
+    %td 
+      = @product.price 
+    %td
+      = @product.description 
+
+= link_to "Edit", edit_admin_product_path(@product.id)
+
+= link_to "Retire" 
+

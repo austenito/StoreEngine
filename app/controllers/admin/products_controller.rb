@@ -3,12 +3,16 @@ class Admin::ProductsController < ActionController::Base
   def new
   end 
 
+  def show 
+    @product = Product.find_by_id(params[:id])
+  end 
+
   def index
     @products = Product.all
   end 
 
   def edit
-    product = Product.find_by_id(params[:id])
+    @product = Product.find_by_id(params[:id])
   end 
 
   def create

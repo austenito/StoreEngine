@@ -3,7 +3,7 @@ StoreEngine::Application.routes.draw do
 
   root :to => 'products#index'
 
-  resource :product, :only => [:show]
+  resources :products, :only => [:show]
 
   resource :checkout, :only => [:create, :show] do
     get :confirmation
@@ -21,12 +21,11 @@ StoreEngine::Application.routes.draw do
     resources :orders
   end 
 
-  resource :order
-
   match "/create_account" => "users#new", :via => [:get]
   
   resources :users
   resources :user_sessions, :only => [:new, :create]
+  #need just sessions, not user_sessions, and it is one resource not multiple
   resource :user_session, :only => [:destroy]
 
   match "/login" => "user_sessions#create", :via =>[:get]
