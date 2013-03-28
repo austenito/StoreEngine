@@ -38,14 +38,20 @@ describe Admin::OrdersController do
 
     it "cancels a pending order" do
       order = Order.create(product_id: 1, quantity: 2, status: "pending")
-      post :cancel, { id: 1 } 
+      post :cancel, { id: order.id } 
       expect(assigns(:order).status).to eq "cancelled"
     end 
 
     it "marks as returned orders that are currently marked as shipped" do 
       order = Order.create(product_id: 1, quantity: 2, status: "pending")
-      post :return, { id: 1 }
+      post :return, { id: order.id }
       expect(assigns(:order).status).to eq "returned"
+    end 
+
+    it "marks as shipped orders that are currently paid" do 
+      order = Order.create(product_id: 1, quantity: 2, status: "paid")
+      post :ship, { id: order.id }
+      expect(assigns(:order).status).to eq "shipped"
     end 
   end 
 

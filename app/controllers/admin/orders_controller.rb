@@ -31,7 +31,14 @@ class Admin::OrdersController < ActionController::Base
     @order.status = "returned"
     @order.save
     redirect_to admin_orders_path 
-  end 
+  end
+
+  def ship
+    @order = Order.find_by_id(params[:id])
+    @order.status = "shipped"
+    @order.save
+    redirect_to admin_orders_path
+  end  
 
 ## create order products for that order
 
