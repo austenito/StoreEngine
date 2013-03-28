@@ -1,17 +1,17 @@
-%table 
-  - form_for [:admin, @product] do |f|
-    %tr
-      %td 
-        = f.label :name
-        = f.text_field :name
-      %td
-        = f.label :description 
-        = f.text_field :description 
-      %td 
-        = f.label :price
-        = f.text_field :price 
-      %td 
-        = f.submit 'Update Product'
+Edit Products Page 
+
+= form_for [:admin, @product] do |f|
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :description 
+    = f.text_field :description 
+  %p
+    = f.label :price
+    = f.text_field :price 
+  %p
+    = f.submit 'Update Product'
 
 
 / retire should be a button 

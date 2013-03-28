@@ -41,6 +41,7 @@ describe 'admin products page' do
   context 'an admin wants to modify an existing product' do 
 
     it "has an edit button for each product" do 
+      pending
       # todo - add image option to the index page
       Product.create(name: 'name', description: 'description', price: 34.99)
       visit admin_products_path

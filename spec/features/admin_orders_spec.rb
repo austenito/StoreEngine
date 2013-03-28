@@ -24,7 +24,7 @@ describe 'admin orders dashboard page' do
       order = Order.create(product_id: 1, quantity: 2)
       visit admin_orders_path
       Order.all.each do |order| 
-        expect(page).to have_button("View Order")
+        expect(page).to have_link("View Order")
       end
     end
 
