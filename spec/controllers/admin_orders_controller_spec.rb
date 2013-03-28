@@ -36,7 +36,16 @@ describe Admin::OrdersController do
 
   context "an admin clicks to update an order" do
 
-    it "edits that order when they click submit" do 
+    it "cancels a pending order" do
+      order = Order.create(product_id: 1, quantity: 2, status: "pending")
+      post :cancel, { id: 1 } 
+      expect(assigns(:order).status).to eq "cancelled"
+    end 
+
+    it "marks as returned orders that are currently marked as shipped" do 
+      order = Order.create(product_id: 1, quantity: 2, status: "pending")
+      post :return, { id: 1 }
+      expect(assigns(:order).status).to eq "returned"
     end 
   end 
 
@@ -56,7 +65,6 @@ describe Admin::OrdersController do
       get :index, { status: "cancelled"}
       expect(assigns(:orders)).to eq cancelled_orders
     end 
-
   end 
 end 
 

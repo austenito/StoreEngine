@@ -6,6 +6,15 @@ Total Orders by Status
 
 %p
 
+= link_to "View All Orders", admin_orders_path
+= link_to "View Shipped Orders", admin_orders_path(status: "shipped")
+= link_to "View Cancelled Orders", admin_orders_path(status: "cancelled")
+= link_to "View Pending Orders", admin_orders_path(status: "pending")
+= link_to "View Paid Orders", admin_orders_path(status: "paid")
+= link_to "View Returned Orders", admin_orders_path(status: "returned")
+
+%p
+
 %table{id: 'statusCount'}
   %th Order Status
   %th Number of Orders
@@ -37,16 +46,6 @@ Total Orders by Status
 
 %p
 
-= link_to "View All Orders", admin_orders_path
-= link_to "View Shipped Orders", admin_orders_path(status: "shipped")
-= link_to "View Cancelled Orders", admin_orders_path(status: "cancelled")
-= link_to "View Pending Orders", admin_orders_path(status: "pending")
-= link_to "View Paid Orders", admin_orders_path(status: "paid")
-= link_to "View Returned Orders", admin_orders_path(status: "returned")
-
-%p
-
-
 All Orders
 
 %p
@@ -65,3 +64,9 @@ All Orders
         = form_for [:admin, order] do |f|
           = f.hidden_field :id
           = f.submit "View Order"
+      - if order.status == "pending"
+        %td
+          = button_to "Cancel Order", { action: "cancel", id: order.id }
+        
+
+   
