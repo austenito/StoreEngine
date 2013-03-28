@@ -32,6 +32,8 @@ Your Orders
     %tr
       %td
         = order.id
+      %td 
+        = order.status
       %td
         = form_for [:admin, order] do |f|
           = f.hidden_field :id

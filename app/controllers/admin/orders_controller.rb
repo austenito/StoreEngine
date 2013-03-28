@@ -4,6 +4,10 @@ class Admin::OrdersController < ActionController::Base
     @orders = Order.all
   end
 
+  def show
+    @order = Order.find_by_id(params[:id])
+  end 
 
+## create order products for that order
 
 end 

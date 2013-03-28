@@ -35,5 +35,17 @@ describe 'admin orders dashboard page' do
       expect(page).to have_content("shipped")
       expect(page).to have_content('1')
     end
+
+    it "shows a filtered view of orders by status" do 
+      pending
+      Product.create(name: "banana", description: "yummy", price: 2.00)
+      order = Order.create(product_id: 1, quantity: 2, status: "shipped")
+      visit admin_orders_path
+      click_button("Shipped")
+    end 
   end
 end 
+
+
+
+
