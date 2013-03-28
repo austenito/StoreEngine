@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "category pages" do
 
-  describe "creating a category" do
+  describe "amdin creating a category" do
     before { visit new_category_path }
 
     context "when information is valid" do
@@ -20,7 +20,7 @@ describe "category pages" do
     end
   end
 
-  describe "modifying a category" do
+  describe "admin modifying a category" do
     let!(:category){Category.create!(name: "shoes")}
     before { visit '/categories/1/edit' }
 
