@@ -1,17 +1,15 @@
-%form{ action: update_quantity_cart_path, method: 'post' }
-  %table
-    -@cart.products.each do |product|
-      %tr
-        %td 
-          = product.name
-        %td
-          %input{ type: 'text', name: 'quantity', value: '1' }       
-        %td
-          = product.price
-        %td
-          = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
-        %td
-          %input{ type: 'submit', value: 'Update' }
-        %td
-          %input{ type: 'hidden', name: 'product_id', value: product.id}
+%table
+  -@cart.products.each do |product|
+    %tr
+      %td 
+        = product.name
+      %td
+        %input{ type: 'text', name: 'quantity', value: '1' }       
+      %td
+        = product.price
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+      %td
+        = link_to 'Update', update_quantity_cart_path, :method => :put
+        %input{ type: 'hidden', name: 'product_id', value: product.id}
 

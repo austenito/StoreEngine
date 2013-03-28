@@ -1,5 +1,7 @@
 .flash
   = flash.notice
+  = flash[:success]
+
 
 %table Products
 - @products.each do |product|
@@ -7,6 +9,7 @@
   %td= product.name
   %td= product.description
   %td
-    %form{action: add_item_cart_path, method: 'post'}
-      %input{type: "submit", value: "Buy!", id: product.id}
-      %input{type: "hidden", value: product.id, name: "product_id"}
+    = button_to 'Add to cart', add_item_cart_path(:product_id => product.id)
+    / %form{action: add_item_cart_path, method: 'post'}
+    /   %input{type: "submit", value: "Buy!", id: product.id}
+    /   %input{type: "hidden", value: product.id, name: "product_id"}

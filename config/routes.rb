@@ -11,7 +11,9 @@ StoreEngine::Application.routes.draw do
   resource :cart, :only => [:show] do
     post :add_item
     put :update_quantity
+    delete :delete_item
   end
+
 
   resources :orders
 
