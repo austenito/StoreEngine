@@ -4,8 +4,9 @@ describe ProductsController do
 
   describe 'GET #index' do
     it "assigns product to a product" do
-      product = Product.create!(name: "sample", description: "thing", price: 13.99)
-      products = Product.all
+      Product.create!(name: "sample", description: "thing", price: 13.99)
+      Product.create!(name: "sample", description: "thing2", price: 13.99, retired: true)
+      products = Product.find_all_by_retired(false)
       get :index
       expect(assigns(:products)).to match_array products
     end
