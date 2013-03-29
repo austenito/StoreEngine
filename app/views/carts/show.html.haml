@@ -1,19 +1,29 @@
-%form{ action: update_quantity_cart_path, method: 'post' }
-  %table
-    -@cart.products.each do |product|
-      %tr
-        %td
-          = product.name
-        %td
-          %input{ type: 'text', name: 'quantity', value: '1' }
-        %td
-          = product.price
-        %td
-          = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
-        %td
-          %input{ type: 'submit', value: 'Update' }
-        %td
+%table
+  %tr
+    %th Item
+    %th Quantity
+    %th Unit Price
+    %th Subtotal
+    %th
+  -@cart.products.each do |product|
+    %tr
+      %td
+        = product.name
+      %td
+        %form{ action: update_quantity_cart_path, method: 'post' }
           %input{ type: 'hidden', name: 'product_id', value: product.id}
+          %input{ type: 'text', name: 'quantity', value: '1' }
+          %input{ type: 'submit', value: 'Update' }
+      %td
+        = product.price
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+      %td
+        %form{ action: delete_product_cart_path, method: 'post' }
+          %input{ type: 'hidden', name: 'product_id', value: product.id}
+          %input{ type: 'submit', value: 'Remove from cart' }
 
 %form{ action: checkout_path, method: 'get' }
   %input{ type: 'submit', name: 'checkout', value: 'checkout'}
+
+= session[:cart_id]

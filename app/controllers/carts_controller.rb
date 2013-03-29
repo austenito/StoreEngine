@@ -23,6 +23,14 @@ class CartsController < ApplicationController
     end
   end
 
+	def delete_product
+    cart = Cart.find_by_id(session[:cart_id])
+    cart_product = cart.cart_products.find_by_product_id(params[:product_id])
+    cart_product.delete
+
+    redirect_to cart_path
+	end
+
   def update_quantity
     cart = Cart.find_by_id(session[:cart_id])
     cart_product = cart.cart_products.find_by_product_id(params[:product_id])
