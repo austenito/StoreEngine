@@ -19,10 +19,6 @@ StoreEngine::Application.routes.draw do
   namespace :admin do
     resources :products
     resources :orders do 
-      members do 
-        post :cancel 
-      end 
-    end
   end
 
   resource :order
