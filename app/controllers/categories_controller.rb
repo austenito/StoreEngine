@@ -1,24 +1,11 @@
-class Admin::CategoriesController < ApplicationController
 
-  #show/cat index
+class CategoriesController < ApplicationController
 
-  def new
-    @category = Category.new
-  end
+  def show
+    @category = Category.find(params[:id])
 
-  def create
-    @category = Category.new(name: params[:name])
-    if @category.save
-      redirect_to admin_categories_path
-    else
-      render action: "new"
+    respond_to do |format|
+      format.html #show.html.erb
     end
   end
-
-  def update
-    @category = Category.find_by_id(params[:id])
-    @category.update_attributes(params[:category])
-    redirect_to admin_category_path
-  end
-
 end

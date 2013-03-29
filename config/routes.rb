@@ -1,4 +1,7 @@
 StoreEngine::Application.routes.draw do
+  resources :categories
+
+
   root :to => 'products#index'
 
   resource :checkout, :only => [:create, :show] do
@@ -16,4 +19,8 @@ StoreEngine::Application.routes.draw do
     resources :products
     resources :categories
   end
+
+  resource :order
+
+  resources :products
 end
