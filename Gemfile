@@ -10,7 +10,7 @@ gem 'rspec-rails'
 gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
-gem 'paperclip'
+gem 'paperclip', "~> 3.0"
 gem 'sorcery'
 gem 'cancan'
 
