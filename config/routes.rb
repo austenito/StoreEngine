@@ -11,20 +11,26 @@ StoreEngine::Application.routes.draw do
 
   resource :cart, :only => [:show] do
     post :add_item
-    put :update_quantity
+    post :update_quantity
+    post :delete_product
   end
 
   resources :orders
 
   namespace :admin do
-    resources :products
-    resources :orders do 
-      member do 
+    resources :products do
+      member do
+        post :retire
+      end
+    end
+
+    resources :orders do
+      member do
         post :cancel
         post :return
         post :ship
-      end 
-    end 
+      end
+    end
   end
 
   resource :order

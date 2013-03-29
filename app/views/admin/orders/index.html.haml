@@ -58,7 +58,7 @@ All Orders
     %tr
       %td
         = order.id
-      %td 
+      %td
         = order.status
       %td
         = link_to "View Order", admin_order_path(order), class: 'order', id: dom_id(order)
@@ -66,10 +66,9 @@ All Orders
         %td
           = button_to "Cancel Order", { action: "cancel", id: order.id }
       - if order.status == "shipped"
-        %td 
+        %td
           = button_to "Mark as Returned", { action: "return", id: order.id }
       - if order.status == "paid"
         %td
           = button_to "Mark as Shipped", { action: "ship", id: order.id }
 
-   

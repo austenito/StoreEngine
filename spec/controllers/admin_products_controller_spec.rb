@@ -8,13 +8,23 @@ describe Admin::ProductsController do
     end
   end
 
-  context 'when an edit product button gets submitted by an admin' do 
+  context 'when an edit product button gets submitted by an admin' do
 
-    it "edits that product" do 
+    it "edits that product" do
       Product.create!(name: 'name', description: 'description', price: 34.99)
       post :update, { id: 1, product: { name: 'name', description: 'new product description', price: 34.99 } }
       expect(Product.find_by_id(1).description).to eq 'new product description'
-    end 
-  end 
+    end
+  end
+
+  context "POST #retire" do
+    it "retires the product" do
+      product = Product.create!(name: 'name', description: 'description', price: 34.99)
+      post :retire, id: product.id
+      retired_product = Product.find(product.id)
+      expect(retired_product).to be_retired
+    end
+  end
 end
+
 
