@@ -12,8 +12,9 @@
           = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
         %td
           %input{ type: 'submit', value: 'Update' }
-        %td
           %input{ type: 'hidden', name: 'product_id', value: product.id}
+
+%p
 
 %form{ action: checkout_path, method: 'get' }
   %input{ type: 'submit', name: 'checkout', value: 'checkout'}

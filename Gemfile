@@ -13,6 +13,7 @@ gem 'credit_card_validator'
 gem 'paperclip'
 gem 'sorcery'
 gem 'cancan'
+gem 'unicorn'
 
 
 # Gems used only for assets and not required

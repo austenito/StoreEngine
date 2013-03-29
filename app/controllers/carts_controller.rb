@@ -1,9 +1,14 @@
 class CartsController < ApplicationController
 
+  #do line 6 as a before filter # ensure there is a cart id
+
   def add_item
-    session[:cart_id] ||= Cart.create.id
+    cart_id = session[:cart_id]
+    cart_id ||= Cart.create.id
+    session[:cart_id] = cart_id
 
     cart = Cart.find_by_id(session[:cart_id])
+
     product = Product.find_by_id(params[:product_id])
 
     if product
