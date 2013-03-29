@@ -12,7 +12,6 @@ gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip', "~> 3.0"
 gem 'sorcery'
-gem 'cancan'
 
 
 # Gems used only for assets and not required
