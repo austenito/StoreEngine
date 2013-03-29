@@ -1,17 +1,17 @@
-Edit Products Page 
+Edit Products Page
 
-= form_for [:admin, @product] do |f|
+= form_for [:admin, @product], html: {multipart: true} do |f|
+  = image_tag @product.image.url(:medium)
+  %p
+  = f.file_field :image
   %p
     = f.label :name
     = f.text_field :name
   %p
-    = f.label :description 
-    = f.text_field :description 
+    = f.label :description
+    = f.text_field :description
   %p
     = f.label :price
-    = f.text_field :price 
+    = f.text_field :price
   %p
     = f.submit 'Update Product'
-
-
-/ retire should be a button 

@@ -10,11 +10,8 @@ gem 'rspec-rails'
 gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
-gem 'paperclip'
+gem 'paperclip', "~> 3.0"
 gem 'sorcery'
-gem 'cancan'
-gem 'unicorn'
-
 
 # Gems used only for assets and not required
 # in production environments by default.

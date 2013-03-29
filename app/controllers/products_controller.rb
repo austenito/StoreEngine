@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
     @products = Product.find_all_by_retired(false)
   end
 
-  def show 
+  def show
     @product = Product.find(params[:id])
-  end 
+  end
+
 end

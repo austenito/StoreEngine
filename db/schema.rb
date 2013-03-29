@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328173550) do
+ActiveRecord::Schema.define(:version => 20130328200017) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -35,21 +35,23 @@ ActiveRecord::Schema.define(:version => 20130328173550) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "status"
     t.string   "user_id"
+    t.string   "status"
   end
 
   create_table "products", :force => true do |t|
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
     t.string   "name"
     t.string   "description"
-    t.decimal  "price",       :precision => 8, :scale => 2
-    t.boolean  "retired",                                   :default => false
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.boolean  "retired",                                          :default => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "sessions", :force => true do |t|
@@ -74,17 +76,5 @@ ActiveRecord::Schema.define(:version => 20130328173550) do
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
-
-  create_table "will_filter_filters", :force => true do |t|
-    t.string   "type"
-    t.string   "name"
-    t.text     "data"
-    t.integer  "user_id"
-    t.string   "model_class_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"
 
 end
