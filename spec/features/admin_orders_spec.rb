@@ -9,7 +9,7 @@ describe 'admin orders dashboard page' do
 
     it "shows an index of their orders" do
       visit admin_orders_path
-      expect(page).to have_content('Your Orders')
+      expect(page).to have_content('Orders Index')
     end
 
     it "shows all orders" do
@@ -17,15 +17,6 @@ describe 'admin orders dashboard page' do
       order = Order.create(product_id: 1, quantity: 2)
       visit admin_orders_path
       expect(page).to have_content(order.id)
-    end
-
-    it "has a link to each individual order" do
-      Product.create(name: "banana", description: "yummy", price: 2.00)
-      order = Order.create(product_id: 1, quantity: 2)
-      visit admin_orders_path
-      Order.all.each do |order| 
-        expect(page).to have_link("View Order")
-      end
     end
 
     it "has a table of orders by status" do 

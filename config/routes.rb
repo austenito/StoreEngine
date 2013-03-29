@@ -19,6 +19,12 @@ StoreEngine::Application.routes.draw do
   namespace :admin do
     resources :products
     resources :orders do 
+      member do 
+        post :cancel
+        post :return
+        post :ship
+      end 
+    end 
   end
 
   resource :order
@@ -27,7 +33,7 @@ StoreEngine::Application.routes.draw do
 
   resources :users
   resources :user_sessions, :only => [:new, :create]
-  #need just sessions, not user_sessions, and it is one resource not multiple
+
   resource :user_session, :only => [:destroy]
 
   match "/login" => "user_sessions#create", :via =>[:get]
