@@ -1,18 +1,24 @@
 Admin Products Page
 
 %table
-  - @products.each do |product| 
+  - @products.each do |product|
     %tr
-      %td 
+      %td
+        - if product.image
+          = image_tag product.image.url(:thumb)
+        - else
+          No Image
+      %td
         = product.name
-      %td 
+      %td
         = product.description
-      %td 
+      %td
         = product.price
       %td
-        = link_to "Edit", admin_product_path(product), class: 'product', id: dom_id(product) 
-
-
-
-%form{ action: new_admin_product_path, method: 'get' }
-  %input{ type: "submit", value: "Create Product" }
+        - if product.retired?
+          Retired
+        - else
+          = button_to "Retire", { action: "retire", id: product.id }
+      %td
+        = link_to "Edit", admin_product_path(product), class: 'product', id: dom_id(product)
+= link_to "Add a product", new_admin_product_path
