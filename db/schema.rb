@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130330023529) do
-=======
-ActiveRecord::Schema.define(:version => 20130328173704) do
->>>>>>> fb6dad55a196bca1b4aa0c3be5d34c6a80439387
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 class Admin::CategoriesController < ActionController::Base
-=======
-class Admin::CategoriesController < ApplicationController
->>>>>>> fb6dad55a196bca1b4aa0c3be5d34c6a80439387
 
   #show/cat index
 

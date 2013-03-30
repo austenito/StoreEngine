@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
     @products = Product.find_all_by_retired(false)
 
     if params[:filter_by_category]
-      @products = @products.includes(:categories).where(categories: {name: params[:filter_by_category]})
+      products = Product.includes(:categories).where(categories: {name: params[:filter_by_category]})
+      @products = products.collect { |product| product if product.retired == false }
     end
   end
 
@@ -22,3 +23,4 @@ class ProductsController < ApplicationController
     redirect_to product_path(@product)
   end
 end
+
