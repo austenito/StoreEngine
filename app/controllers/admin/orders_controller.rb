@@ -12,10 +12,10 @@ class Admin::OrdersController < ActionController::Base
     @order = Order.find_by_id(params[:id])
   end 
 
-  def update
-    @order = Order.find_by_id(params[:id])
-    @order.status = params[:status]
-    @order.save
+  def update_quantity 
+    order_product = OrderProduct.find_by_id(params[:order_product_id])
+    order_product.quantity = params[:quantity]
+    order_product.save
     redirect_to admin_orders_path
   end 
 

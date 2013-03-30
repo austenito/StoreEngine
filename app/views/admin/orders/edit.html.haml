@@ -1,35 +1,36 @@
 Edit Orders Page 
 
-= form_for [:admin, @order ] do |f|
 %p
-  = @order.id
 
-%p 
-  =@order.status
+%table
+  %th Order ID
+  %th Order Status
+  %tr
+    %td 
+      = @order.id
+    %td 
+      = @order.status
+
+%p
 
 Change Quantity or Remove Products from Order if Order Status is "Pending" or "Paid"
 
-%table
-  - if @order.status == "pending" || @order.status == "paid"
+
+- if @order.status == "pending" || @order.status == "paid"
+  %table
+    %th Product ID
+    %th Product Name 
+    %th Quantity 
+    - @order.order_products.each do |order_product|
+      %tr
+        = Product.find_by_id(order_product.product_id).id
+      %tr 
+        = Product.find_by_id(order_product.product_id).name
+      %tr
+        = form_tag update_quantity_admin_order_path do 
+          = hidden_field_tag 'order_product_id', order_product.id
+          = text_field_tag :quantity, order_product.quantity 
+          = submit_tag "Update"
 
 
 
-
-
-Edit Products Page
-
-= form_for [:admin, @product], html: {multipart: true} do |f|
-  = image_tag @product.image.url(:medium)
-  %p
-  = f.file_field :image
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :description
-    = f.text_field :description
-  %p
-    = f.label :price
-    = f.text_field :price
-  %p
-    = f.submit 'Update Product'

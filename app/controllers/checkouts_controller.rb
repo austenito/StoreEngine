@@ -11,7 +11,7 @@ class CheckoutsController < ApplicationController
     if valid_billing_info? params
       order = Order.create
 
-      cart.products.each do |product |
+      cart.products.each do |product|
         order.products << product
       end
 

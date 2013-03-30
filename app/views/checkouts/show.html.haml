@@ -1,6 +1,14 @@
+Checkout
+
+%p
+
 %form{action: checkout_path, method: 'post'}
   -@cart.products.each do |product|
     %table{id: 'products'}
+      %th Product Name
+      %th Quantity 
+      %th Price Per Item 
+      %th Subtotal 
       %tr
         %td= product.name
         %td 
@@ -8,17 +16,7 @@
         %td= product.price
         %td= @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
-  %input{type: 'text', name: 'firstName'}
-  %input{type: 'text', name: 'lastName'}
-  %input{type: 'text', name: 'creditCardNumber'}
-  %input{type: 'text', name: 'expirationDate'}
-  %input{type: 'text', name: 'addressLine1'}
-  %input{type: 'text', name: 'addressLine2'}
-  %input{type: 'text', name: 'city'}
-  %input{type: 'text', name: 'state'}
-  %input{type: 'text', name: 'zipcode'}
-  %input{type: 'text', name: 'email'}
-  %input{type: 'submit', value: 'Checkout'}
+%p
 
 = link_to "Cancel", root_path
 
