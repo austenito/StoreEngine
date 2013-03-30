@@ -33,7 +33,8 @@ Change Quantity or Remove Products from Order if Order Status is "Pending" or "P
           = text_field_tag :quantity, order_product.quantity 
           = submit_tag "Update"
       %tr
-        = form_tag 
+        = button_to "Remove Product", {action: "remove_product", id: @order.id, product_id: order_product.product_id} 
+
 
 
 
