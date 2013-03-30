@@ -17,8 +17,8 @@ describe OrdersController do
     it "does not create duplicate order products for a single product" do 
       product = Product.create!(name: 'name', description: 'description', price: 34.99)
       cart = Cart.create
-      expect(order.order_products.count).to eq 1
-      expect(order.order_products.first.quantity).to eq 2
+      expect(Order.first.order_products.count).to eq 1
+      expect(Order.first.order_products.first.quantity).to eq 2
     end 
   end
 
