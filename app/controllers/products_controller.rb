@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
 
   def index
-    if params[:filter_by_category] == nil
-      @products = Product.all
-    else
+    if params[:filter_by_category]
       @products = Product.includes(:categories).where(categories: {name: params[:filter_by_category]})
+    else
+      @products = Product.all
     end
   end
 
