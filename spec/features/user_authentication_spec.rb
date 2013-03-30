@@ -7,6 +7,8 @@ describe 'user authentication' do
     context 'registration is valid' do
       it 'redirects back to index page' do
         visit "/create_account"
+        fill_in "first_name", with: "Alexander"
+        fill_in "last_name", with: "McQueen"
         fill_in "Email", with: "test123@gmail.com"
         fill_in "Password", with: "password1"
         fill_in "Confirm password", with: "password1"
