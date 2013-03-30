@@ -40,6 +40,10 @@ class Admin::OrdersController < ActionController::Base
     redirect_to admin_orders_path
   end  
 
+  def edit
+    @order = Order.find_by_id(params[:id])
+  end 
+
 ## create order products for that order
 
 end 

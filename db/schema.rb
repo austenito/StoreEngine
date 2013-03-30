@@ -35,10 +35,12 @@ ActiveRecord::Schema.define(:version => 20130328200017) do
   end
 
   create_table "orders", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "user_id"
     t.string   "status"
+    t.string   "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -76,5 +78,17 @@ ActiveRecord::Schema.define(:version => 20130328200017) do
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
+
+  create_table "will_filter_filters", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "data"
+    t.integer  "user_id"
+    t.string   "model_class_name"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"
 
 end
