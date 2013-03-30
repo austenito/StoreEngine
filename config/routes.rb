@@ -16,6 +16,7 @@ StoreEngine::Application.routes.draw do
     post :delete_product
   end
 
+
   resources :orders
 
   namespace :admin do

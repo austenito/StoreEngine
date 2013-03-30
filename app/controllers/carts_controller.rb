@@ -24,7 +24,7 @@ class CartsController < ApplicationController
       redirect_to root_path, flash: { error: "An error occurred while adding the item to your cart" }
     end
   end
-  
+
   def show
     @cart = Cart.find_by_id(session[:cart_id])
     if @cart && @cart.cart_products.count > 0
