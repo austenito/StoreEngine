@@ -1,7 +1,14 @@
 .flash
   = flash.notice
 
+Welcome to our store! Product Index below
+
+%p
+
 %table
+  %th Product Name
+  %th Product Description 
+  %th Product Price 
   - @products.each do |product|
     %tr
       %td
@@ -13,4 +20,6 @@
           = hidden_field_tag 'product_id', product.id
           = submit_tag "Buy!"
 
+%p
 
+= link_to "View Cart", cart_path 
