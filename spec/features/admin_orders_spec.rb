@@ -29,10 +29,12 @@ describe 'admin orders dashboard page' do
 
     it "shows a filtered view of orders by status" do 
       pending
+      #how to test that you are on the filtered view? 
       Product.create(name: "banana", description: "yummy", price: 2.00)
       order = Order.create(product_id: 1, quantity: 2, status: "shipped")
       visit admin_orders_path
-      click_button("Shipped")
+      click_link("View Shipped Orders")
+      expect(page).to_not have_content("Cancelled")
     end 
   end
 end 

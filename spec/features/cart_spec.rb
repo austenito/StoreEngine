@@ -44,9 +44,9 @@ describe "user cart" do
 
       context "and the user is not logged in" do
         it "redirects to a signup and login page" do
-          pending 
-          #select_products is broken 
-          select_products
+          pending
+          #need to fix id for buy button on index page 
+          select_products 
           visit cart_path
 
           click_button('checkout')

@@ -26,14 +26,11 @@ describe 'admin products page' do
     context 'there are no products' do
 
       it "creates a new product" do
-        pending
-        #broke when trying to find the description field 
-        #todo - add image option to this page
         visit new_admin_product_path
-        fill_in('name', with: "product_name")
-        fill_in('description', with: "product_description")
-        fill_in('price', with: 1.00)
-        click_button("Create Product")
+        fill_in('Name', with: "product_name")
+        fill_in('Description', with: "product_description")
+        fill_in('Price', with: 1.00)
+        click_button("Add Product")
         expect(current_path).to eq admin_products_path
         expect(Product.count).to eq 1
       end
@@ -43,21 +40,17 @@ describe 'admin products page' do
   context 'an admin wants to modify an existing product' do
 
     it "has an edit button for each product" do
-      pending
-      # todo - add image option to the index page
       Product.create(name: 'name', description: 'description', price: 34.99)
       visit admin_products_path
       Product.all.each do |product|
-        page.should have_button('Edit Product')
+        page.should have_link('Edit')
       end
     end
 
-    it "allows admins to visit an edit products page" do
-      #todo - fix redirect to product show page
-      pending
+    it "allows admins go to an edit page for that product" do
       Product.create!(name: 'name', description: 'description', price: 34.99)
       visit admin_products_path
-      click_button("Edit Product")
+      click_link("Edit")
       expect(current_path).to eq '/admin/products/1'
     end
   end
