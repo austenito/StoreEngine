@@ -27,7 +27,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = Cart.find_by_id(session[:cart_id])
-    if @cart
+    if @cart && @cart.cart_products.count > 0
       render :show
     else
       render :empty_cart

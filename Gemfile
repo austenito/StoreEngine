@@ -12,6 +12,7 @@ gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip', "~> 3.0"
 gem 'sorcery'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
