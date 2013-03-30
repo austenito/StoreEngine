@@ -2,7 +2,6 @@
   = flash.notice
   = flash[:success]
 
-
 Welcome to our store! Product Index below
 
 %p
@@ -18,10 +17,7 @@ Welcome to our store! Product Index below
       %td
         = product.description
       %td
-        = form_tag add_item_cart_path do
-          = hidden_field_tag 'product_id', product.id
-          = submit_tag "Buy!"
-
+        = button_to 'Add to cart', add_item_cart_path(:product_id => product.id)
 %p
 
 = link_to "View Cart", cart_path 
