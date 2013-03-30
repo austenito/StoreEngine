@@ -15,12 +15,13 @@ Edit Orders Page
 
 Change Quantity or Remove Products from Order if Order Status is "Pending" or "Paid"
 
+%p
 
-- if @order.status == "pending" || @order.status == "paid"
-  %table
-    %th Product ID
-    %th Product Name 
-    %th Quantity 
+%table
+  %th Product ID
+  %th Product Name 
+  %th Quantity 
+  - if @order.status == "pending" || @order.status == "paid"
     - @order.order_products.each do |order_product|
       %tr
         = Product.find_by_id(order_product.product_id).id
@@ -31,6 +32,8 @@ Change Quantity or Remove Products from Order if Order Status is "Pending" or "P
           = hidden_field_tag 'order_product_id', order_product.id
           = text_field_tag :quantity, order_product.quantity 
           = submit_tag "Update"
+      %tr
+        = form_tag 
 
 
 

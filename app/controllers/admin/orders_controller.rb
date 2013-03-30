@@ -19,6 +19,13 @@ class Admin::OrdersController < ActionController::Base
     redirect_to admin_orders_path
   end 
 
+  def remove_product
+    order = Order.find_by_id(params[:id])
+    order_product = order.order_products.find_by_product_id(params[:product_id])
+    order_product.destroy
+    render :edit
+  end 
+
   def cancel
     @order = Order.find_by_id(params[:id])
     @order.status = "cancelled"

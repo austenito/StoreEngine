@@ -36,6 +36,8 @@ Your Orders
         = @order.order_products.find_by_product_id(product.id).quantity
       %td
         = product.price
+      %td 
+        = @order.order_products.find_by_product_id(product.id).quantity * product.price 
 
 %p
 

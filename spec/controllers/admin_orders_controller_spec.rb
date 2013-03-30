@@ -72,6 +72,16 @@ describe Admin::OrdersController do
       expect(assigns(:orders)).to eq cancelled_orders
     end 
   end 
+
+  context "an admin clicks to edit an order" do 
+    it "removes an order when 'remove' is clicked" do 
+      order = Order.create(product_id: 1, quantity: 2, status: "pending")
+      new_product = Product.create(name: "banana", description: "yummy", price: 2.00)
+      order.products << new_product
+      post :remove_product, { id: order.id, product_id: new_product.id }
+      expect(order.products.include?(new_product) ).to eq false 
+    end 
+  end 
 end 
 
 
