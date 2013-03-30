@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328200017) do
+ActiveRecord::Schema.define(:version => 20130330023529) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20130328200017) do
     t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "status"
     t.string   "user_id"
+    t.string   "status"
   end
 
   create_table "products", :force => true do |t|
@@ -75,20 +75,10 @@ ActiveRecord::Schema.define(:version => 20130328200017) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "admin",                        :default => false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
-
-  create_table "will_filter_filters", :force => true do |t|
-    t.string   "type"
-    t.string   "name"
-    t.text     "data"
-    t.integer  "user_id"
-    t.string   "model_class_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"
 
 end

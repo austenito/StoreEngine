@@ -13,13 +13,5 @@ describe OrdersController do
       expect(assigns(:orders)).to match_array orders
 
     end
-
-    it "does not create duplicate order products for a single product" do 
-      product = Product.create!(name: 'name', description: 'description', price: 34.99)
-      cart = Cart.create
-      expect(Order.first.order_products.count).to eq 1
-      expect(Order.first.order_products.first.quantity).to eq 2
-    end 
   end
-
 end
