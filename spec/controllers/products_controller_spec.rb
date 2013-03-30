@@ -3,7 +3,10 @@ require 'spec_helper'
 describe ProductsController do
 
   describe 'GET #index' do
+<<<<<<< HEAD
 
+=======
+>>>>>>> fb6dad55a196bca1b4aa0c3be5d34c6a80439387
     it "assigns @product to an array of all products" do
       product = Product.create!(name: "sample", description: "thing", price: 13.99)
       products = Product.all
@@ -12,6 +15,7 @@ describe ProductsController do
     end
   end
 
+<<<<<<< HEAD
   describe 'associating categories with a product' do
     context 'when modifying existing product' do
       it 'adds category to product' do
@@ -25,6 +29,8 @@ describe ProductsController do
     end
   end
 
+=======
+>>>>>>> fb6dad55a196bca1b4aa0c3be5d34c6a80439387
   describe 'filter products by category' do
     context 'when an unauth user wants to browse products by category' do
       it 'assigns @product to an array of products with the category "shoes"' do
@@ -38,4 +44,21 @@ describe ProductsController do
       end
     end
   end
+<<<<<<< HEAD
+=======
+
+  describe 'Associating categories with a product' do
+    context 'when modifying existing product' do
+      it 'adds category to product' do
+        category = Category.create!(name: "shoes")
+        product = Product.create!(name: "Nike high-tops", description: "black and gold", price: 99.99)
+
+        expect{
+          put :update, :id => product.id, :category => {shoes: category.id}
+        }.to change(product.categories, :count).by(1)
+
+      end
+    end
+  end
+>>>>>>> fb6dad55a196bca1b4aa0c3be5d34c6a80439387
 end

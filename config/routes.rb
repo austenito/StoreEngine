@@ -20,6 +20,7 @@ StoreEngine::Application.routes.draw do
   resources :orders
 
   namespace :admin do
+
     resources :products do
       member do
         post :retire
@@ -36,7 +37,6 @@ StoreEngine::Application.routes.draw do
     end
 
     resources :categories
-
   end
 
   resource :order
@@ -51,6 +51,5 @@ StoreEngine::Application.routes.draw do
   match "/login" => "user_sessions#create", :via =>[:get]
 
   #match "/dashboard" => "user_sessions#create", :via =>[:get]
-
 
 end
