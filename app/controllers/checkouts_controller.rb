@@ -13,6 +13,10 @@ class CheckoutsController < ApplicationController
 
       cart.products.each do |product|
         order.products << product
+        quantity = cart.cart_products.find_by_product_id(product.id).quantity
+        order_product = order.order_products.find_by_product_id(product.id)
+        order_product.quantity = quantity
+        order_product.save
       end
 
       order.save

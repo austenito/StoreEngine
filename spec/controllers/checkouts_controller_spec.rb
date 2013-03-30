@@ -10,6 +10,11 @@ describe CheckoutsController do
       user = User.create!(email: "email@email.com", password:"1234", password_confirmation:"1234")
       login_user(user)
       cart = Cart.create
+      cart.products << product
+      cart_product = cart.cart_products.find_by_product_id(product.id)
+      cart_product.quantity = 3
+      cart_product.save!
+      cart.save!
       session[:cart_id] = cart.id
     end
 
@@ -50,6 +55,12 @@ describe CheckoutsController do
       it "then creates a new order" do
         post :create, valid_params
         expect(Order.count).to eq 1
+      end
+
+      it "adds the correct quantity of each product" do
+        post :create, valid_params
+        order = Order.first
+        expect(order.order_products.find_by_product_id(product.id).quantity).to eq 3
       end
 
       #TODO describe what is valid information

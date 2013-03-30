@@ -16,7 +16,7 @@
           = submit_tag 'Update'
       %td
         = product.price
-      %td 
+      %td
         = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
       %td
         = form_tag delete_product_cart_path do
