@@ -9,8 +9,8 @@
       %td
         = product.description
       %td
-        %form{action: add_item_cart_path, method: 'post'}
-          %input{type: "submit", value: "Buy!", id: product.id}
-          %input{type: "hidden", value: product.id, name: "product_id"}
+        = form_tag add_item_cart_path do
+          = hidden_field_tag 'product_id', product.id
+          = submit_tag "Buy!"
 
 
