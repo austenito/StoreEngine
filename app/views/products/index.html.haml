@@ -1,3 +1,6 @@
+.flash
+  = flash.notice
+
 Welcome to our store! Product Index below
 
 %p
@@ -16,3 +19,8 @@ Welcome to our store! Product Index below
         = form_tag add_item_cart_path do
           = hidden_field_tag 'product_id', product.id
           = submit_tag "Buy!"
+
+%p
+
+= link_to "View Cart", cart_path 
+

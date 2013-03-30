@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyStore</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="navbar">
+    <div class="navbar-inner">
+    <ul class="nav">
+    <li><h4>StoreEngine</h4></li>
+    <li><a href=""> </a></li>
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="/categories">Categories</a></li>
+    <li><a href="/">Products</a></li>
+    <li><a href="/cart">My Cart</a></li>
+    <li><a href="/checkouts">Checkout</a></li>
+    <% if current_user %>
+      <li><a href="/orders">Orders</a></li>
+    <% else %>
+    <% end %>
+    <% if current_user %>
+      <li><a href="/logout">Logout</a></li>
+    <% else %>
+      <li><a href="/user_sessions/new">Login</a></li>
+    <% end %>
+    </ul>
+    </div>
+    </div>
+<div class="container">
+
+<%= yield %>
+</div>
+
+
+</body>
+</html>
