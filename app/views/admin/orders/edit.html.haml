@@ -35,6 +35,18 @@ Change Quantity or Remove Products from Order if Order Status is "Pending" or "P
       %tr
         = button_to "Remove Product", {action: "remove_product", id: @order.id, product_id: order_product.product_id} 
 
+Change Status of Order if Order is Pending, Shipped, or Paid
 
+%p
+
+- if @order.status == "pending"
+  Change "Pending" Order to "Cancelled"
+  = button_to "Cancel Order", { action: "cancel", id: @order.id }
+- if @order.status == "shipped"
+  "Mark as Returned" an Order that is Currently "Shipped"
+  = button_to "Mark as Returned", { action: "return", id: @order.id }
+- if @order.status == "paid"
+  "Mark as Shipped" an Order that is Currently "Paid"
+  = button_to "Mark as Shipped", { action: "ship", id: @order.id }
 
 
