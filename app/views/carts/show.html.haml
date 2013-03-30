@@ -10,18 +10,18 @@
       %td
         = product.name
       %td
-        %form{ action: update_quantity_cart_path, method: 'post' }
-          %input{ type: 'hidden', name: 'product_id', value: product.id}
-          %input{ type: 'text', name: 'quantity', value: '1' }
-          %input{ type: 'submit', value: 'Update' }
+        = form_tag update_quantity_cart_path do
+          = hidden_field_tag 'product_id', product.id
+          = text_field_tag 'quantity', @cart.cart_products.find_by_product_id(product.id).quantity
+          = submit_tag 'Update'
       %td
         = product.price
       %td
         = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
       %td
-        %form{ action: delete_product_cart_path, method: 'post' }
-          %input{ type: 'hidden', name: 'product_id', value: product.id}
-          %input{ type: 'submit', value: 'Remove from cart' }
+        = form_tag delete_product_cart_path do
+          = hidden_field_tag 'product_id', product.id
+          = submit_tag 'Remove from cart'
 
 %p
 

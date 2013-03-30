@@ -12,7 +12,13 @@ class CartsController < ApplicationController
     product = Product.find_by_id(params[:product_id])
 
     if product
-      cart.products << product
+      if cart.products.include?(product)
+        cart_product = cart.cart_products.find_by_product_id(product.id)
+        cart_product.quantity += 1
+        cart_product.save!
+      else
+        cart.products << product
+      end
       redirect_to root_path, flash: { success: "Product added to cart" }
     else
       redirect_to root_path, flash: { error: "An error occurred while adding the item to your cart" }
@@ -21,7 +27,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = Cart.find_by_id(session[:cart_id])
-    if @cart
+    if @cart && @cart.cart_products.count > 0
       render :show
     else
       render :empty_cart
@@ -29,16 +35,16 @@ class CartsController < ApplicationController
   end
 
 	def delete_product
-    cart = Cart.find_by_id(session[:cart_id])
-    cart_product = cart.cart_products.find_by_product_id(params[:product_id])
+    @cart = Cart.find_by_id(session[:cart_id])
+    cart_product = @cart.cart_products.find_by_product_id(params[:product_id])
     cart_product.delete
 
     redirect_to cart_path
 	end
 
   def update_quantity
-    cart = Cart.find_by_id(session[:cart_id])
-    cart_product = cart.cart_products.find_by_product_id(params[:product_id])
+    @cart = Cart.find_by_id(session[:cart_id])
+    cart_product = @cart.cart_products.find_by_product_id(params[:product_id])
     cart_product.quantity = params[:quantity]
     cart_product.save
 

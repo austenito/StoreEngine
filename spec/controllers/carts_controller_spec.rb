@@ -18,8 +18,12 @@ describe CartsController do
       expect(cart.products.first.id).to eq product.id
     end
 
-    it "increases the quantity of an order product if that item already exists" do 
-    end 
+    it "increases the quantity of an order product if that item already exists" do
+      post :add_item, { product_id: product.id }
+      post :add_item, { product_id: product.id }
+      cart = Cart.first
+      expect(cart.cart_products.find_by_product_id(product.id).quantity).to eq 2
+    end
 
     it "stays on the index page" do
       post :add_item, { product_id: product.id }
