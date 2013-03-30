@@ -1,37 +1,25 @@
 StoreEngine::Application.routes.draw do
 
   resources :categories
-
+  resources :products
 
   root :to => 'products#index'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   resources :products, :only => [:show]
 
-=======
->>>>>>> add tests for updating products with categories
-=======
->>>>>>> create categories controller for Admin, start tests
   resource :checkout, :only => [:create, :show] do
     get :confirmation
   end
 
   resource :cart, :only => [:show] do
     post :add_item
-<<<<<<< HEAD
-<<<<<<< HEAD
     post :update_quantity
     post :delete_product
-=======
-    put :update_quantity
->>>>>>> create categories controller for Admin, start tests
   end
 
   resources :orders
 
   namespace :admin do
-<<<<<<< HEAD
     resources :products do
       member do
         post :retire
@@ -46,14 +34,13 @@ StoreEngine::Application.routes.draw do
         post :update_quantity
       end
     end
-=======
-    put :update_quantity
->>>>>>> add tests for updating products with categories
+
+    resources :categories
+
   end
 
   resource :order
 
-<<<<<<< HEAD
   match "/create_account" => "users#new", :via => [:get]
 
   resources :users
@@ -65,12 +52,5 @@ StoreEngine::Application.routes.draw do
 
   #match "/dashboard" => "user_sessions#create", :via =>[:get]
 
-=======
-  resources :products
->>>>>>> add tests for updating products with categories
-=======
-    resources :products
-    resources :categories
-  end
->>>>>>> create categories controller for Admin, start tests
+
 end

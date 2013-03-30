@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130330023529) do
-=======
-ActiveRecord::Schema.define(:version => 20130328173704) do
->>>>>>> create categories controller for Admin, start tests
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -82,8 +78,6 @@ ActiveRecord::Schema.define(:version => 20130328173704) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-<<<<<<< HEAD
-<<<<<<< HEAD
     t.string   "email",                                           :null => false
     t.string   "crypted_password"
     t.string   "salt"
@@ -94,21 +88,6 @@ ActiveRecord::Schema.define(:version => 20130328173704) do
     t.boolean  "admin",                        :default => false
     t.string   "first_name"
     t.string   "last_name"
-=======
-=======
->>>>>>> create categories controller for Admin, start tests
-    t.string   "username",                     :null => false
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "salt"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.string   "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-<<<<<<< HEAD
->>>>>>> add tests for updating products with categories
-=======
->>>>>>> create categories controller for Admin, start tests
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
