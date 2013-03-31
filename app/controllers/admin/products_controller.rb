@@ -39,4 +39,15 @@ class Admin::ProductsController < ActionController::Base
 
     redirect_to admin_products_path(product)
   end
+
+
+  def add_categories
+    @product = Product.find_by_id(params[:id])
+
+    params[:category].values.each do |category_id|
+      category = Category.find_by_id(category_id)
+      @product.categories << category
+    end
+    redirect_to product_path(@product)
+  end
 end

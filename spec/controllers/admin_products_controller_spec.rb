@@ -25,6 +25,20 @@ describe Admin::ProductsController do
       expect(retired_product).to be_retired
     end
   end
+
+  describe 'associating categories with a product' do
+    context 'when modifying existing product' do
+      it 'adds category to product' do
+        category = Category.create!(name: "shoes")
+        product = Product.create!(name: "Nike high-tops", description: "black and gold", price: 99.99)
+
+        expect{
+          put :add_categories, :id => product.id, :category => {shoes: category.id}
+        }.to change(product.categories, :count).by(1)
+
+      end
+    end
+  end
 end
 
 

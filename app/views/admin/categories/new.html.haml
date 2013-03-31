@@ -1,0 +1,10 @@
+Create A New Cateogy 
+
+%br
+
+= form_for [:admin, @category] do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.submit "Create"
+

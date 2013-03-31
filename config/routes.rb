@@ -1,8 +1,5 @@
 StoreEngine::Application.routes.draw do
 
-  resources :categories
-  resources :products
-
   root :to => 'products#index'
 
   resources :products, :only => [:show]
@@ -24,6 +21,7 @@ StoreEngine::Application.routes.draw do
     resources :products do
       member do
         post :retire
+        post :add_categories 
       end
     end
 
