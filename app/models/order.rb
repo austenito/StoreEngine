@@ -7,4 +7,12 @@ class Order < ActiveRecord::Base
    has_many :order_products
    has_many :products, through: :order_products
    belongs_to :user
+
+   validate :has_products? 
+
+   def has_products?
+    errors.add :base, "Order must have at least one product" if self.products.blank?
+   end 
 end
+
+
