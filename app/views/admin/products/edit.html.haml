@@ -14,9 +14,14 @@ Edit Products Page
     = f.label :price
     = f.text_field :price
   %p
-    = f.label :category
-    = f.collection_select(:id, Category.all, :id, :name)
+    - for category in Category.find(:all)
+      = check_box_tag "category_ids[]", category.id, @product.categories.include?(category)
+      = category.name
   %p
     = f.submit 'Update Product'
 
 
+
+
+f.label :category
+f.collection_select(:id, Category.all, :id, :name)

@@ -27,8 +27,15 @@ class Admin::ProductsController < ActionController::Base
   end
 
   def update
+    params[:category_ids] ||= []
+
     @product = Product.find_by_id(params[:id])
     @product.update_attributes(params[:product])
+
+    params[:category_ids].each do |id|
+      @product.categories << Category.find_by_id(id)
+    end
+
     redirect_to admin_products_path
   end
 
