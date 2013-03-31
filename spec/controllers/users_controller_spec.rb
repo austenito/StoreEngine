@@ -11,7 +11,9 @@ describe UsersController do
     context "given valid sign up information" do
 
       let(:valid_attributes) do
-        {user: {email: "user@user.com",
+        {user: {first_name: "afirstname",
+          last_name: "alastname",
+          email: "user@user.com",
           password: "password1",
           password_confirmation: "password1"}}
       end
@@ -28,7 +30,9 @@ describe UsersController do
 
     context "given invalid sign up information" do
       let(:invalid_attributes ) do
-        {user: {email: "user@user.com",
+        {user: {first_name: "afirstname",
+          last_name: "alastname",
+          email: "user@user.com",
           password: "password1",
           password_confirmation: "pass"}}
         end
@@ -41,9 +45,6 @@ describe UsersController do
         post :create, invalid_attributes
         expect(response).to render_template :new
       end
-
     end
-
   end
-
 end

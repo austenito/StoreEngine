@@ -4,10 +4,10 @@ describe CheckoutsController do
 
   describe "when a user clicks checkout" do
 
-    let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2)}
+    let!(:product){Product.create!(name: "cool beans", description: "very cold beans", price: 2.00)}
 
     before do
-      user = User.create!(email: "email@email.com", password:"1234", password_confirmation:"1234")
+      user = User.create!(first_name: "afirstname", last_name: "alastname", email: "email@email.com", password:"1234", password_confirmation:"1234")
       login_user(user)
       cart = Cart.create
       cart.products << product

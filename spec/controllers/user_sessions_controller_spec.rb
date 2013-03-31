@@ -16,6 +16,8 @@ describe UserSessionsController do
       before do
 
         valid_attributes = {
+          first_name: "afirstname",
+          last_name: "alastname",
           email: "email@email.com",
           password: "password",
           password_confirmation: "password"
@@ -40,8 +42,8 @@ describe UserSessionsController do
     context "an unauthorized user" do
 
       before do
-        post :create, {email: "email@email.com",
-          password: "password"}
+        post :create, {first_name: "afirstname", last_name: "alastname", 
+        email: "email@email.com", password: "password"}
       end
 
       it "cannot log in" do
@@ -60,6 +62,8 @@ describe UserSessionsController do
       before do
 
         valid_attributes = {
+          first_name: "afirstname",
+          last_name: "alastname",
           email: "email@email.com",
           password: "password",
           password_confirmation: "password"
