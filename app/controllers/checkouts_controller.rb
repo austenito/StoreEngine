@@ -9,10 +9,11 @@ class CheckoutsController < ApplicationController
 
     cart = Cart.find_by_id(session[:cart_id])
     if valid_billing_info? params
-      order = Order.create(user_id: current_user.id)
+      order = Order.new(user_id: current_user.id)
 
       cart.products.each do |product|
         order.products << product
+        order.save
         quantity = cart.cart_products.find_by_product_id(product.id).quantity
         order_product = order.order_products.find_by_product_id(product.id)
         order_product.quantity = quantity
