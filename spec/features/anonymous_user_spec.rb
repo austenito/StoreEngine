@@ -9,22 +9,32 @@ describe "An unathorized user" do
 
   describe "goes to a product's page" do
 
-    let(:product) do
-      Product.create(
+    let!(:product) do
+      Product.create!(
         name: "Sample Product",
         description: "This is the product description",
         price: 2.00
       )
     end
 
+    let!(:retired_product) do
+      Product.create!(
+        name: "Sample Product",
+        description: "This is the product description",
+        price: 2.00,
+        retired: true
+      )
+    end
+
     before do
 
-      visit product_path(product)
+      visit root_path
+      click_link(product.name)
     end
 
     it "and sees product info" do
 
-      find('img.product')
+      expect(page).to have_css("img.product")
       expect(page).to have_content product.name
       expect(page).to have_content product.description
       expect(page).to have_content product.price
@@ -32,20 +42,13 @@ describe "An unathorized user" do
 
     context "of an active product" do
 
-      it "and sees a 'buy' button." do
-
-        within('.product-details') do
-
-          find('.purchase_button')
-        end
-
-      end
-
       context "and clicks on the 'buy' button" do
 
         before do
 
-          find_button('.purchase_button').click
+          visit root_path
+          click_link(product.name)
+          find('.purchase_button').click
         end
 
         it "and sees a message that the item was added to their cart" do
@@ -58,6 +61,7 @@ describe "An unathorized user" do
     context "of a retired prodcut" do
 
       it "and sees the word 'retired'." do
+        visit product_path(retired_product)
 
         expect(page).to have_content 'Retired'
         expect(page).to_not have_selector 'button'
@@ -123,23 +127,23 @@ describe "An unathorized user" do
         User.create!(user_info)
       end
 
-      it "and gets a message that an account already exists"
+      it "and gets a message that an account already exists" do
 
-
-        fill_in("First Name", with: new_user_info.first_name)
-        fill_in("Last Name", with: new_user_info.last_name)
-        fill_in("Email", with: new_user_info.email)
-        fill_in("Password", with: new_user_info.password)
-        fill_in("Confirm Password", with: new_user_info.password)
+        fill_in("First Name", with: user_info.first_name)
+        fill_in("Last Name", with: user_info.last_name)
+        fill_in("Email", with: user_info.email)
+        fill_in("Password", with: user_info.password)
+        fill_in("Confirm Password", with: user_info.password)
         click_button(create_account_button)
 
         expect(page).to have_content("exists")
+      end
     end
   end
 
   describe "logs in" do
 
-    let(:login_button) { "Login" }
+    let(:login_button) { ".login" }
 
     let(:user_info) do
       { email: "email@email.com",
@@ -152,13 +156,16 @@ describe "An unathorized user" do
 
       before do
         User.create!(user_info)
+        visit root_path
       end
 
       it "and is logged in and sees a messsage that they are logged in" do
-        click_link("Login")
-        fill_field("Email").with(user_info.email)
-        fill_field("Password").with(user_info.password)
-        click_button(login_button)
+        within("header") do
+          click_link("Login")
+        end
+        fill_in "email", with: user_info[:email]
+        fill_in "password", with: user_info[:password]
+        find(login_button).click
         expect(page).to have_content("Log out")
       end
     end
@@ -212,7 +219,7 @@ describe "An unathorized user" do
         cart.save!
       end
 
-      def create_cart
+      let(:create_cart) do
         session[:cart_id] = cart.id
       end
 
@@ -222,6 +229,7 @@ describe "An unathorized user" do
       end
 
       it "and sees a table of their cart items which can be modified" do
+
         cart.products.each do | product |
           expect(page).to have_content(product.name)
           expect(page).to have_content(product.description)
@@ -234,12 +242,14 @@ describe "An unathorized user" do
           fill_field('quantity').with(3)
           click_button('Update')
         end
+
         expect(page).to have_content('success')
 
         within('tr[position=0]') do
           click_button('Remove', exact: false)
         end
-        expect(page.to_not have_content(product.name)
+
+        expect(page).to_not have_content(product.name)
 
       end
 

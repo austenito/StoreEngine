@@ -46,6 +46,7 @@ StoreEngine::Application.routes.draw do
   resource :user_session, :only => [:destroy]
 
   match "/login" => "user_sessions#create", :via =>[:get]
+  match "/logout" => "user_sessions#destroy", :via =>[:post]
 
   #match "/dashboard" => "user_sessions#create", :via =>[:get]
 
