@@ -1,0 +1,10 @@
+%ul
+  - if current_user
+    %li
+      %a{href: logout_path} Logout
+  - else
+    %li
+      %a{href: login_path} Login
+    %li
+      %a{href: new_user_path} Create account
+

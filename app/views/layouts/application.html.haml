@@ -14,8 +14,17 @@
     %header.navbar.navbar-fixed-top
       %nav.navbar-inner
         .container
-          /= render 'layouts/navigation'
+          = render file: 'layouts/navigation'
     #main{:role => "main"}
+      .flash
+        .notice
+          = flash.notice
+        .message
+          = flash[:message]
+        .success
+          = flash[:success]
+        .error
+          = flash[:error]
       .container
         .content
           .row

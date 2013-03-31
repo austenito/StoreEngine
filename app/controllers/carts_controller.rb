@@ -19,7 +19,7 @@ class CartsController < ApplicationController
       else
         cart.products << product
       end
-      redirect_to root_path, flash: { success: "Product added to cart" }
+      redirect_to root_path, flash: { success: "#{product.name} was added to your cart!" }
     else
       redirect_to root_path, flash: { error: "An error occurred while adding the item to your cart" }
     end
