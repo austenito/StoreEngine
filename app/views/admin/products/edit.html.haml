@@ -14,4 +14,9 @@ Edit Products Page
     = f.label :price
     = f.text_field :price
   %p
+    = f.label :category
+    = f.collection_select(:id, Category.all, :id, :name)
+  %p
     = f.submit 'Update Product'
+
+

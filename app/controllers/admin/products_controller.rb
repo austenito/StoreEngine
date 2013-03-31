@@ -14,6 +14,7 @@ class Admin::ProductsController < ActionController::Base
 
   def edit
     @product = Product.find_by_id(params[:id])
+    @categories = Category.all
   end
 
   def create
