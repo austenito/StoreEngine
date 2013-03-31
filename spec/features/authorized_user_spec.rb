@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "An authorized user" do
 
+<<<<<<< HEAD
   let(:user_info) do
     { email: "email@email.com",
       password: "password",
@@ -14,12 +15,15 @@ describe "An authorized user" do
    login_user(user)
   end
 
+=======
+>>>>>>> described features for an authorized user
   describe "does stuff they're not supposed to do" do
     it "and is sent to a 403 page"
   end
 
   describe "goes to a product's page" do
 
+<<<<<<< HEAD
     let(:product) do
       Product.create!(
         name: "sample",
@@ -41,11 +45,18 @@ describe "An authorized user" do
       it "adds the item to the cart and directed to the checkout page" do
         expect(current_path).to eq checkout_path
       end
+=======
+    it "sees a 2-click order option"
+
+    context "clicks on the 2-click order option" do
+      it "adds the item to the cart and directed to the checkout page"
+>>>>>>> described features for an authorized user
     end
   end
 
   describe "checks out" do
 
+<<<<<<< HEAD
       let(:product) do
         Product.create!(
           name: "Name!",
@@ -94,10 +105,16 @@ describe "An authorized user" do
         expect(page).to have_selector('input.invalid', name: 'billing_info[city]')
 
       end
+=======
+    context "and fills in the billing information with valid info" do
+
+      it "and gets a message that the billing info is incorrect"
+>>>>>>> described features for an authorized user
     end
 
     context "and fills in the billing information correctly" do
 
+<<<<<<< HEAD
       before do
         valid_billing_info = {
           credit_card_number: 4242424242424242,
@@ -123,11 +140,15 @@ describe "An authorized user" do
       it "and sees the order confirmation page"
         click_button('Confirm')
         expect(current_path).to eq confirmation_checkout_path
+=======
+      it "and sees the order confirmation page"
+>>>>>>> described features for an authorized user
     end
   end
 
   describe "looks at past orders" do
 
+<<<<<<< HEAD
     before do
       visit root_path
       click_link('Orders')
@@ -138,14 +159,22 @@ describe "An authorized user" do
       it "and sees a 'no past orders'" do
         expect(page).to have_content("No Orders")
       end
+=======
+    context "but hasn't ordered anything in the past" do
+
+      it "and sees a 'no past orders'"
+>>>>>>> described features for an authorized user
     end
 
     context "and has ordered items in the past" do
 
+<<<<<<< HEAD
       before do
         #TODO setup factory girl and create dummy orders and products
       end
 
+=======
+>>>>>>> described features for an authorized user
       context "and clicks on an entry in the table for specific order information" do
 
         it "and sees details about the order products and status"
@@ -156,6 +185,7 @@ describe "An authorized user" do
 
   describe "logs out" do
 
+<<<<<<< HEAD
     before do
       visit root_path
       click_link('Log out')
@@ -166,5 +196,8 @@ describe "An authorized user" do
       expect(current_path).to eq root_path
       expect(page).to have_content('Login')
     end
+=======
+    it "and is directed to the home page and sees a message that they were logged out"
+>>>>>>> described features for an authorized user
   end
 end
