@@ -4,9 +4,13 @@ describe "An unathorized user" do
 
   describe "does stuff they're not supposed to do" do
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> described features for an anonymous user
+=======
+
+>>>>>>> added tests for viewing a product page signing up
     it "and is sent to a 403 page"
   end
 
@@ -26,6 +30,7 @@ describe "An unathorized user" do
 
     before do
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       visit product_path(product)
     end
@@ -40,6 +45,15 @@ describe "An unathorized user" do
     it "and sees product info." do
       find('img')
 >>>>>>> filled out test for seeing product info
+=======
+
+      visit product_path(product)
+    end
+
+    it "and sees product info" do
+
+      find('img.product')
+>>>>>>> added tests for viewing a product page signing up
       expect(page).to have_content product.name
       expect(page).to have_content product.description
       expect(page).to have_content product.price
@@ -74,31 +88,61 @@ describe "An unathorized user" do
 >>>>>>> filled out test for seeing product info
 
     context "of an active product" do
-      it "and sees a 'buy' button."
+
+      it "and sees a 'buy' button." do
+
+        within('.product-details') do
+
+          find('.purchase_button')
+        end
+
+      end
 
       context "and clicks on the 'buy' button" do
+<<<<<<< HEAD
         it "and sees a message that the item was added to their cart"
 >>>>>>> described features for an anonymous user
+=======
+
+        before do
+
+          find_button('.purchase_button').click
+        end
+
+        it "and sees a message that the item was added to their cart" do
+
+          expect(page).to have_content 'added'
+        end
+>>>>>>> added tests for viewing a product page signing up
       end
     end
 
     context "of a retired prodcut" do
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added tests for viewing a product page signing up
 
       it "and sees the word 'retired'." do
 
         expect(page).to have_content 'Retired'
         expect(page).to_not have_selector 'button'
       end
+<<<<<<< HEAD
 =======
       it "and sees the word 'retired'."
 >>>>>>> described features for an anonymous user
+=======
+>>>>>>> added tests for viewing a product page signing up
     end
   end
 
   describe "signs up for an account" do
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added tests for viewing a product page signing up
     let(:create_account_button) {"Create Account"}
 
     before do
@@ -107,6 +151,7 @@ describe "An unathorized user" do
       click_link("Create account")
     end
 
+<<<<<<< HEAD
     context "with invalid information" do
 
       it "stays on the same page and highlights the invalid fields" do
@@ -167,17 +212,71 @@ describe "An unathorized user" do
 
         expect(page).to have_content("exists")
 =======
+=======
+>>>>>>> added tests for viewing a product page signing up
     context "with invalid information" do
-      it "stays on the same page and highlights the invalid fields"
+
+      it "stays on the same page and highlights the invalid fields" do
+        click_button(create_account_button)
+
+        expect(page).to have_content('error')
+        expect(page).to have_selector('input.invalid', name: 'user[first_name]')
+        expect(page).to have_selector('input.invalid', name: 'user[last_name]')
+        expect(page).to have_selector('input.invalid', name: 'user[email]')
+        expect(page).to have_selector('input.invalid', name: 'user[password]')
+        expect(page).to have_selector('input.invalid', name: 'user[password_confirmation]')
+      end
     end
 
     context "with valid information" do
-      it "and is logged in and directed back to their original page"
+
+      it "and is logged in" do
+        new_user_info = {
+          first_name: "George",
+          last_name: "Smith",
+          email: "email@email.com",
+          password: "my_password"
+        }
+
+        fill_in("First Name", with: new_user_info.first_name)
+        fill_in("Last Name", with: new_user_info.last_name)
+        fill_in("Email", with: new_user_info.email)
+        fill_in("Password", with: new_user_info.password)
+        fill_in("Confirm Password", with: new_user_info.password)
+        click_button(create_account_button)
+
+        expect(page).to have_selector("a", content: "Log out")
+      end
     end
 
     context "with an email that already exists in the db" do
+
+      let(:user_info) do
+        { first_name: "George",
+          last_name: "Smith",
+          email: "email@email.com",
+          password: "my_password" }
+      end
+
+      before do
+        User.create!(user_info)
+      end
+
       it "and gets a message that an account already exists"
+<<<<<<< HEAD
 >>>>>>> described features for an anonymous user
+=======
+
+
+        fill_in("First Name", with: new_user_info.first_name)
+        fill_in("Last Name", with: new_user_info.last_name)
+        fill_in("Email", with: new_user_info.email)
+        fill_in("Password", with: new_user_info.password)
+        fill_in("Confirm Password", with: new_user_info.password)
+        click_button(create_account_button)
+
+        expect(page).to have_selector("a", content: "Log out")
+>>>>>>> added tests for viewing a product page signing up
     end
   end
 
