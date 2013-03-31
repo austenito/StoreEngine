@@ -21,7 +21,6 @@ StoreEngine::Application.routes.draw do
     resources :products do
       member do
         post :retire
-        post :add_categories 
       end
     end
 
