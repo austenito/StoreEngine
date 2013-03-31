@@ -13,6 +13,9 @@ describe "An unathorized user" do
   describe "goes to a product's page" do
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> filled out test for seeing product info
     let(:product) do
       Product.create(
         name: "Sample Product",
@@ -22,6 +25,7 @@ describe "An unathorized user" do
     end
 
     before do
+<<<<<<< HEAD
 
       visit product_path(product)
     end
@@ -29,10 +33,18 @@ describe "An unathorized user" do
     it "and sees product info" do
 
       find('img.product')
+=======
+      visit product_path(product)
+    end
+
+    it "and sees product info." do
+      find('img')
+>>>>>>> filled out test for seeing product info
       expect(page).to have_content product.name
       expect(page).to have_content product.description
       expect(page).to have_content product.price
     end
+<<<<<<< HEAD
 
     context "of an active product" do
 
@@ -58,6 +70,8 @@ describe "An unathorized user" do
         end
 =======
     it "and sees product info."
+=======
+>>>>>>> filled out test for seeing product info
 
     context "of an active product" do
       it "and sees a 'buy' button."
