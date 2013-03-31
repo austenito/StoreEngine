@@ -3,12 +3,16 @@ require 'spec_helper'
 describe "An unathorized user" do
 
   describe "does stuff they're not supposed to do" do
+<<<<<<< HEAD
 
+=======
+>>>>>>> described features for an anonymous user
     it "and is sent to a 403 page"
   end
 
   describe "goes to a product's page" do
 
+<<<<<<< HEAD
     let(:product) do
       Product.create(
         name: "Sample Product",
@@ -52,21 +56,35 @@ describe "An unathorized user" do
 
           expect(page).to have_content 'added'
         end
+=======
+    it "and sees product info."
+
+    context "of an active product" do
+      it "and sees a 'buy' button."
+
+      context "and clicks on the 'buy' button" do
+        it "and sees a message that the item was added to their cart"
+>>>>>>> described features for an anonymous user
       end
     end
 
     context "of a retired prodcut" do
+<<<<<<< HEAD
 
       it "and sees the word 'retired'." do
 
         expect(page).to have_content 'Retired'
         expect(page).to_not have_selector 'button'
       end
+=======
+      it "and sees the word 'retired'."
+>>>>>>> described features for an anonymous user
     end
   end
 
   describe "signs up for an account" do
 
+<<<<<<< HEAD
     let(:create_account_button) {"Create Account"}
 
     before do
@@ -134,11 +152,24 @@ describe "An unathorized user" do
         click_button(create_account_button)
 
         expect(page).to have_content("exists")
+=======
+    context "with invalid information" do
+      it "stays on the same page and highlights the invalid fields"
+    end
+
+    context "with valid information" do
+      it "and is logged in and directed back to their original page"
+    end
+
+    context "with an email that already exists in the db" do
+      it "and gets a message that an account already exists"
+>>>>>>> described features for an anonymous user
     end
   end
 
   describe "logs in" do
 
+<<<<<<< HEAD
     let(:login_button) { "Login" }
 
     let(:user_info) do
@@ -174,6 +205,14 @@ describe "An unathorized user" do
 
       end
 
+=======
+    context "with user info that matches info in the db" do
+      it "and is logged in and sees a messsage that they are logged in"
+    end
+
+    context "with user info that doesn't exist in the db" do
+      it "is not logged in and given a message that login info is not correct"
+>>>>>>> described features for an anonymous user
     end
   end
 
@@ -181,14 +220,19 @@ describe "An unathorized user" do
 
     context "and the cart is empty" do
 
+<<<<<<< HEAD
       it "and sees a message that the cart is empty" do
         visit cart_path
         expect(page).to have_content "empty"
       end
+=======
+      it "and sees a message that the cart is empty"
+>>>>>>> described features for an anonymous user
     end
 
     context "and the cart has items" do
 
+<<<<<<< HEAD
       let(:product) do
         Product.create!(
           name: "Name!",
@@ -252,6 +296,13 @@ describe "An unathorized user" do
         it "but is asked to first login or signup" do
           expect(page).to have_content("Please login")
         end
+=======
+      it "and sees a table of their cart items which can be modified"
+
+      context "and attempts to checkout" do
+
+        it "but is asked to first login or signup"
+>>>>>>> described features for an anonymous user
 
       end
     end
