@@ -3,6 +3,8 @@ class Product < ActiveRecord::Base
   validates :name, :description, :price, presence: true
   validates_uniqueness_of :name
 
+  validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than => 0}
+
   has_many :cart_products
   has_many :carts, through: :cart_products
   has_and_belongs_to_many :categories

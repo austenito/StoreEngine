@@ -43,56 +43,63 @@ describe Product do
       end
 
       it "has errors" do
-        expect(product).to have(1).errors_on :price
+        expect(product).to have(2).errors_on :price
       end
     end
   end
 
   describe "when a product has invalid attributes" do 
 
-    let(:product) { Product.new(name: "grapes", description: "good", price: 3.00) }
+    let!(:product) { Product.create(name: "grapes", description: "sweet", price: 2.00) }
+    let(:product2) { Product.new(name: "oranges", description: "good", price: 3.00) }
 
     context "when its name is not unique" do
       it "is invalid" do 
-        Product.create(name: "grapes", description: "sweet", price: 2.00)
-        expect(product).to be_invalid
+        product2.name = "grapes"
+        expect(product2).to be_invalid
       end
 
       it "has errors" do 
+        product2.name = "grapes"
+        expect(product2).to have(1).errors_on :name
       end 
     end 
 
     context "when description is an empty string" do 
       it "is invalid" do 
+        product2.description = ""
+        expect(product2).to be_invalid
       end 
 
       it "has errors" do 
+        product2.description = ""
+        expect(product2).to have(1).errors_on :description
       end 
     end 
 
     context "when price is not a valid decimal numeric value" do 
       it "is invalid" do 
+        product2.price = "apples"
+        expect(product2).to be_invalid
       end 
 
       it "has errors" do 
+        product2.price = "apples"
+        expect(product2).to have(1).errors_on :price 
       end 
     end 
 
     context "when price is not greater than zero" do 
-      it "is invalid" do 
+      it "is invalid" do
+        product2.price = 0.00
+        expect(product2).to be_invalid
       end 
 
       it "has errors" do 
+        product2.price = 0.00
+        expect(product2).to have(1).errors_on :price
       end 
     end
-
-    context "when a photo is not a valid URL format" do 
-      it "is invalid" do 
-      end 
-
-      it "has errors" do 
-      end 
-    end 
   end
 
   context "when valid" do

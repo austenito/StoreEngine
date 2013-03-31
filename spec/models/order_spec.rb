@@ -9,6 +9,15 @@ describe Order do
 
     end
 
+    context "an order does not belong to a user" do
+
+      it "is invalid" do 
+      end 
+
+      it "has errors" do 
+      end  
+    end 
+
     it "is valid when it has a quantity of positive value" do
       pending
     end

@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe User do
   let(:user) do
-    User.new(email: "email@email.com",
+    User.new(first_name: "afirstname",
+             last_name: "alastname",
+             email: "email@email.com",
              password: "password",
              password_confirmation: "password")
   end
@@ -21,7 +23,9 @@ describe User do
 
       context "the email is not unique" do
         let(:duplicate) do
-          User.create!(email: "email@email.com",
+          User.create!(first_name: "afirstname",
+                       last_name: "alastname",
+                       email: "email@email.com",
                        password: "blah",
                        password_confirmation: "blah")
         end
@@ -31,8 +35,6 @@ describe User do
         end
 
         it "is invalid" do
-          pending "WHY IS THIS INVALID WHEN UNIQUENESS ATTRIBUTE ISN'T THERE?"
-          puts User.count
           expect(duplicate).to be_invalid
         end
       end
@@ -82,9 +84,24 @@ describe User do
       end
 
       it "has errors" do
-        expect(user).to have(1).errors_on(:email)
+        expect(user).to have(2).errors_on(:email)
       end
     end
+
+    context "when the email is not of a valid type" do 
+
+      before do 
+        user.email = "invalidemail"
+      end
+
+      it "is invalid" do 
+        expect(user).to be_invalid
+      end 
+
+      it "has errors" do 
+        expect(user).to have(1).errors_on(:email)
+      end 
+    end 
 
     context "when it is missing a password" do
       before do
@@ -98,9 +115,35 @@ describe User do
       it "has errors" do
         expect(user).to have(3).errors_on(:password)
       end
-
     end
   end
+
+  context "a user does not enter a first name" do 
+    before do 
+      user.first_name = nil
+    end 
+
+    it "is invalid" do 
+      expect(user).to be_invalid
+    end 
+
+    it "has errors" do 
+      expect(user).to have(1).errors_on :first_name
+    end 
+  end 
+
+  context "a user does not enter a last name" do 
+    before do 
+      user.last_name = nil
+    end 
+
+    it "is invalid" do 
+      expect(user).to be_invalid
+    end 
+
+    it "has errors" do 
+    end 
+  end 
 
   context "attribute thingies..." do
     context "user is an admin" do
