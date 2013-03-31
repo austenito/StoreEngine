@@ -8,7 +8,24 @@ describe "An unathorized user" do
 
   describe "goes to a product's page" do
 
-    it "and sees product info."
+    let(:product) do
+      Product.create(
+        name: "Sample Product",
+        description: "This is the product description",
+        price: 2.00
+      )
+    end
+
+    before do
+      visit product_path(product)
+    end
+
+    it "and sees product info." do
+      find('img')
+      expect(page).to have_content product.name
+      expect(page).to have_content product.description
+      expect(page).to have_content product.price
+    end
 
     context "of an active product" do
       it "and sees a 'buy' button."
