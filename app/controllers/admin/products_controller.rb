@@ -32,6 +32,8 @@ class Admin::ProductsController < ActionController::Base
     @product = Product.find_by_id(params[:id])
     @product.update_attributes(params[:product])
 
+    @product.categories.clear
+    
     params[:category_ids].each do |id|
       @product.categories << Category.find_by_id(id)
     end
