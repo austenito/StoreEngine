@@ -211,6 +211,7 @@ describe "An unathorized user" do
         click_button(create_account_button)
 
         expect(page).to have_content("exists")
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> added tests for viewing a product page signing up
@@ -277,12 +278,17 @@ describe "An unathorized user" do
 
         expect(page).to have_selector("a", content: "Log out")
 >>>>>>> added tests for viewing a product page signing up
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
     end
   end
 
   describe "logs in" do
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
     let(:login_button) { "Login" }
 
     let(:user_info) do
@@ -292,6 +298,7 @@ describe "An unathorized user" do
         last_name: "Last" }
     end
 
+<<<<<<< HEAD
     context "with user info that matches info in the db" do
 
       before do
@@ -319,13 +326,39 @@ describe "An unathorized user" do
       end
 
 =======
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
     context "with user info that matches info in the db" do
-      it "and is logged in and sees a messsage that they are logged in"
+
+      before do
+        User.create!(user_info)
+      end
+
+      it "and is logged in and sees a messsage that they are logged in" do
+        click_link("Login")
+        fill_field("Email").with(user_info.email)
+        fill_field("Password").with(user_info.password)
+        click_button(login_button)
+        expect(page).to have_content("Log out")
+      end
     end
 
     context "with user info that doesn't exist in the db" do
+<<<<<<< HEAD
       it "is not logged in and given a message that login info is not correct"
 >>>>>>> described features for an anonymous user
+=======
+
+      it "is not logged in and given a message that login info is not correct" do
+        click_link("Login")
+        fill_field("Email").with(user_info.email)
+        fill_field("Password").with(user_info.password)
+        click_button(login_button)
+        expect(page).to have_content("error")
+
+      end
+
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
     end
   end
 
@@ -334,18 +367,27 @@ describe "An unathorized user" do
     context "and the cart is empty" do
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
       it "and sees a message that the cart is empty" do
         visit cart_path
         expect(page).to have_content "empty"
       end
+<<<<<<< HEAD
 =======
       it "and sees a message that the cart is empty"
 >>>>>>> described features for an anonymous user
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
     end
 
     context "and the cart has items" do
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
       let(:product) do
         Product.create!(
           name: "Name!",
@@ -399,6 +441,7 @@ describe "An unathorized user" do
         expect(page.to_not have_content(product.name)
 
       end
+<<<<<<< HEAD
 
       context "and attempts to checkout" do
 
@@ -416,6 +459,18 @@ describe "An unathorized user" do
 
         it "but is asked to first login or signup"
 >>>>>>> described features for an anonymous user
+=======
+
+      context "and attempts to checkout" do
+
+        before do
+          click_button('Checkout', exact: false)
+        end
+
+        it "but is asked to first login or signup" do
+          expect(page).to have_content("Please login")
+        end
+>>>>>>> finished writing tests for anonymous user. no clue if it actually works
 
       end
     end
