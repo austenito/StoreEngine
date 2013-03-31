@@ -133,18 +133,47 @@ describe "An unathorized user" do
         fill_in("Confirm Password", with: new_user_info.password)
         click_button(create_account_button)
 
-        expect(page).to have_selector("a", content: "Log out")
+        expect(page).to have_content("exists")
     end
   end
 
   describe "logs in" do
 
+    let(:login_button) { "Login" }
+
+    let(:user_info) do
+      { email: "email@email.com",
+        password: "password",
+        first_name: "First",
+        last_name: "Last" }
+    end
+
     context "with user info that matches info in the db" do
-      it "and is logged in and sees a messsage that they are logged in"
+
+      before do
+        User.create!(user_info)
+      end
+
+      it "and is logged in and sees a messsage that they are logged in" do
+        click_link("Login")
+        fill_field("Email").with(user_info.email)
+        fill_field("Password").with(user_info.password)
+        click_button(login_button)
+        expect(page).to have_content("Log out")
+      end
     end
 
     context "with user info that doesn't exist in the db" do
-      it "is not logged in and given a message that login info is not correct"
+
+      it "is not logged in and given a message that login info is not correct" do
+        click_link("Login")
+        fill_field("Email").with(user_info.email)
+        fill_field("Password").with(user_info.password)
+        click_button(login_button)
+        expect(page).to have_content("error")
+
+      end
+
     end
   end
 
@@ -152,16 +181,77 @@ describe "An unathorized user" do
 
     context "and the cart is empty" do
 
-      it "and sees a message that the cart is empty"
+      it "and sees a message that the cart is empty" do
+        visit cart_path
+        expect(page).to have_content "empty"
+      end
     end
 
     context "and the cart has items" do
 
-      it "and sees a table of their cart items which can be modified"
+      let(:product) do
+        Product.create!(
+          name: "Name!",
+          description: "Description!",
+          price: 1.00
+        )
+      end
+
+      let(:product2) do
+        Product.create!(
+          name: "Name2!",
+          description: "Description2!",
+          price: 2.00
+        )
+      end
+
+      let(:cart) do
+        Cart.create
+        cart.products << product
+        cart.products << product2
+        cart.save!
+      end
+
+      def create_cart
+        session[:cart_id] = cart.id
+      end
+
+      before do
+        create_cart
+        visit cart_path
+      end
+
+      it "and sees a table of their cart items which can be modified" do
+        cart.products.each do | product |
+          expect(page).to have_content(product.name)
+          expect(page).to have_content(product.description)
+          expect(page).to have_content(product.price)
+          expect(page).to have_selector('input', name: 'quantity', value: 1)
+          expect(page).to have_selector('button', value: 'Update')
+        end
+
+        within('tr[position=0]') do
+          fill_field('quantity').with(3)
+          click_button('Update')
+        end
+        expect(page).to have_content('success')
+
+        within('tr[position=0]') do
+          click_button('Remove', exact: false)
+        end
+        expect(page.to_not have_content(product.name)
+
+      end
 
       context "and attempts to checkout" do
 
-        it "but is asked to first login or signup"
+        before do
+          click_button('Checkout', exact: false)
+        end
+
+        it "but is asked to first login or signup" do
+          expect(page).to have_content("Please login")
+        end
 
       end
     end
