@@ -48,22 +48,22 @@ describe CartsController do
 
   context "adding another item to an existing cart" do
 
-    it "adds to the cart" do
+    before do 
       post :add_item, { product_id: product.id }
       post :add_item, { product_id: product2.id }
+    end 
+
+    it "adds to the cart" do    
       items = [product, product2]
       expect(Cart.find_by_id(session[:cart_id]).products).to match_array items
     end
 
     it "doesnt add a non exisiting item to the cart" do
-      post :add_item, { product_id: product.id }
       post :add_item, { product_id: 123 }
-      expect(Cart.find_by_id(session[:cart_id]).products).to match_array [product]
+      expect(Cart.find_by_id(session[:cart_id]).products).to match_array [product, product2]
     end
 
     it "does not create a new cart" do
-      post :add_item, { product_id: product.id }
-      post :add_item, { product_id: product2.id }
       expect(Cart.count).to eq 1
     end
   end
