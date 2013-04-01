@@ -10,7 +10,7 @@
       %td
         = product.name
       %td
-        = form_tag update_quantity_cart_path do
+        = form_for product do |f|
           = hidden_field_tag 'product_id', product.id
           = text_field_tag 'quantity', @cart.cart_products.find_by_product_id(product.id).quantity
           = submit_tag 'Update'
@@ -27,5 +27,3 @@
 
 %form{ action: checkout_path, method: 'get' }
   %input{ type: 'submit', name: 'checkout', value: 'checkout'}
-
-
