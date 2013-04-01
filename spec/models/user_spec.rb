@@ -118,6 +118,22 @@ describe User do
     end
   end
 
+  context "a user can have an optional display name" do 
+
+    let(:user) do
+      User.create!(first_name: "afirstname",
+                   last_name: "alastname",
+                   email: "email@email.com",
+                   password: "blah",
+                   password_confirmation: "blah", 
+                   display_name: "j3")
+    end
+
+    it "returns that display name if it is present" do 
+      expect(User.find_by_id(user.id).display_name).to eq "j3"
+    end 
+  end 
+
   context "a user does not enter a first name" do 
     before do 
       user.first_name = nil

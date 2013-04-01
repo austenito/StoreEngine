@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :email, :password, :admin, :password_confirmation, :first_name, :last_name
+  attr_accessible :email, :password, :admin, :password_confirmation, :first_name, :last_name, :display_name
   validates :email, :password, :first_name, :last_name, presence: true
 
   validates :email, :format => { :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/ }
