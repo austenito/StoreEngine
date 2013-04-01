@@ -103,11 +103,11 @@ describe "An unathorized user" do
           password: "my_password"
         }
 
-        fill_in("First Name", with: new_user_info.first_name)
-        fill_in("Last Name", with: new_user_info.last_name)
-        fill_in("Email", with: new_user_info.email)
-        fill_in("Password", with: new_user_info.password)
-        fill_in("Confirm Password", with: new_user_info.password)
+        fill_in("First Name", with: new_user_info[:first_name])
+        fill_in("Last Name", with: new_user_info[:last_name])
+        fill_in("Email", with: new_user_info[:email])
+        fill_in("Password", with: new_user_info[:password])
+        fill_in("Confirm Password", with: new_user_info[:password])
         click_button(create_account_button)
 
         expect(page).to have_selector("a", content: "Log out")
@@ -129,11 +129,11 @@ describe "An unathorized user" do
 
       it "and gets a message that an account already exists" do
 
-        fill_in("First Name", with: user_info.first_name)
-        fill_in("Last Name", with: user_info.last_name)
-        fill_in("Email", with: user_info.email)
-        fill_in("Password", with: user_info.password)
-        fill_in("Confirm Password", with: user_info.password)
+        fill_in("First Name", with: user_info[:first_name])
+        fill_in("Last Name", with: user_info[:last_name])
+        fill_in("Email", with: user_info[:email])
+        fill_in("Password", with: user_info[:password])
+        fill_in("Confirm Password", with: user_info[:password])
         click_button(create_account_button)
 
         expect(page).to have_content("exists")
@@ -213,18 +213,21 @@ describe "An unathorized user" do
       end
 
       let(:cart) do
-        Cart.create
+        cart = Cart.create!
         cart.products << product
         cart.products << product2
+        puts cart.cart_products.inspect
         cart.save!
+        cart
       end
 
-      let(:create_cart) do
-        session[:cart_id] = cart.id
+      let(:setup_cart) do
+        page.set_rack_session(cart_id: cart.id)
+        #session[:cart_id] = cart.id
       end
 
       before do
-        create_cart
+        setup_cart
         visit cart_path
       end
 
@@ -232,9 +235,9 @@ describe "An unathorized user" do
 
         cart.products.each do | product |
           expect(page).to have_content(product.name)
-          expect(page).to have_content(product.description)
           expect(page).to have_content(product.price)
-          expect(page).to have_selector('input', name: 'quantity', value: 1)
+          #expect(page).to have_selector('input', name: 'quantity', count: 1)
+          expect(find_field('quantity')).to have_value(1)
           expect(page).to have_selector('button', value: 'Update')
         end
 
