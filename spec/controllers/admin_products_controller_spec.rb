@@ -64,49 +64,71 @@ describe Admin::ProductsController do
         expect(response).to redirect_to login_path
       end
 
+      it "can't get a new product" do
+        get :new
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot go to the admin show product page" do
+        get :show, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot go to the admin show product page" do
+        get :edit, id: 1
+        expect(response).to redirect_to login_path
+      end
+
       it "cannot create a new product" do
         post :create, { product: {name: 'goat', description: 'has beard', price: 1.99} }
         expect(response).to redirect_to login_path
-
       end
 
       it "cannot retire the product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :retire, id: product.id
-        retired_product = Product.find(product.id)
+        post :retire, id: 1
         expect(response).to redirect_to login_path
       end
 
       it "cannot edit that product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :update, { id: 1, product: { name: 'name', description: 'new product description', price: 34.99 } }
+        post :update, id: 1
         expect(response).to redirect_to login_path
       end
 
     end
 
-    context "not logged in users" do
+    context "logged in users" do
       it "cannot go to the admin products page" do
         get :index
+        expect(response).to redirect_to login_path
+      end
+
+      it "can't get a new product" do
+        get :new
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot go to the admin show product page" do
+        get :show, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot go to the admin show product page" do
+        get :edit, id: 1
         expect(response).to redirect_to login_path
       end
 
       it "cannot create a new product" do
         post :create, { product: {name: 'goat', description: 'has beard', price: 1.99} }
         expect(response).to redirect_to login_path
-
       end
 
       it "cannot retire the product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :retire, id: product.id
-        retired_product = Product.find(product.id)
+        post :retire, id: 1
         expect(response).to redirect_to login_path
       end
 
       it "cannot edit that product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :update, { id: 1, product: { name: 'name', description: 'new product description', price: 34.99 } }
+        post :update, id: 1
         expect(response).to redirect_to login_path
       end
 
