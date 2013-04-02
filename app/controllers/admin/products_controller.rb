@@ -1,5 +1,7 @@
 class Admin::ProductsController < ActionController::Base
 
+  before_filter :require_admin_login
+
   def new
     @product = Product.new
   end
@@ -48,5 +50,13 @@ class Admin::ProductsController < ActionController::Base
     product.save
 
     redirect_to admin_products_path(product)
+  end
+
+  private
+
+  def require_admin_login
+    if !current_user || !current_user.admin
+      redirect_to login_path
+    end
   end
 end
