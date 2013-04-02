@@ -1,7 +1,5 @@
 class Admin::ProductsController < AdminController
 
-#  before_filter :require_admin_login
-
   def new
     @product = Product.new
   end
