@@ -1,6 +1,20 @@
 Admin Products Page
 
+%br
+%br
+
+All Current Products 
+
+%br
+%br
+
 %table
+  %th Product Image
+  %th Product Name
+  %th Product Description 
+  %th Product Price
+  %th Product Status
+  %th Edit Product
   - @products.each do |product|
     %tr
       %td
@@ -17,5 +31,19 @@ Admin Products Page
         - else
           = button_to "Retire", { action: "retire", id: product.id }
       %td
-        = link_to "Edit", admin_product_path(product), class: 'product', id: dom_id(product)
-= link_to "Add a product", new_admin_product_path
+        = link_to "Edit Product", admin_product_path(product), class: 'product', id: dom_id(product)
+
+%br
+%br
+
+= link_to "Add a Product", new_admin_product_path
+
+%br 
+%br
+
+= link_to "Add a Category", new_admin_category_path
+
+%br
+%br 
+
+=link_to "View Orders Dashboard", admin_orders_path 
