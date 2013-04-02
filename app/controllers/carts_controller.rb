@@ -1,6 +1,16 @@
 class CartsController < ApplicationController
 
-  #do line 6 as a before filter # ensure there is a cart id
+  #do line 15 as a before filter # ensure there is a cart id
+
+  def show
+    @cart = Cart.find_by_id(session[:cart_id])
+    # if @cart and @cart.present?
+    if @cart && @cart.cart_products.count > 0
+      render :show
+    else
+      render :empty_cart
+    end
+  end
 
   def add_item
     cart_id = session[:cart_id]
@@ -25,23 +35,6 @@ class CartsController < ApplicationController
     end
   end
 
-  def show
-    @cart = Cart.find_by_id(session[:cart_id])
-    if @cart && @cart.cart_products.count > 0
-      render :show
-    else
-      render :empty_cart
-    end
-  end
-
-	def delete_product
-    @cart = Cart.find_by_id(session[:cart_id])
-    cart_product = @cart.cart_products.find_by_product_id(params[:product_id])
-    cart_product.delete
-
-    redirect_to cart_path
-	end
-
   def update_quantity
     @cart = Cart.find_by_id(session[:cart_id])
     cart_product = @cart.cart_products.find_by_product_id(params[:product_id])
@@ -50,5 +43,14 @@ class CartsController < ApplicationController
 
     redirect_to cart_path
   end
+
+  def delete_product
+    @cart = Cart.find_by_id(session[:cart_id])
+    cart_product = @cart.cart_products.find_by_product_id(params[:product_id])
+    cart_product.delete
+
+    redirect_to cart_path
+  end
+
 end
 

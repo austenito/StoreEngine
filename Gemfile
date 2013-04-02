@@ -15,6 +15,7 @@ gem 'sorcery'
 gem 'unicorn'
 group :development do
   gem 'quiet_assets'
+
 end
 # Gems used only for assets and not required
 # in production environments by default.
