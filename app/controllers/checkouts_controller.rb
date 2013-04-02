@@ -42,7 +42,6 @@ class CheckoutsController < ApplicationController
   end 
 
   def valid_billing_info? params
-    #CreditCardValidator::Validator.valid?(params[:creditCardNumber])
-    true
+    CreditCardValidator::Validator.valid?(params[:creditCardNumber])
   end
 end
