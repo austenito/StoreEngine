@@ -1,4 +1,4 @@
-class Admin::OrdersController < ActionController::Base
+class Admin::OrdersController < AdminController
 
   def index
     if params[:status] == nil
@@ -10,27 +10,27 @@ class Admin::OrdersController < ActionController::Base
 
   def show
     @order = Order.find_by_id(params[:id])
-  end 
+  end
 
-  def update_quantity 
+  def update_quantity
     order_product = OrderProduct.find_by_id(params[:order_product_id])
     order_product.quantity = params[:quantity]
     order_product.save
     redirect_to admin_orders_path
-  end 
+  end
 
   def cancel
     @order = Order.find_by_id(params[:id])
     @order.status = "cancelled"
     @order.save
-    redirect_to admin_orders_path 
-  end 
+    redirect_to admin_orders_path
+  end
 
-  def return 
+  def return
     @order = Order.find_by_id(params[:id])
     @order.status = "returned"
     @order.save
-    redirect_to admin_orders_path 
+    redirect_to admin_orders_path
   end
 
   def ship
@@ -38,13 +38,13 @@ class Admin::OrdersController < ActionController::Base
     @order.status = "shipped"
     @order.save
     redirect_to admin_orders_path
-  end  
+  end
 
   def edit
     @order = Order.find_by_id(params[:id])
-  end 
+  end
 
 ## create order products for that order
 
-end 
+end
 

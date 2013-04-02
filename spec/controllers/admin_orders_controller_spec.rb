@@ -7,6 +7,18 @@ describe Admin::OrdersController do
     let(:order) { Order.new(quantity: 2, status: "shipped", user_id: 1) }
 
     before do
+      user = User.create(
+        email: "user@user.com",
+        password: "blah",
+        password_confirmation: "blah",
+        admin: true,
+        first_name: "first",
+        last_name: "last",
+        display_name: "display"
+      )
+
+      login_user(user)
+
       order.products << product
       order.save
     end
@@ -76,8 +88,11 @@ describe Admin::OrdersController do
       end
     end
   end
+
   context "non admin users" do
+
     context "logged in users" do
+
       before do
 
         user = User.create(
@@ -98,46 +113,76 @@ describe Admin::OrdersController do
         expect(response).to redirect_to login_path
       end
 
-      it "cannot modify" do
-        post :update
+      it "cannot go to the show page of an order" do
+        get :show, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot cancel" do
+        post :cancel, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot return a product" do
+        post :return, id: 1
         expect(response).to redirect_to login_path
       end
 
       it "cannot edit that product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :update, { id: 1, product: { name: 'name', description: 'new product description', price: 34.99 } }
+        post :update_quantity, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot mark a product as shipped" do
+        post :ship, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot edit a order" do
+        get :edit, id: 1
         expect(response).to redirect_to login_path
       end
 
     end
 
     context "not logged in users" do
-      it "cannot go to the admin products page" do
+      it "cannot go to the admin orders page" do
         get :index
         expect(response).to redirect_to login_path
       end
 
-      it "cannot create a new product" do
-        post :create, { product: {name: 'goat', description: 'has beard', price: 1.99} }
+      it "cannot go to the show page of an order" do
+        get :show, id: 1
         expect(response).to redirect_to login_path
-
       end
 
-      it "cannot retire the product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :retire, id: product.id
-        retired_product = Product.find(product.id)
+      it "cannot cancel" do
+        post :cancel, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot return a product" do
+        post :return, id: 1
         expect(response).to redirect_to login_path
       end
 
       it "cannot edit that product" do
-        product = Product.create!(name: 'name', description: 'description', price: 34.99)
-        post :update, { id: 1, product: { name: 'name', description: 'new product description', price: 34.99 } }
+        post :update_quantity, id: 1
         expect(response).to redirect_to login_path
       end
 
+      it "cannot mark a product as shipped" do
+        post :ship, id: 1
+        expect(response).to redirect_to login_path
+      end
+
+      it "cannot edit a order" do
+        get :edit, id: 1
+        expect(response).to redirect_to login_path
+      end
     end
   end
+end
 
 
 
