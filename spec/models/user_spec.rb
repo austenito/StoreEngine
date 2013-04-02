@@ -121,16 +121,31 @@ describe User do
   context "a user can have an optional display name" do 
 
     let(:user) do
-      User.create!(first_name: "afirstname",
+      User.new(first_name: "afirstname",
                    last_name: "alastname",
                    email: "email@email.com",
                    password: "blah",
-                   password_confirmation: "blah", 
-                   display_name: "j3")
+                   password_confirmation: "blah" )
     end
 
     it "returns that display name if it is present" do 
+      user.display_name = "j3"
+      user.save
       expect(User.find_by_id(user.id).display_name).to eq "j3"
+    end 
+
+    it "is invalid if that display name is shorter tha 2 characters" do
+      user.display_name = "j"
+      user.save
+      expect(user).to be_invalid
+      expect(user).to have(1).errors_on(:display_name)
+    end 
+
+    it "is invalid if that display name is longer than 32 characters" do 
+      user.display_name = "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj" 
+      user.save
+      expect(user).to be_invalid
+      expect(user).to have(1).errors_on(:display_name)
     end 
   end 
 
