@@ -2,21 +2,57 @@ Checkout
 
 %p
 
-%form{action: checkout_path, method: 'post'}
+%table{id: 'products'}
+  %th Product Name
+  %th Quantity 
+  %th Price Per Item 
+  %th Subtotal 
   -@cart.products.each do |product|
-    %table{id: 'products'}
-      %th Product Name
-      %th Quantity 
-      %th Price Per Item 
-      %th Subtotal 
-      %tr
-        %td= product.name
-        %td 
-          = @cart.cart_products.find_by_product_id(product.id).quantity
-        %td= product.price
-        %td= @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+    %tr
+      %td
+        = product.name
+      %td 
+        = @cart.cart_products.find_by_product_id(product.id).quantity
+      %td
+        = product.price
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
-%p
+%br
 
-= link_to "Cancel", root_path
+= form_tag(checkout_path) do
+  = label_tag 'First Name'
+  = text_field_tag :firstName
+  %br
+  = label_tag 'Last Name'
+  = text_field_tag :lastName
+  %br
+  = label_tag 'Credit Cart Number'
+  = text_field_tag :creditCartNumber
+  %br
+  = label_tag 'Expiration Date'
+  = text_field_tag :expirationDate
+  %br
+  = label_tag 'Address 1'
+  = text_field_tag :addressLine1
+  %br
+  = label_tag 'Address 2'
+  = text_field_tag :addressLine2
+  %br
+  = label_tag 'City'
+  = text_field_tag :city
+  %br
+  = label_tag 'State'
+  = text_field_tag :state
+  %br
+  = label_tag 'Zipcode'
+  = text_field_tag :zipcode
+  %br
+  = label_tag 'Email'
+  = text_field_tag :email
+  %br
+  = button_tag "Checkout", class: "checkout"
+
+
+
 
