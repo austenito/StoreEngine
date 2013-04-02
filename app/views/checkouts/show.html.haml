@@ -20,30 +20,38 @@ Checkout
 
 %br
 
-%form{ action: checkout_path, method: 'post' }
-  %input{type: 'text', name: 'firstName', value: 'First Name'}
+= form_tag(checkout_path) do
+  = label_tag 'First Name'
+  = text_field_tag :firstName
   %br
-  %input{ type: "text", name: 'lastName', value: 'Last Name'}
+  = label_tag 'Last Name'
+  = text_field_tag :lastName
   %br
-  %input{type: 'text', name: 'creditCartNumber', value: 'Credit Cart Number' }
+  = label_tag 'Credit Cart Number'
+  = text_field_tag :creditCartNumber
   %br
-  %input{ type: 'text', name: 'expirationDate', value: 'Expiration Date'}
+  = label_tag 'Expiration Date'
+  = text_field_tag :expirationDate
   %br
-  %input{ type: 'text', name: 'addressLine1', value: 'Address 1' }
+  = label_tag 'Address 1'
+  = text_field_tag :addressLine1
   %br
-  %input{ type: 'text', name: 'addressLine2', value: 'Address 2' }
+  = label_tag 'Address 2'
+  = text_field_tag :addressLine2
   %br
-  %input{ type: 'text', name: 'city', value: 'City' }
+  = label_tag 'City'
+  = text_field_tag :city
   %br
-  %input{ type: 'text', name: 'state', value: 'State' }
+  = label_tag 'State'
+  = text_field_tag :state
   %br
-  %input{ type: 'text', name: 'zipcode', value: 'Zipcode' }
+  = label_tag 'Zipcode'
+  = text_field_tag :zipcode
   %br
-  %input{ type: 'text', name: 'email', value: 'Email' }
+  = label_tag 'Email'
+  = text_field_tag :email
   %br
-  %input{ type: 'submit', name: 'checkout', value: 'checkout'}
-
-
+  = button_tag "Checkout", class: "checkout"
 
 
 
