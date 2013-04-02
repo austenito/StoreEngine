@@ -195,8 +195,8 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   paperclip (~> 3.0)
-  rack_session_access
   quiet_assets
+  rack_session_access
   rails (= 3.2.12)
   rspec-rails
   sass-rails (~> 3.2.3)
