@@ -1,19 +1,4 @@
-!!!
-%html
-  %head
-    %meta{:charset => "utf-8"}
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "Myapp"
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
-    /= stylesheet_link_tag "application", :media => "all"
-    /= javascript_include_tag "application"
-    = csrf_meta_tags
-    = yield(:head)
-  %body
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
+
           = render file: 'layouts/navigation'
     #main{:role => "main"}
       .flash
@@ -32,3 +17,321 @@
               /= render 'layouts/messages'
               = yield
           %footer
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          / <a class="brand" href="#"></a>
+          .nav-collapse
+            %ul.nav.pull-right
+              %li
+                %a.disabled CURRENCY
+              %li.active
+                %a{:href => "#"} USD
+              %li
+                %a{:href => "#"} EUR
+              %li
+                %a{:href => "#"} IDR
+              %li.divider-vertical
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  LANGUAGE
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "#"} EN
+                  %li
+                    %a{:href => "#"} ID
+                  %li
+                    %a{:href => "#"} FR
+                  %li.divider
+                  %li
+                    %a{:href => "#"} IT
+          / /.nav-collapse
+    .container
+      .row-fluid
+        .span6.logo
+          %h1
+            %a{:href => "/"} StoreEngine
+          %p We sell the best shit evar!
+        .span6.account
+          %ul
+            %li#your-account
+              %h4
+                - if !session[:current_user_id].nil?
+                  %a{:href => "#"} Your Account
+                - else
+                  %a{:href => '/create_account'} Create Account
+              %p
+              - if session[:current_user_id]
+                = "#{User.find_by_id(session[:current_user_id]).email}, "
+                %a{:href => "/logout"} logout
+              - else
+                Welcome,
+                %a{:href => "/login"} login
+            %li
+              %h4
+                %a{:href => "/cart"} Cart
+              %p
+                %strong 1 Product
+      .row-fluid
+        .span12.nav-menus
+          %ul.nav.nav-pills
+            %li.active
+              %a{:href => "index.html"} Home
+            %li
+              %a{:href => "#"} Acessories
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Boy
+                %b.caret
+              %ul#menu1.dropdown-menu
+                %li
+                  %a{:href => "#"}
+                    Shirts
+                    %i.icon-chevron-right.pull-right
+                  %ul.dropdown-menu.sub-menu
+                    %li
+                      %a{:href => "#"} Shirts
+                    %li
+                      %a{:href => "#"} T-shirts
+                    %li
+                      %a{:href => "#"} Polo Shirts
+                    %li
+                      %a{:href => "#"} Tanktop
+                %li
+                  %a{:href => "#"} Jacket
+                %li
+                  %a{:href => "categories.html"} Pants
+                %li
+                  %a{:href => "#"} Boxer
+                %li.divider
+                %li
+                  %a{:href => "#"} SweatShirts
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Girl
+                %b.caret
+              %ul#menu1.dropdown-menu
+                %li
+                  %a{:href => "#"} Shirts
+                %li
+                  %a{:href => "#"} Pants
+                %li
+                  %a{:href => "#"} Skirts
+            %li
+              %a{:href => "#"} Edition
+            %li
+              %a{:href => "#"} Authorized Dealer
+            %li
+              %a{:href => "about.html"} About
+            %li
+              %a{:href => "contact.html"} Contact
+            %br
+            %br
+      .row-fluid
+      / .span12
+      /   #myCarousel.carousel.slide
+      /     .carousel-inner
+      /       .item
+      /         = image_tag "slider1.png"
+      /         .carousel-caption
+      /           %h4 First Thumbnail label
+      /           %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      /       .item
+      /         = image_tag "slider2.png"
+      /         .carousel-caption
+      /           %h4 Second Thumbnail label
+      /           %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      /       .item
+      /         = image_tag "slider3.png"
+      /         .carousel-caption
+      /           %h4 Third Thumbnail label
+      /           %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      /     %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} &lsaquo;
+      /     %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} &rsaquo;
+      = yield 
+      / .row-fluid
+      /   .span12
+      /     .page-header
+      /       %h1
+      /         Best Seller
+      /         %small Most sold product in this month
+      / .row-fluid
+      /   %ul.thumbnails
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product1.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product2.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product3.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product4.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      / .row-fluid
+      /   .span12
+      /     .page-header
+      /       %h1
+      /         New Arrival
+      /         %small New products in this month
+      / .row-fluid
+      /   %ul.thumbnails
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product1.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product2.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product3.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product4.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      / .row-fluid
+      /   .span12
+      /     .page-header
+      /       %h1
+      /         Random Product
+      /         %small Other products
+      / .row-fluid
+      /   %ul.thumbnails
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product1.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product2.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product3.jpg"}/
+      /         .caption
+      /           %h5 Pants
+      /           %p $54.00
+      /           %p Available
+      /     %li.span3
+      /       .thumbnail
+      /         %a{:href => "product_detail.html"}
+      /           %img{:alt => "", :src => "img/product4.jpg"}/
+      /         .caption
+      /           %h5 Shirt
+      /           %p $20.50
+      /           %p Available
+      / %hr/
+      .row-fluid.footer
+        .span3
+          %h3 Information
+          %ul
+            %li
+              %a{:href => "#"} Contact
+            %li
+              %a{:href => "#"} Delivery
+            %li
+              %a{:href => "#"} FAQ
+            %li
+              %a{:href => "#"} Terms and condition
+        .span3
+          %h3 Stay in touch
+          %ul
+            %li
+              %a{:href => "#"} Facebook
+            %li
+              %a{:href => "#"} Twitter
+            %br/
+            %li
+              .control-group
+                .controls
+                  .input-prepend.input-append
+                    %span.add-on
+                      %i.icon-envelope
+                    %input#appendedPrependedInput.span6{:placeholder => "Enter your email", :size => "16", :type => "text"}
+                      %input.btn{:name => "submit", :type => "submit", :value => "Subscribe"}/
+          %p
+        .span3
+          %h3 Affiliate
+          %ul
+            %li
+              %a{:href => "#"} Lorem ipsum
+            %li
+              %a{:href => "#"} Lorem ipsum dolor sit amet
+            %li
+              %a{:href => "#"} Lorem ipsum
+            %li
+              %a{:href => "#"} Lorem ipsum dolor sit amet
+        .span3
+          %h3 Discover our store
+          %ul
+            %li
+              %a{:href => "#"} California
+            %li
+              %a{:href => "#"} Bali
+            %li
+              %a{:href => "#"} Singapore
+            %li
+              %a{:href => "#"} Canada
+      %hr
+        %footer
+          %p &copy; StoreEngine 2012. All right reserved.
+    / /container
+    /
+      Le javascript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "jquery-1.7.2.min.js"
+    = javascript_include_tag "bootstrap.min.js"
+    = javascript_include_tag "script.js"
+

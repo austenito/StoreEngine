@@ -1,18 +1,19 @@
-Welcome to our store! Product Index below
 
-%p
+.flash
+  = flash.notice
 
-%table
-  %th Product Name
-  %th Product Description
-  %th Product Price
-  - @products.each do |product|
-    %tr
-      %td
-        = link_to product.name, product_path(product)
-      %td
-        = product.description
-      %td
-        = form_tag add_item_cart_path do
-          = hidden_field_tag 'product_id', product.id
-          = submit_tag "Buy!"
+- @products.each_slice(3).each do |group|
+  .row-fluid
+    %ul.thumbnails
+    - group.each do |product|
+      %li.span3
+        .thumbnail
+          %a{:href => "product_detail.html"}
+            %img{:alt => "", :src => "images/product1.jpg"}/
+          .caption
+            %h4= link_to "#{product.name}", product
+            %p=product.price
+            %p=product.description
+%br
+%br
+
