@@ -16,3 +16,9 @@ Welcome to our store! Product Index below
         = form_tag add_item_cart_path do
           = hidden_field_tag 'product_id', product.id
           = submit_tag "Buy!"
+
+%br
+
+= link_to "View My Cart", cart_path
+
+=button_to "Log Out", logout_path

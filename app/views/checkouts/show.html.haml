@@ -16,7 +16,27 @@ Checkout
         %td= product.price
         %td= @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
-%p
 
-= link_to "Cancel", root_path
+%form{ action: checkout_path, method: 'post' }
+  %input{type: 'text', name: 'firstName', value: 'First Name'}
+  %br
+  %input{ type: "text", name: 'lastName', value: 'Last Name'}
+  %br
+  %input{type: 'text', name: 'creditCartNumber', value: 'Credit Cart Number' }
+  %br
+  %input{ type: 'text', name: 'expirationDate', value: 'Expiration Date'}
+  %br
+  %input{ type: 'text', name: 'addressLine1', value: 'Address 1' }
+  %br
+  %input{ type: 'text', name: 'addressLine2', value: 'Address 2' }
+  %br
+  %input{ type: 'text', name: 'city', value: 'City' }
+  %br
+  %input{ type: 'text', name: 'state', value: 'State' }
+  %br
+  %input{ type: 'text', name: 'zipcode', value: 'Zipcode' }
+  %br
+  %input{ type: 'text', name: 'email', value: 'Email' }
+  %br
+  %input{ type: 'submit', name: 'checkout', value: 'checkout'}
 
