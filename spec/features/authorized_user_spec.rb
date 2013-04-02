@@ -120,7 +120,6 @@
 
 #       end
 
-
 #       it "and sees the order confirmation page"
 #         click_button('Confirm')
 #         expect(current_path).to eq confirmation_checkout_path

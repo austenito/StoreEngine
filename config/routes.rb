@@ -1,5 +1,7 @@
 StoreEngine::Application.routes.draw do
 
+  resources :user_sessions
+
   root :to => 'products#index'
 
   resources :products, :only => [:show]
@@ -13,6 +15,7 @@ StoreEngine::Application.routes.draw do
     post :update_quantity
     post :delete_product
   end
+
 
   resources :orders
 

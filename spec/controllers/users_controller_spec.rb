@@ -23,6 +23,7 @@ describe UsersController do
       end
 
       it "redirects to index" do
+        pending "check with front end to make sure doesn't go to login"
         post :create, valid_attributes
         expect(response).to redirect_to root_path
       end
