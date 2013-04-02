@@ -1,4 +1,4 @@
-require 'spec_helper'
+# require 'spec_helper'
 
 # describe "An authorized user" do
 
@@ -120,9 +120,15 @@ require 'spec_helper'
 
 #       end
 
+<<<<<<< HEAD
 #       it "and sees the order confirmation page"
 #         click_button('Confirm')
 #         expect(current_path).to eq confirmation_checkout_path
+=======
+#       # it "and sees the order confirmation page"
+#       #   click_button('Confirm')
+#       #   expect(current_path).to eq confirmation_checkout_path
+>>>>>>> user_display_name
 #     end
 #   end
 
