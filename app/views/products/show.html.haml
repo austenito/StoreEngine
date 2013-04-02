@@ -1,3 +1,17 @@
+.product-details
+  %img{:src=>@product.image.url, :class=>"product"}
+  = @product.name
+  %p
+  = @product.description
+  %p
+  = @product.price
+  %p
+  - if @product.retired?
+    Retired
+  - else
+    = form_tag add_item_cart_path do
+      = hidden_field_tag 'product_id', @product.id
+      = button_tag "buy", :class => 'purchase_button'
 
 .row-fluid
   .span12

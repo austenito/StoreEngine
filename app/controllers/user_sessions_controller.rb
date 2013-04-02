@@ -6,13 +6,12 @@ class UserSessionsController < ApplicationController
   def create
     user = login(params[:email], params[:password])
 
-    if user
-      if user.admin?
-        redirect_to '/dashboard'
-      else
-        session[:current_user_id] = user.id
-        redirect_to root_path, notice: "LOGGED IN!"
-      end
+    if user && user.admin?
+      # TODO: change to route helper method: dashboard_path
+      redirect_to "/dashboard"
+    elsif user
+      session[:current_user_id] = user.id
+      redirect_to root_path, notice: "LOGGED IN!"
     else
       render :login_form
     end

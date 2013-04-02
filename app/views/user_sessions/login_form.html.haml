@@ -1,8 +1,6 @@
-
 .row-fluid
   .span6.create-account
     %h3= link_to "Create An Account", new_user_path
-
 
   .span6.login
     %h3 Already registered?
@@ -18,6 +16,7 @@
 .span3
 
 
+/= link_to "Logout", user_session_path, method: "delete"
 / = form_tag(user_sessions_path) do
 /   = label_tag 'Email'
 /   = text_field_tag :email

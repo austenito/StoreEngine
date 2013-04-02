@@ -1,7 +1,8 @@
 .flash
   = flash.notice
-
-- @products.each_slice(3).each do |group|
+  
+=render 'carousel'
+- @products.each_slice(4).each do |group|
   .row-fluid
     %ul.thumbnails
     - group.each do |product|

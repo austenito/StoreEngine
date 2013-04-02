@@ -16,6 +16,7 @@ gem 'unicorn'
 gem 'rack_session_access'
 
 group :development do
+
   gem 'quiet_assets'
 end
 

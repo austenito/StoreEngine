@@ -2,14 +2,19 @@
 %html{:lang => "en"}
   %head
     %meta{:charset => "utf-8"}
-      %title StoreEngine
+      %title 
       %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
         %meta{:content => "", :name => "description"}
           %meta{:content => "", :name => "author"}
             / Le styles
+            %script{:src=>"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"}
             = stylesheet_link_tag "bootstrap"
             = stylesheet_link_tag "style"
             = stylesheet_link_tag "bootstrap-responsive.css"
+            / = javascript_include_tag "jquery-1.7.2.min.js"
+            / = javascript_include_tag "bootstrap.min.js"
+            / = javascript_include_tag "script.js"
+
             / Le HTML5 shim, for IE6-8 support of HTML5 elements
             /[if lt IE 9]
               <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,6 +23,24 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
+          = render file: 'layouts/navigation'
+    #main{:role => "main"}
+      .flash
+        .notice
+          = flash.notice
+        .message
+          = flash[:message]
+        .success
+          = flash[:success]
+        .error
+          = flash[:error]
+      .container
+        .content
+          .row
+            .span12
+              /= render 'layouts/messages'
+              = yield
+          %footer
           %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
             %span.icon-bar
             %span.icon-bar
@@ -31,8 +54,6 @@
                 %a{:href => "#"} USD
               %li
                 %a{:href => "#"} EUR
-              %li
-                %a{:href => "#"} IDR
               %li.divider-vertical
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -42,12 +63,8 @@
                   %li
                     %a{:href => "#"} EN
                   %li
-                    %a{:href => "#"} ID
-                  %li
                     %a{:href => "#"} FR
                   %li.divider
-                  %li
-                    %a{:href => "#"} IT
           / /.nav-collapse
     .container
       .row-fluid
@@ -62,65 +79,70 @@
                 %a{:href => "#"} Your Account
               %p
                 Welcome,
-                %a{:href => "/login"} log in
+                %a{:href => login_path} login
             %li
               %h4
-                %a{:href => "#"} Cart
+                %a{:href => cart_path} Cart
               %p
-                %strong 1 Product
+                - if session[:cart_id]
+                  %strong= "#{Cart.find_by_id(session[:cart_id]).cart_products.count} Item(s)"
+                - else
+                  %strong 0
       .row-fluid
         .span12.nav-menus
           %ul.nav.nav-pills
             %li.active
-              %a{:href => "index.html"} Home
-            %li
-              %a{:href => "#"} Acessories
+              %a{:href => root_path} Images
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                Boy
+                Categories
                 %b.caret
               %ul#menu1.dropdown-menu
+                / %li
+                /   %a{:href => "#"}
+                /     SweatShirts
+                /     %i.icon-chevron-right.pull-right
+                /   %ul.dropdown-menu.sub-menu
+                /     %li
+                /       %a{:href => "#"} Shirts
+                /     %li
+                /       %a{:href => "#"} T-shirts
+                /     %li
+                /       %a{:href => "#"} Polo Shirts
+                /     %li
+                /       %a{:href => "#"} Tanktop
                 %li
-                  %a{:href => "#"}
-                    Shirts
-                    %i.icon-chevron-right.pull-right
-                  %ul.dropdown-menu.sub-menu
-                    %li
-                      %a{:href => "#"} Shirts
-                    %li
-                      %a{:href => "#"} T-shirts
-                    %li
-                      %a{:href => "#"} Polo Shirts
-                    %li
-                      %a{:href => "#"} Tanktop
-                %li
-                  %a{:href => "#"} Jacket
-                %li
-                  %a{:href => "categories.html"} Pants
-                %li
-                  %a{:href => "#"} Boxer
+                  %a{:href => "#"} Cityscapes
                 %li.divider
                 %li
-                  %a{:href => "#"} SweatShirts
+                  %a{:href => "categories.html"} Fashion & Retail
+                %li.divider
+                %li
+                  %a{:href => "#"} Goats
+                %li.divider
+                %li
+                  %a{:href => "#"} Artwork
             %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                Girl
-                %b.caret
-              %ul#menu1.dropdown-menu
-                %li
-                  %a{:href => "#"} Shirts
-                %li
-                  %a{:href => "#"} Pants
-                %li
-                  %a{:href => "#"} Skirts
+              / %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              /   Girl
+              /   %b.caret
+              / %ul#menu1.dropdown-menu
+              /   %li
+              /     %a{:href => "#"} Shirts
+              /   %li
+              /     %a{:href => "#"} Pants
+              /   %li
+              /     %a{:href => "#"} Skirts
             %li
-              %a{:href => "#"} Edition
-            %li
-              %a{:href => "#"} Authorized Dealer
+              %a{:href => "#"} FAQ
             %li
               %a{:href => "about.html"} About
             %li
               %a{:href => "contact.html"} Contact
+
+            %br
+            %br
+      
       = yield 
       / .row-fluid
       /   .span12
@@ -305,3 +327,4 @@
     %script{:src => "js/jquery-1.7.2.min.js"}
     %script{:src => "js/bootstrap.min.js"}
     %script{:src => "js/script.js"}
+
