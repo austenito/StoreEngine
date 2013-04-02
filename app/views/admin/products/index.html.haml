@@ -14,7 +14,7 @@ All Current Products
   %th Product Description 
   %th Product Price
   %th Product Status
-  %th Edit Product
+  %th View & Edit Product
   - @products.each do |product|
     %tr
       %td
@@ -31,7 +31,7 @@ All Current Products
         - else
           = button_to "Retire", { action: "retire", id: product.id }
       %td
-        = link_to "Edit Product", admin_product_path(product), class: 'product', id: dom_id(product)
+        = link_to "View & Edit", admin_product_path(product), class: 'product', id: dom_id(product)
 
 %br
 %br
