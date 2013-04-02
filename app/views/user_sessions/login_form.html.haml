@@ -1,20 +1,16 @@
-
 .row-fluid
   .span6.create-account
-    %h3 Create An Account
-    %form
-      %label Enter your email address
-      %input.span9{:type => "text", :value => "me@domainname.com"}/
-      %a.btn.btn-inverse{:href => "account.html"} Register
+    %h3= link_to "Create An Account", new_user_path
+
   .span6.login
-    %h3= 
-    = form_for (user_sessions_path) do |f|
-      = f.label 'Email'
-      = f.text_field :email
-      = f.label 'Password'
-      = f.password_field :password
+    %h3 Already registered?
+    = form_tag(user_sessions_path) do
+      = label_tag 'Email'
+      = text_field_tag :email
+      = label_tag :password
+      = password_field_tag :password
       %br
-      %a.btn.btn-inverse.marg5-top= f.submit "Login"
+      = button_tag "Log in!"
 %hr/
 .row-fluid.footer
 .span3

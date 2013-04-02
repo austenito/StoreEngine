@@ -10,6 +10,7 @@ class UserSessionsController < ApplicationController
       if user.admin?
         redirect_to '/dashboard'
       else
+        session[:current_user_id] = user.id
         redirect_to root_path, notice: "LOGGED IN!"
       end
     else
@@ -18,6 +19,7 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    session[:current_user_id] = nil
     logout
     redirect_to root_path, :notice => "Logged out!"
   end

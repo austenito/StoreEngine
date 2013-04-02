@@ -1,33 +1,17 @@
 .flash
   = flash.notice
 
-Welcome to our store! Product Index below
-
-%p
-
-%table
-  %th Product Name
-  %th Product Description 
-  %th Product Price 
-  - @products.each do |product|
-    %tr
-      %td
-        = product.name
-      %td
-        = product.description
-      %td
-        = form_tag add_item_cart_path do
-          = hidden_field_tag 'product_id', product.id
-          = submit_tag "Buy!"
-
-%p
-
-=link_to "Login", login_path
-
-%p 
-
-=link_to "Sign Up", new_user_path
-
-%p
-
-= link_to "View Cart", cart_path 
+- @products.each_slice(3).each do |group|
+  .row-fluid
+    %ul.thumbnails
+    - group.each do |product|
+      %li.span3
+        .thumbnail
+          %a{:href => "product_detail.html"}
+            %img{:alt => "", :src => "images/product1.jpg"}/
+          .caption
+            %h4= link_to "#{product.name}", product
+            %p=product.price
+            %p=product.description
+%br
+%br
