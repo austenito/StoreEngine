@@ -1,9 +1,39 @@
+<<<<<<< HEAD
 = form_tag(user_sessions_path) do
   = label_tag 'Email'
   = text_field_tag :email
   = label_tag :password
   = password_field_tag :password
   = button_tag "Log in!", class: "login"
+=======
+.row-fluid
+  .span6.create-account
+    %h3= link_to "Create An Account", new_user_path
+>>>>>>> css
 
+  .span6.login
+    %h3 Already registered?
+    = form_tag(user_sessions_path) do
+      = label_tag 'Email'
+      = text_field_tag :email
+      = label_tag :password
+      = password_field_tag :password
+      %br
+      = button_tag "Log in!"
+%hr/
+.row-fluid.footer
+.span3
 
+<<<<<<< HEAD
 /= link_to "Logout", user_session_path, method: "delete"
+=======
+/ = form_tag(user_sessions_path) do
+/   = label_tag 'Email'
+/   = text_field_tag :email
+/   = label_tag :password
+/   = password_field_tag :password
+/   = button_tag "Log in!"
+
+
+/ = link_to "Logout", user_session_path, method: "delete"
+>>>>>>> css

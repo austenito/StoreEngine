@@ -5,4 +5,10 @@ class CartProduct < ActiveRecord::Base
 
    belongs_to :cart
    belongs_to :product
+
+   delegate :name, :price, to: :product
+
+  def subtotal
+    quantity * price
+  end
 end

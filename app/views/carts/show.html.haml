@@ -4,8 +4,7 @@
     %th Quantity
     %th Unit Price
     %th Subtotal
-    %th
-  -@cart.products.each do |product|
+    %th-@cart.products.each do |product|
     %tr
       %td
         = product.name
@@ -22,7 +21,6 @@
         = form_tag delete_product_cart_path do
           = hidden_field_tag 'product_id', product.id
           = submit_tag 'Remove from cart'
-
 %p
 
 %form{ action: checkout_path, method: 'get' }

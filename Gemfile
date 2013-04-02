@@ -15,6 +15,10 @@ gem 'sorcery'
 gem 'unicorn'
 gem 'rack_session_access'
 
+group :development do
+
+  gem 'quiet_assets'
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

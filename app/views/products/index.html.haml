@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Welcome to our store! Product Index below
 
 %p
@@ -16,3 +17,23 @@ Welcome to our store! Product Index below
         = form_tag add_item_cart_path do
           = hidden_field_tag 'product_id', product.id
           = submit_tag "Buy!"
+=======
+.flash
+  = flash.notice
+  
+=render 'carousel'
+- @products.each_slice(4).each do |group|
+  .row-fluid
+    %ul.thumbnails
+    - group.each do |product|
+      %li.span3
+        .thumbnail
+          %a{:href => "product_detail.html"}
+            %img{:alt => "", :src => "images/product1.jpg"}/
+          .caption
+            %h4= link_to "#{product.name}", product
+            %p=product.price
+            %p=product.description
+%br
+%br
+>>>>>>> css
