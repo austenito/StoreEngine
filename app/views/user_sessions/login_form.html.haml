@@ -1,9 +1,30 @@
-= form_tag(user_sessions_path) do
-  = label_tag 'Email'
-  = text_field_tag :email
-  = label_tag :password
-  = password_field_tag :password
-  = button_tag "Log in!"
+
+.row-fluid
+  .span6.create-account
+    %h3 Create An Account
+    %form
+      %label Enter your email address
+      %input.span9{:type => "text", :value => "me@domainname.com"}/
+      %a.btn.btn-inverse{:href => "account.html"} Register
+  .span6.login
+    %h3= 
+    = form_for (user_sessions_path) do |f|
+      = f.label 'Email'
+      = f.text_field :email
+      = f.label 'Password'
+      = f.password_field :password
+      %br
+      %a.btn.btn-inverse.marg5-top= f.submit "Login"
+%hr/
+.row-fluid.footer
+.span3
+
+/ = form_tag(user_sessions_path) do
+/   = label_tag 'Email'
+/   = text_field_tag :email
+/   = label_tag :password
+/   = password_field_tag :password
+/   = button_tag "Log in!"
 
 
-= link_to "Logout", user_session_path, method: "delete"
+/ = link_to "Logout", user_session_path, method: "delete"

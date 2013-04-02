@@ -13,7 +13,9 @@ gem 'credit_card_validator'
 gem 'paperclip', "~> 3.0"
 gem 'sorcery'
 gem 'unicorn'
-
+group :development do
+  gem 'quiet_assets'
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

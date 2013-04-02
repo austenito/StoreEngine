@@ -41,7 +41,7 @@ StoreEngine::Application.routes.draw do
   match "/create_account" => "users#new", :via => [:get]
 
   resources :users
-  resources :user_sessions, :only => [:new, :create]
+  resources :user_sessions
 
   resource :user_session, :only => [:destroy]
 
