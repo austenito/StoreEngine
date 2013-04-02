@@ -4,24 +4,26 @@
     %th Quantity
     %th Unit Price
     %th Subtotal
-    %th-@cart.products.each do |product|
-    %tr
-      %td
-        = product.name
-      %td
-        = form_for product do |f|
-          = hidden_field_tag 'product_id', product.id
-          = text_field_tag 'quantity', @cart.cart_products.find_by_product_id(product.id).quantity
-          = submit_tag 'Update'
-      %td
-        = product.price
-      %td
-        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
-      %td
-        = form_tag delete_product_cart_path do
-          = hidden_field_tag 'product_id', product.id
-          = submit_tag 'Remove from cart'
+    -@cart.products.each do |product|
+      %tr
+        %td
+          = product.name
+        %td
+          %form{ action: update_quantity_cart_path, method: 'post' }
+            %input{ type: 'text', name: 'quantity', value: @cart.cart_products.find_by_product_id(product.id).quantity }
+            %input{ type: 'hidden', name: 'product_id', value: product.id}
+            %input{ type: 'submit', name: 'update_quantity', value: 'Update Quantity'}
+        
+        %td
+          = product.price
+        %td
+          = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+        %td
+          = form_tag delete_product_cart_path do
+            = hidden_field_tag 'product_id', product.id
+            = submit_tag 'Remove from cart'
 %p
 
 %form{ action: checkout_path, method: 'get' }
   %input{ type: 'submit', name: 'checkout', value: 'checkout'}
+
