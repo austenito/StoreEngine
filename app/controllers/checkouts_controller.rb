@@ -1,16 +1,16 @@
 class CheckoutsController < ApplicationController
+ 
   def show
 
-    user = login(params[:email], params[:password])
-
-    if user == nil 
-      flash.notice = "Please log in before checking out!"
+    if session[:current_user_id].nil?
       redirect_to login_path
-    else 
+      flash.notice = "Please log in before checking out!"
+    else
       @cart = Cart.find_by_id(session[:cart_id])
       render :show
     end
   end
+
 
   def create
     cart = Cart.find_by_id(session[:cart_id])
