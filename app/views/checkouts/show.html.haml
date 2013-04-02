@@ -2,20 +2,23 @@ Checkout
 
 %p
 
-%form{action: checkout_path, method: 'post'}
+%table{id: 'products'}
+  %th Product Name
+  %th Quantity 
+  %th Price Per Item 
+  %th Subtotal 
   -@cart.products.each do |product|
-    %table{id: 'products'}
-      %th Product Name
-      %th Quantity 
-      %th Price Per Item 
-      %th Subtotal 
-      %tr
-        %td= product.name
-        %td 
-          = @cart.cart_products.find_by_product_id(product.id).quantity
-        %td= product.price
-        %td= @cart.cart_products.find_by_product_id(product.id).quantity * product.price
+    %tr
+      %td
+        = product.name
+      %td 
+        = @cart.cart_products.find_by_product_id(product.id).quantity
+      %td
+        = product.price
+      %td
+        = @cart.cart_products.find_by_product_id(product.id).quantity * product.price
 
+%br
 
 %form{ action: checkout_path, method: 'post' }
   %input{type: 'text', name: 'firstName', value: 'First Name'}
@@ -39,4 +42,9 @@ Checkout
   %input{ type: 'text', name: 'email', value: 'Email' }
   %br
   %input{ type: 'submit', name: 'checkout', value: 'checkout'}
+
+
+
+
+
 
