@@ -1,10 +1,10 @@
-class Admin::CategoriesController < ActionController::Base
+class Admin::CategoriesController < AdminController
 
   #show/cat index
 
   def index
     @categories = Category.all
-  end 
+  end
 
   def new
     @category = Category.new
