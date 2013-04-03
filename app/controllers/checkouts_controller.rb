@@ -24,12 +24,17 @@ class CheckoutsController < ApplicationController
 
       if order.save
         session[:cart_id] = nil
-        flash.notice = "Order Successful"
         redirect_to confirmation_checkout_path
+        flash.notice = "Order Successful"
+      else
+        flash.notice = "Could not create order"
+        redirect_to root_path, notice: flash.notice
+        raise order.errors.inspect
       end
-
     else
+      flash.notice = checkout.errors.inspect
       redirect_to root_path, notice: flash.notice
+      raise checkout.errors.inspect
     end
   end
 
@@ -59,7 +64,6 @@ class CheckoutsController < ApplicationController
         redirect_to confirmation_checkout_path
         flash.notice = "Order Successful"
       else
-        raise order.errors.inspect
         flash.notice = "Could not create order"
         redirect_to root_path, notice: flash.notice
       end
