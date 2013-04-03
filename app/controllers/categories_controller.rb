@@ -1,11 +1,15 @@
 class CategoriesController < ApplicationController
 
+  def index
+    @categories = Category.all
+  end
 
   def show
     @category = Category.find(params[:id])
 
-    respond_to do |format|
-      format.html #show.html.erb
+    if @category
+      products = Product.includes(:categories).where(categories: {name: params[:filter_by_category]})
+      @products = products.collect { |product| product if product.retired == false }
     end
   end
 end

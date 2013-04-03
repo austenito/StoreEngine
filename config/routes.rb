@@ -39,6 +39,8 @@ StoreEngine::Application.routes.draw do
     resources :categories
   end
 
+  resources :categories
+  
   resource :order
 
   resources :users
