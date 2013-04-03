@@ -1,12 +1,12 @@
-Your Orders
+Orders
 
 %table
   %tr
-    %th Order ID
-    %th Order Status
-    %th Order Date
-    %th Customer Email
-    %th Order Total
+    %th ID
+    %th Status
+    %th Date
+    %th Customer Name
+    %th Total
   %tr
     %td
       = @order.id
@@ -15,17 +15,23 @@ Your Orders
     %td
       = @order.created_at
     %td
-      = @order.user.email
+      = " #{@order.user.first_name} #{@order.user.last_name} "
     %td 
       = @order.total 
 
+%br
+%br
+
+Order Products
+
+%br
 
 %table
   %tr
-    %th Product ID
-    %th Product Name
+    %th ID
+    %th Name
     %th Quantity Purchased
-    %th Product Price
+    %th Price
     %th Subtotal
   - @order.products.each do |product|
     %tr
@@ -37,6 +43,9 @@ Your Orders
         = @order.order_products.find_by_product_id(product.id).quantity
       %td
         = product.price
+      %td 
+        = @order.order_products.find_by_product_id(product.id).quantity * product.price
+
 
 %p
 
