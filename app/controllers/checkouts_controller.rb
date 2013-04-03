@@ -30,7 +30,7 @@ class CheckoutsController < ApplicationController
 
     else
       flash.notice = "Could not create order"
-      redirect_to root_path
+      redirect_to root_path, 
     end
   end
 

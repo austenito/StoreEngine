@@ -8,10 +8,10 @@ class UserSessionsController < ApplicationController
 
     if user && user.admin?
       # TODO: change to route helper method: dashboard_path
-      redirect_to "/dashboard"
+      redirect_to "/dashboard", notice: "Logged in as admin"
     elsif user
       #session[:current_user_id] = user.id
-      redirect_to root_path, notice: "LOGGED IN!"
+      redirect_to root_path, notice: "Logged in!"
     else
       render :login_form
     end
