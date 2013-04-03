@@ -1,4 +1,4 @@
-class Admin::OrdersController < AdminController
+class Admin::OrdersController < Admin::AdminController
 
   def index
     if params[:status] == nil
