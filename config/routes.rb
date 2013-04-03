@@ -45,7 +45,8 @@ StoreEngine::Application.routes.draw do
 
   resource :order
 
-  resource :user
+  resources :users, :only => [:new, :create]
+  resource :user, :only => [:show, :update, :edit]
 
   get "/create_account" => "users#new"
 
@@ -55,7 +56,7 @@ StoreEngine::Application.routes.draw do
 
   get "/login" => "user_sessions#create"
 
-  get "/logout" => "user_sessions#destroy"
+  post "/logout" => "user_sessions#destroy"
 
   get "/about" => "abouts#index"
 end
