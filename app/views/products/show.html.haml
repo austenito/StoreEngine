@@ -2,7 +2,7 @@
   .span12
     %ul.breadcrumb
       %li
-/ /row
+        / /row
 .row-fluid
   = image_tag @product.image.url
   .span4
@@ -24,8 +24,7 @@
 - else
   = form_tag add_item_cart_path do
     = hidden_field_tag "product_id", @product.id
-    = submit_tag "Buy!"
-
-
-%br
-%br
+    = submit_tag "Add to Cart"
+  = form_tag add_item_cart_path, :confirm => "Place an order for #{@product.name}?" do
+    = hidden_field_tag "product_id", @product.id
+    = submit_tag "Two Click Checkout"

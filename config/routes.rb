@@ -8,6 +8,7 @@ StoreEngine::Application.routes.draw do
 
   resource :checkout, :only => [:create, :show] do
     get :confirmation
+    post :two_click
   end
 
   resource :cart, :only => [:show] do

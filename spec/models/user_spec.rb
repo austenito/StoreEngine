@@ -173,6 +173,7 @@ describe User do
     end 
 
     it "has errors" do 
+      expect(user).to have(1).errors_on :last_name
     end 
   end 
 
