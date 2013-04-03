@@ -1,0 +1,57 @@
+Order Information 
+
+%br 
+%br 
+
+Order History 
+
+%br 
+%br 
+
+%table 
+  %th Order ID
+  %th Order Status
+  %th Date Order Placed
+  %th Total 
+  %th Timestamp of Status Changed
+  %tr
+    %td
+      = @order.id
+    %td
+      = @order.status
+    %td
+      = @order.created_at
+    %td
+      = @order.total 
+    - if @order.status == "shipped" || @order.status == "cancelled"
+      %td
+        = @order.updated_at
+
+%br 
+%br 
+
+Order Products
+
+%table.table-hover
+  %th Product Name
+  %th Quantity Purchased
+  %th Subtotal 
+  %th View Product 
+  - @order.order_products.each do |order_product|
+    %tr
+      %td
+        = Product.find(order_product.product_id).name
+      %td
+        = Product.find(order_product.product_id).description
+      %td
+        = order_product.quantity
+      %td 
+        = link_to "View Product", product_path(order_product.product_id)
+
+
+
+%br 
+%br
+
+
+
