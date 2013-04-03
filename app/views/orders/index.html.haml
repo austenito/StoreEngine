@@ -1,15 +1,14 @@
+Your Past Orders
+
+%br
+%br
+
 %table.table-hover
-  %tr Name
-  %tr
-  %tr Description
-  %tr
-  %tr quantity
-  %br
+  %th Order Id
+  %th View Order
   - @orders.each do |order|
-    - order.order_products.each do |order_product|
-      %tr
-        %td= Product.find(order_product.product_id).name
-        %td
-        %td= Product.find(order_product.product_id).description
-        %td
-        %td= order_product.quantity
+    %tr 
+      %td
+        = order.id
+      %td 
+        = link_to "View Order", order
