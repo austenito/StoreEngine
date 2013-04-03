@@ -1,4 +1,4 @@
-class AdminController < ActionController::Base
+class Admin::AdminController < ActionController::Base
   before_filter :require_admin_login
 
   private

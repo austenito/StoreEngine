@@ -52,16 +52,18 @@
         %ul
           %li#your-account
             %h4
-              %a{:href => "#"} Your Account
+              - if current_user
+                = link_to "Your Account", user_path
             %p
               Welcome,
               - if current_user
+                = current_user.display_name || current_user.first_name
                 = button_to "logout", logout_path
               - else
                 = link_to "login", login_path
           %li
             %h4
-              %a{:href => cart_path} Cart
+              %p.big_cart= link_to image_tag( 'shopping_cart.png'), '/cart'
             %p
               - if session[:cart_id]
                 %strong= "#{Cart.find_by_id(session[:cart_id]).cart_products.count} Item(s)"
@@ -71,23 +73,16 @@
       .span12.nav-menus
         %ul.nav.nav-pills
           %li.active
-            %a{:href => root_path} Images
+            %a{:href => products_path} Images
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Categories
               %b.caret
             %ul#menu1.dropdown-menu
-              %li
-                %a{:href => "/"} Architekshure
-              %li.divider
-              %li
-                %a{:href => "categories.html"} Fashion & Retail
-              %li.divider
-              %li
-                %a{:href => "#"} Goats
-              %li.divider
-              %li
-                %a{:href => "#"} Artwork
+              - Category.all.each do |c|
+                %li
+                  %a{:href => "/categories/#{c.id}"} #{c.name.capitalize}
+                %li.divider
           %li.dropdown
             / %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             /   Girl

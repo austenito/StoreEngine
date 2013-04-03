@@ -1,4 +1,4 @@
-class Admin::ProductsController < AdminController
+class Admin::ProductsController < Admin::AdminController
 
   def new
     @product = Product.new

@@ -308,3 +308,21 @@ img.thumb {
     height: 40px;
     width: 40px;
 }
+td.cart {
+    max-width: 120px;
+    padding: 20px;
+}
+
+#quantity {
+    max-width: 15px;
+}
+.cart_image {
+    height: 100px;
+    width: 100px;
+    max-width: 100px;
+    max-height: 80px;
+} 
+p.big_cart {
+    height: 30px;
+    width: 30px;
+}  

@@ -1,10 +1,12 @@
 StoreEngine::Application.routes.draw do
 
+  resources :indices
+  match "/" => "indices#index"
   resources :user_sessions
 
   root :to => 'products#index'
 
-  resources :products, :only => [:show]
+  resources :products, :only => [:show, :index]
 
   resource :checkout, :only => [:create, :show] do
     get :confirmation
@@ -16,7 +18,6 @@ StoreEngine::Application.routes.draw do
     post :update_quantity
     post :delete_product
   end
-
 
   resources :orders
 
@@ -44,17 +45,17 @@ StoreEngine::Application.routes.draw do
 
   resource :order
 
-  resources :users
+  resource :user
 
-  match "/create_account" => "users#new", :via => [:get]
+  get "/create_account" => "users#new"
 
   resources :user_sessions
 
   resource :user_session, :only => [:destroy]
 
-  match "/login" => "user_sessions#create", :via =>[:get]
+  get "/login" => "user_sessions#create"
 
-  match "/logout" => "user_sessions#destroy", :via =>[:post]
+  get "/logout" => "user_sessions#destroy"
 
-  match "/about" => "abouts#index", :via => [:get]
+  get "/about" => "abouts#index"
 end

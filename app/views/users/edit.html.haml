@@ -1,10 +1,11 @@
-= form_for @user do |f|
-  -if @user.errors.any?
+= form_for current_user do |f|
+  -if current_user.errors.any?
     .error_messages
       %p Form is invalid
       %ul
-        - for message in @user.errors.full_messages
-          %li message
+        - for message in current_user.errors.full_messages
+          %li
+            = message
   = f.label :first_name
   = f.text_field :first_name
   %br
@@ -13,12 +14,6 @@
   %br
   = f.label :email
   = f.text_field :email
-  %br
-  = f.label :password
-  = f.password_field :password
-  %br
-  = f.label :password_confirmation, "Confirm password"
-  = f.password_field :password_confirmation
   %br
   = f.label :credit_card_number
   = f.text_field :credit_card_number
