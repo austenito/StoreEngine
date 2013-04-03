@@ -28,8 +28,11 @@ class CheckoutsController < ApplicationController
         order_product.save
       end
 
-      order.save
-      redirect_to confirmation_checkout_path
+      
+      if order.save
+        redirect_to confirmation_checkout_path
+        session[:cart_id] = nil
+      end
 
     else
       flash.notice = "Invalid Billing Information"
