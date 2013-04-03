@@ -300,3 +300,6 @@ a:hover.no-underline{
 .footer a:hover{
     color:#333;
 }
+.span5 {
+    padding-left: 100px;
+}
