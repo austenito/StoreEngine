@@ -2,7 +2,7 @@
 %html{:lang => "en"}
   %head
     %meta{:charset => "utf-8"}
-      %title 
+      %title
       %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
         %meta{:content => "", :name => "description"}
           %meta{:content => "", :name => "author"}
@@ -67,7 +67,10 @@
               %a{:href => "#"} Your Account
             %p
               Welcome,
-              %a{:href => login_path} login
+              - if current_user
+                = button_to "logout", logout_path
+              - else
+                = link_to "login", login_path
           %li
             %h4
               %a{:href => cart_path} Cart
@@ -117,8 +120,9 @@
 
           %br
           %br
-    
-    = yield 
+    .flash
+      = flash.notice
+    = yield
     .row-fluid.footer
       .span3
         %h3 Information
