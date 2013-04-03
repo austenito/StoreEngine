@@ -79,17 +79,10 @@
               Categories
               %b.caret
             %ul#menu1.dropdown-menu
-              %li
-                %a{:href => "/"} Architekshure
-              %li.divider
-              %li
-                %a{:href => "categories.html"} Fashion & Retail
-              %li.divider
-              %li
-                %a{:href => "#"} Goats
-              %li.divider
-              %li
-                %a{:href => "#"} Artwork
+              - Category.all.each do |c|
+                %li
+                  %a{:href => "/categories/#{c.id}"} #{c.name.capitalize}
+                %li.divider
           %li.dropdown
             / %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             /   Girl
