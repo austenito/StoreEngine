@@ -30,7 +30,7 @@ class Checkout
 
   def generate_errors
     generated_errors = []
-    generated_errors << CheckoutErrors.new(:credit_card_info) unless valid_credit_card?
+    generated_errors << CheckoutErrors.new(:credit_card_number) unless valid_credit_card?
     generated_errors << CheckoutErrors.new(:address_line1) unless not_blank? address_line1
     generated_errors << CheckoutErrors.new(:state) unless not_blank? state
     generated_errors << CheckoutErrors.new(:city) unless not_blank? city

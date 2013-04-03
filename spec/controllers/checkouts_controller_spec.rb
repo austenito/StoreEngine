@@ -16,7 +16,6 @@ describe CheckoutsController do
       cart_product.save!
       cart.save!
       session[:cart_id] = cart.id
-      session[:current_user_id] = user.id
     end
 
     context "when the billing information is not valid" do
@@ -63,8 +62,6 @@ describe CheckoutsController do
         order = Order.first
         expect(order.order_products.find_by_product_id(product.id).quantity).to eq 3
       end
-
-      #TODO describe what is valid information
 
       it "redirects to checkout confirmation page" do
         post :create, valid_params
