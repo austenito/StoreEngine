@@ -6,9 +6,10 @@
   %tr quantity
   %br
   - @orders.each do |order|
-    %tr
-      %td= Product.find(order.product_id).name
-      %td
-      %td= Product.find(order.product_id).description
-      %td
-      %td= order.quantity
+    - order.order_products.each do |order_product|
+      %tr
+        %td= Product.find(order_product.product_id).name
+        %td
+        %td= Product.find(order_product.product_id).description
+        %td
+        %td= order_product.quantity
