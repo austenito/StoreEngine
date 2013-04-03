@@ -23,7 +23,7 @@ class CheckoutsController < ApplicationController
       end
 
       if order.save
-        CheckoutMailer.order_fulfillment(current_user).deliver
+        CheckoutMailer.order_fulfillment(current_user, order).deliver
         session[:cart_id] = nil
 
         redirect_to confirmation_checkout_path
@@ -31,7 +31,7 @@ class CheckoutsController < ApplicationController
       end
 
     else
-      CheckoutMailer.order_fulfillment(current_user).deliver
+      raise checkout.errors.inspect
       redirect_to root_path, notice: flash.notice
     end
   end
