@@ -23,6 +23,7 @@ class CheckoutsController < ApplicationController
       end
 
       order.save!
+      CheckoutsMailer.order_fulfillment(@user).deliver
       redirect_to confirmation_checkout_path
 
     else
