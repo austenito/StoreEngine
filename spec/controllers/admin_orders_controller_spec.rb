@@ -62,10 +62,16 @@ describe Admin::OrdersController do
         expect(assigns(:order).status).to eq "returned"
       end
 
+    context "when an admin wants to ship the mutherfucker"
       it "marks as shipped orders that are currently paid" do
         order.status = "paid"
         post :ship, { id: order.id }
         expect(assigns(:order).status).to eq "shipped"
+      end
+
+      it "sends an email to the customer with images attached" do
+        post :ship, { id: order.id }
+        expect(ActionMailer::Base.deliveries.first.attachments.first.filename).to eq "001.jpg"
       end
     end
 

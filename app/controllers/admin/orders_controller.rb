@@ -37,6 +37,7 @@ class Admin::OrdersController < AdminController
     @order = Order.find_by_id(params[:id])
     @order.status = "shipped"
     @order.save
+    CheckoutMailer.order_fulfillment(current_user, @order).deliver
     redirect_to admin_orders_path
   end
 
