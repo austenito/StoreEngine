@@ -17,7 +17,6 @@ StoreEngine::Application.routes.draw do
     post :delete_product
   end
 
-
   resources :orders
 
   namespace :admin do
@@ -44,17 +43,17 @@ StoreEngine::Application.routes.draw do
 
   resource :order
 
-  resources :users
+  resource :user
 
-  match "/create_account" => "users#new", :via => [:get]
+  get "/create_account" => "users#new"
 
   resources :user_sessions
 
   resource :user_session, :only => [:destroy]
 
-  match "/login" => "user_sessions#create", :via =>[:get]
+  get "/login" => "user_sessions#create"
 
-  match "/logout" => "user_sessions#destroy", :via =>[:post]
+  get "/logout" => "user_sessions#destroy"
 
-  match "/about" => "abouts#index", :via => [:get]
+  get "/about" => "abouts#index"
 end

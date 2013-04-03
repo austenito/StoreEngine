@@ -58,9 +58,12 @@ class CheckoutsController < ApplicationController
         session[:cart_id] = nil
         redirect_to confirmation_checkout_path
         flash.notice = "Order Successful"
+      else
+        flash.notice = "Could not create order"
+        redirect_to root_path, notice: flash.notice
       end
     else
-      flash.notice = "Could not create order"
+      flash.notice = "Order was not created. Please check your billing info"
       redirect_to root_path, notice: flash.notice
     end
   end
