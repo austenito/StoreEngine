@@ -21,9 +21,13 @@
 - if @product.retired?
   This product is retired
 - else
-  = form_tag add_item_cart_path do
+  = form_tag( add_item_cart_path do
     = hidden_field_tag "product_id", @product.id
-    = submit_tag "Buy!"
+    = submit_tag "Add to Cart"
+
+  = form_tag add_item_cart_path, :confirm => "Place an order for #{@product.name}?" do
+    = hidden_field_tag "product_id", @product.id
+    = submit_tag "Add and Checkout"
 
 
 %br

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401232732) do
+ActiveRecord::Schema.define(:version => 20130403034258) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130401232732) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "photo"
   end
 
   create_table "sessions", :force => true do |t|
@@ -89,6 +90,12 @@ ActiveRecord::Schema.define(:version => 20130401232732) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "display_name",                 :default => ""
+    t.string   "credit_card_number"
+    t.string   "security_code"
+    t.string   "address_line1"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

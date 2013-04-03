@@ -71,5 +71,23 @@ describe CheckoutsController do
         expect(response).to redirect_to confirmation_checkout_path
       end
     end
+
+    context "when a user clicks the two-click buy option" do 
+
+      context "when that user is not logged in" do 
+
+        it "redirects to the login page" do 
+        end 
+
+        it "has a flash message that asks the user to first log in" do 
+        end 
+      end
+
+      context "when that user is logged in" do 
+
+        it "creates an order after the user confirms they want to buy that product" do 
+        end 
+      end  
+    end 
   end
 end
