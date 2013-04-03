@@ -1,4 +1,4 @@
-class Admin::ProductsController < ActionController::Base
+class Admin::ProductsController < AdminController
 
   def new
     @product = Product.new
@@ -49,4 +49,5 @@ class Admin::ProductsController < ActionController::Base
 
     redirect_to admin_products_path(product)
   end
+
 end
