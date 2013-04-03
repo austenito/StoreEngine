@@ -45,6 +45,12 @@ class Admin::OrdersController < Admin::AdminController
     @order = Order.find_by_id(params[:id])
   end
 
+  def paid
+    @order = Order.find_by_id(params[:id])
+    @order.status = "paid"
+    @order.save
+    redirect_to admin_orders_path
+  end
 ## create order products for that order
 
 end

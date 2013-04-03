@@ -62,6 +62,12 @@ describe Admin::OrdersController do
         expect(assigns(:order).status).to eq "returned"
       end
 
+      it "marks as paid orders that are currently pending" do
+        order.status = "pending"
+        post :paid, { id: order.id }
+        expect(assigns(:order).status).to eq "paid"
+      end
+
     context "when an admin wants to ship the mutherfucker"
       it "marks as shipped orders that are currently paid" do
         order.status = "paid"
