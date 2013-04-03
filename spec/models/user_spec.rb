@@ -88,20 +88,20 @@ describe User do
       end
     end
 
-    context "when the email is not of a valid type" do 
+    context "when the email is not of a valid type" do
 
-      before do 
+      before do
         user.email = "invalidemail"
       end
 
-      it "is invalid" do 
+      it "is invalid" do
         expect(user).to be_invalid
-      end 
+      end
 
-      it "has errors" do 
+      it "has errors" do
         expect(user).to have(1).errors_on(:email)
-      end 
-    end 
+      end
+    end
 
     context "when it is missing a password" do
       before do
@@ -118,7 +118,7 @@ describe User do
     end
   end
 
-  context "a user can have an optional display name" do 
+  context "a user can have an optional display name" do
 
     let(:user) do
       User.new(first_name: "afirstname",
@@ -128,62 +128,75 @@ describe User do
                    password_confirmation: "blah" )
     end
 
-    it "returns that display name if it is present" do 
+    it "returns that display name if it is present" do
       user.display_name = "j3"
       user.save
       expect(User.find_by_id(user.id).display_name).to eq "j3"
-    end 
+    end
 
     it "is invalid if that display name is shorter tha 2 characters" do
       user.display_name = "j"
       user.save
       expect(user).to be_invalid
       expect(user).to have(1).errors_on(:display_name)
-    end 
+    end
 
-    it "is invalid if that display name is longer than 32 characters" do 
-      user.display_name = "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj" 
+    it "is invalid if that display name is longer than 32 characters" do
+      user.display_name = "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
       user.save
       expect(user).to be_invalid
       expect(user).to have(1).errors_on(:display_name)
-    end 
-  end 
+    end
+  end
 
-  context "a user does not enter a first name" do 
-    before do 
+  context "a user does not enter a first name" do
+    before do
       user.first_name = nil
-    end 
+    end
 
-    it "is invalid" do 
+    it "is invalid" do
       expect(user).to be_invalid
-    end 
+    end
 
-    it "has errors" do 
+    it "has errors" do
       expect(user).to have(1).errors_on :first_name
-    end 
-  end 
+    end
+  end
 
-  context "a user does not enter a last name" do 
-    before do 
+  context "a user does not enter a last name" do
+    before do
       user.last_name = nil
-    end 
+    end
 
-    it "is invalid" do 
+    it "is invalid" do
       expect(user).to be_invalid
-    end 
+    end
 
-    it "has errors" do 
+    it "has errors" do
       expect(user).to have(1).errors_on :last_name
-    end 
-  end 
+    end
+  end
 
   context "attribute thingies..." do
     context "user is an admin" do
       it "is an admin" do
         user.admin = true
-
+        user.save
         expect(user).to be_admin
       end
+    end
+  end
+
+  context "a user's information can be updated" do
+    it "doesn't care about passwords" do
+      user.save
+      found_user = User.find_by_id(user.id)
+      new_attributes = {first_name: "elaine",
+        last_name: "alastname",
+        email: "email@email.com"}
+      found_user.update_attributes(new_attributes)
+      expect(found_user.errors).to be_empty
+
     end
   end
 end
