@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130403005609) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "photo"
   end
 
   create_table "sessions", :force => true do |t|
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20130403005609) do
     t.boolean  "admin",                        :default => false
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "display_name",                 :default => ""
+    t.string   "display_name"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
