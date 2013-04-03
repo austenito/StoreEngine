@@ -46,7 +46,7 @@ class CheckoutsController < ApplicationController
     checkout = Checkout.new(billing_info)
 
     if checkout.valid?
-      order = Order.new(user_id: session[:current_user_id])
+      order = Order.new(user_id: current_user.id)
 
       product = Product.find_by_id(params[:product_id])
       order.products << product
@@ -59,6 +59,7 @@ class CheckoutsController < ApplicationController
         redirect_to confirmation_checkout_path
         flash.notice = "Order Successful"
       else
+        raise order.errors.inspect
         flash.notice = "Could not create order"
         redirect_to root_path, notice: flash.notice
       end
