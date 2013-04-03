@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Order do
-  let(:order) { Order.create(user_id: 1) }
-  let(:product) { Product.create(name: "sample", description: "blah", price: 2.00) }
+  let!(:order) { Order.create(user_id: 1) }
+  let!(:product) { Product.create(name: "sample", description: "blah", price: 2.00) }
 
   before do 
     order.products << product
+    order.order_products.first.quantity = 1
+    order.order_products.each { |order_product| order_product.save }
   end 
 
   context "validation" do
@@ -50,4 +52,11 @@ describe Order do
       pending
     end 
   end
+
+  context "it calculates the total for that product" do 
+
+    it "calculates its total" do 
+      expect(order.total).to eq 2.00
+    end 
+  end 
 end
