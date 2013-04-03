@@ -29,13 +29,13 @@ describe Checkout do
       billing_info[:credit_card_number]= "2"
 
       checkout = Checkout.new billing_info
-      expect(checkout.errors).to match_array [CheckoutErrors.new(:credit_card_info)]
+      expect(checkout.errors).to match_array [CheckoutErrors.new(:credit_card_number)]
     end
 
     it "does not validate blank credit card number" do
       billing_info[:credit_card_number]= nil
       checkout = Checkout.new billing_info
-      expect(checkout.errors).to match_array [CheckoutErrors.new(:credit_card_info)]
+      expect(checkout.errors).to match_array [CheckoutErrors.new(:credit_card_number)]
     end
   end
 
