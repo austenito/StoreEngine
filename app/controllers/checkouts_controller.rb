@@ -19,16 +19,51 @@ class CheckoutsController < ApplicationController
         quantity = current_cart.cart_products.find_by_product_id(product.id).quantity
         order_product = order.order_products.find_by_product_id(product.id)
         order_product.quantity = quantity
-        order_product.save!
+        order_product.save
       end
 
-      order.save!
-      CheckoutsMailer.order_fulfillment(@user).deliver
-      redirect_to confirmation_checkout_path
+      if order.save
+        CheckoutsMailer.order_fulfillment(@user).deliver
+        session[:cart_id] = nil
+        redirect_to confirmation_checkout_path
+        flash.notice = "Order Successful, Please Check Your Email"
+      end
 
     else
-      flash.notice = "Invalid Billing Information"
-      redirect_to checkout_path, {error: "check your form again"}
+      flash.notice = "Could not create order"
+      redirect_to root_path
+    end
+  end
+
+
+  def two_click
+     billing_info = {
+      credit_card_number: current_user.credit_card_number,
+      address_line1: current_user.address_line1,
+      city: current_user.city,
+      state: current_user.state,
+      zipcode: current_user.zipcode,
+      name: "#{current_user.first_name} #{current_user.last_name}"
+    }
+    checkout = Checkout.new(billing_info)
+
+    if checkout.valid?
+      order = Order.new(user_id: session[:current_user_id])
+
+      product = Product.find_by_id(params[:product_id])
+      order.products << product
+      order.order_products.first.quantity = 1
+      order.order_products.first.save
+      order.save
+
+      if order.save
+        session[:cart_id] = nil
+        redirect_to confirmation_checkout_path
+        flash.notice = "Order Successful"
+      end
+    else
+      flash.notice = "Could not create order"
+      redirect_to root_path
     end
   end
 
