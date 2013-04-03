@@ -1,3 +1,10 @@
+### Orders
+
+Order.create()
+
+
+
+
 ### Users
 
 User.create(:first_name => "Franklin", :last_name => "Webber", :email => "demoXX+franklin@jumpstartlab.com",
