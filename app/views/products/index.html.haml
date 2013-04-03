@@ -32,7 +32,7 @@
   .row-fluid
     %ul.thumbnails
     - group.each do |product|
-      %li.span3
+      %li.span5
         .thumbnail
           %a{:href => product_path(product)}
             %img{:alt => "", :src => product.image.url(:thumb)}
