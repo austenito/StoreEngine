@@ -38,7 +38,8 @@ class Admin::OrdersController < Admin::AdminController
     @order.status = "shipped"
     @order.save
     user = User.find_by_id(@order.user_id)
-    CheckoutMailer.order_fulfillment(user, @order).deliver
+    image_paths = @order.products.collect { |product| product.image.url }
+    CheckoutMailer.order_fulfillment(user, @order, image_paths).deliver
     redirect_to admin_orders_path
   end
 
