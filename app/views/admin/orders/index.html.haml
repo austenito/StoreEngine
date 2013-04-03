@@ -65,6 +65,7 @@ All Orders
       - if order.status == "pending"
         %td
           = button_to "Cancel Order", { action: "cancel", id: order.id }
+          = button_to "Mark as Paid", { action: "paid", id: order.id }
       - if order.status == "shipped"
         %td
           = button_to "Mark as Returned", { action: "return", id: order.id }
