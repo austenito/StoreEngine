@@ -14,6 +14,7 @@ gem 'paperclip', "~> 3.0"
 gem 'sorcery'
 gem 'unicorn'
 gem 'rack_session_access'
+gem 'stripe'
 
 group :development do
 

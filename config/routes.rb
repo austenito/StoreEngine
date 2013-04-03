@@ -2,6 +2,8 @@ StoreEngine::Application.routes.draw do
 
   resources :user_sessions
 
+  resources :charges
+
   root :to => 'products#index'
 
   resources :products, :only => [:show]
@@ -40,11 +42,11 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :categories
-  
+
   resource :order
 
   resources :users
-  
+
   match "/create_account" => "users#new", :via => [:get]
 
   resources :user_sessions
