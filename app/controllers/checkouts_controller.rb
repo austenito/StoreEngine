@@ -1,18 +1,14 @@
 class CheckoutsController < ApplicationController
- 
+  before_filter :require_login
+
   def show
 
-    if session[:current_user_id].nil?
-      redirect_to login_path
-      flash.notice = "Please log in before checking out!"
-    else
-      @cart = Cart.find_by_id(session[:cart_id])
-      render :show
-    end
+    @cart = Cart.find_by_id(session[:cart_id])
+    render :show
   end
 
-
   def create
+#    check_process = CheckoutProcess.new(params[:checkout]
     cart = Cart.find_by_id(session[:cart_id])
 
     if valid_billing_info? params
@@ -39,7 +35,7 @@ class CheckoutsController < ApplicationController
 
   def confirmation
     @order = Order.last
-  end 
+  end
 
   def valid_billing_info? params
     CreditCardValidator::Validator.valid?(params[:creditCardNumber])

@@ -71,5 +71,13 @@ describe CheckoutsController do
         expect(response).to redirect_to confirmation_checkout_path
       end
     end
+
+  end
+
+  describe "a guest clicks checkout" do
+    it "should not be able to checkout" do
+      get :show, id: 1
+      expect(response).to redirect_to login_path
+    end
   end
 end
