@@ -41,11 +41,11 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :categories
-  
+
   resource :order
 
   resources :users
-  
+
   match "/create_account" => "users#new", :via => [:get]
 
   resources :user_sessions
@@ -56,4 +56,5 @@ StoreEngine::Application.routes.draw do
 
   match "/logout" => "user_sessions#destroy", :via =>[:post]
 
+  match "/about" => "abouts#index", :via => [:get]
 end

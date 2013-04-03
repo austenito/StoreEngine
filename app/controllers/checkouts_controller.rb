@@ -25,13 +25,14 @@ class CheckoutsController < ApplicationController
       if order.save
         CheckoutsMailer.order_fulfillment(@user).deliver
         session[:cart_id] = nil
+
         redirect_to confirmation_checkout_path
         flash.notice = "Order Successful, Please Check Your Email"
       end
 
     else
       flash.notice = "Could not create order"
-      redirect_to root_path
+      redirect_to root_path, notice: flash.notice
     end
   end
 
@@ -63,7 +64,7 @@ class CheckoutsController < ApplicationController
       end
     else
       flash.notice = "Could not create order"
-      redirect_to root_path
+      redirect_to root_path, notice: flash.notice
     end
   end
 
