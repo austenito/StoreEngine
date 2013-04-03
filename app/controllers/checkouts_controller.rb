@@ -24,13 +24,12 @@ class CheckoutsController < ApplicationController
 
       if order.save
         session[:cart_id] = nil
-        redirect_to confirmation_checkout_path
         flash.notice = "Order Successful"
+        redirect_to confirmation_checkout_path
       end
 
     else
-      flash.notice = "Could not create order"
-      redirect_to root_path, 
+      redirect_to root_path, notice: flash.notice
     end
   end
 
@@ -46,25 +45,25 @@ class CheckoutsController < ApplicationController
     }
     checkout = Checkout.new(billing_info)
 
-    if checkout.valid? 
+    if checkout.valid?
       order = Order.new(user_id: session[:current_user_id])
 
       product = Product.find_by_id(params[:product_id])
       order.products << product
       order.order_products.first.quantity = 1
-      order.order_products.first.save 
+      order.order_products.first.save
       order.save
 
       if order.save
         session[:cart_id] = nil
         redirect_to confirmation_checkout_path
         flash.notice = "Order Successful"
-      end 
+      end
     else
       flash.notice = "Could not create order"
-      redirect_to root_path
+      redirect_to root_path, notice: flash.notice
     end
-  end 
+  end
 
   def confirmation
     @order = Order.last

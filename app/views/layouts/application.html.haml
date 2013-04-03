@@ -109,7 +109,9 @@
           %br
           %br
     .flash
+      /= raise flash.inspect
       = flash.notice
+      = flash[:success]
     = yield
     .row-fluid.footer
       .span3
