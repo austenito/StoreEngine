@@ -6,7 +6,7 @@ StoreEngine::Application.routes.draw do
 
   root :to => 'products#index'
 
-  resources :products, :only => [:show, :index]
+  resources :products
 
   resource :checkout, :only => [:create, :show] do
     get :confirmation
