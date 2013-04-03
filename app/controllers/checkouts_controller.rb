@@ -61,7 +61,6 @@ class CheckoutsController < ApplicationController
     order.order_products.first.save 
     order.save
     return order
-
   end 
 
   def confirmation
