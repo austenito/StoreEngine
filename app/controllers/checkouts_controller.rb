@@ -1,34 +1,28 @@
 class CheckoutsController < ApplicationController
- 
-  def show
+  before_filter :require_login
 
-    if session[:current_user_id].nil?
-      redirect_to login_path
-      flash.notice = "Please log in before checking out!"
-    else
-      @cart = Cart.find_by_id(session[:cart_id])
-      render :show
-    end
+  def show
+    @cart = current_cart
+    render :show
   end
 
-
   def create
-    cart = Cart.find_by_id(session[:cart_id])
+    checkout = Checkout.new(billing_info(params))
 
-    if valid_billing_info? params
-      order = Order.new(user_id: session[:current_user_id])
+    if checkout.valid?
+      order = Order.new(user_id: current_user.id)
 
-      cart.products.each do |product|
+      current_cart.products.each do |product|
         order.products << product
         order.save
         order.order_products.each { |order_product| order_product.save }
-        quantity = cart.cart_products.find_by_product_id(product.id).quantity
+        quantity = current_cart.cart_products.find_by_product_id(product.id).quantity
         order_product = order.order_products.find_by_product_id(product.id)
         order_product.quantity = quantity
-        order_product.save
+        order_product.save!
       end
 
-      order.save
+      order.save!
       redirect_to confirmation_checkout_path
 
     else
@@ -39,10 +33,17 @@ class CheckoutsController < ApplicationController
 
   def confirmation
     @order = Order.last
-  end 
+  end
 
-  def valid_billing_info? params
-    # CreditCardValidator::Validator.valid?(params[:creditCardNumber])
-    true
+  def billing_info params
+    billing_info = {
+      credit_card_number: params[:creditCardNumber],
+      address_line1: params[:addressLine1],
+      address_line2: params[:addressLine2],
+      city: params[:city],
+      state: params[:state],
+      zipcode: params[:zipcode],
+      name: "#{params[:firstName]} #{params[:lastName]}"
+    }
   end
 end
