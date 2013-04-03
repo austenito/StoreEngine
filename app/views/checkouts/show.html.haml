@@ -1,17 +1,17 @@
-Checkout
+%h3 Checkout
 
 %p
 
 %table{id: 'products'}
   %th Product Name
-  %th Quantity 
-  %th Price Per Item 
-  %th Subtotal 
+  %th Quantity
+  %th Price Per Item
+  %th Subtotal
   -@cart.products.each do |product|
     %tr
       %td
         = product.name
-      %td 
+      %td
         = @cart.cart_products.find_by_product_id(product.id).quantity
       %td
         = product.price
@@ -22,34 +22,31 @@ Checkout
 
 = form_tag(checkout_path) do
   = label_tag 'First Name'
-  = text_field_tag :firstName
+  = text_field_tag :firstName, current_user.first_name
   %br
   = label_tag 'Last Name'
-  = text_field_tag :lastName
+  = text_field_tag :lastName, current_user.last_name
   %br
-  = label_tag 'Credit Cart Number'
-  = text_field_tag :creditCartNumber
+  = label_tag 'Credit Card Number'
+  = text_field_tag :creditCardNumber, current_user.credit_card_number
   %br
   = label_tag 'Expiration Date'
   = text_field_tag :expirationDate
   %br
   = label_tag 'Address 1'
-  = text_field_tag :addressLine1
-  %br
-  = label_tag 'Address 2'
-  = text_field_tag :addressLine2
+  = text_field_tag :addressLine1, current_user.address_line1
   %br
   = label_tag 'City'
-  = text_field_tag :city
+  = text_field_tag :city, current_user.city
   %br
   = label_tag 'State'
-  = text_field_tag :state
+  = text_field_tag :state, current_user.state
   %br
   = label_tag 'Zipcode'
-  = text_field_tag :zipcode
+  = text_field_tag :zipcode, current_user.zipcode
   %br
-  = label_tag 'Email'
-  = text_field_tag :email
+  = label_tag 'Email To'
+  = text_field_tag :email, current_user.email
   %br
   = button_tag "Checkout", class: "checkout"
 
