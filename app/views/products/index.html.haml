@@ -1,6 +1,6 @@
 .flash
   = flash.notice
-  
+
 .row-fluid
   .span12
     #myCarousel.carousel.slide
@@ -34,10 +34,10 @@
     - group.each do |product|
       %li.span3
         .thumbnail
-          %a{:href => "product_detail.html"}
-            %img{:alt => "", :src => "images/product1.jpg"}/
+          %a{:href => product_path(product)}
+            %img{:alt => "", :src => product.image.url(:thumb)}
           .caption
-            %h4= link_to "#{product.name}", product
+            %h4= link_to "#{product.name}", product_path(product)
             %p=product.price
             %p=product.description
 %br
