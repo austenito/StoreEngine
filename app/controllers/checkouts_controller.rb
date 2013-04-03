@@ -1,74 +1,84 @@
 class CheckoutsController < ApplicationController
- 
-  def show
+  before_filter :require_login
 
-    if session[:current_user_id].nil?
-      redirect_to login_path
-      flash.notice = "Please log in before checking out!"
-    else
-      @cart = Cart.find_by_id(session[:cart_id])
-      render :show
-    end
+  def show
+    @cart = current_cart
+    render :show
   end
 
-  def cart 
-    Cart.find_by_id(session[:cart_id])
-  end 
-
   def create
-    @order = Order.new(user_id: session[:current_user_id])
+    checkout = Checkout.new(billing_info(params))
 
-    if cart != nil 
+    if checkout.valid?
+      order = Order.new(user_id: current_user.id)
 
-      # if User.billing_info? 
-        @order = cart_checkout @order, params
-      # else
-      #   flash.notice = "Invalid Billing Information"
-      #   redirect_to checkout_path, {error: "check your form again"}
-      # end
+      current_cart.products.each do |product|
+        order.products << product
+        order.save
+        order.order_products.each { |order_product| order_product.save }
+        quantity = current_cart.cart_products.find_by_product_id(product.id).quantity
+        order_product = order.order_products.find_by_product_id(product.id)
+        order_product.quantity = quantity
+        order_product.save
+      end
 
-    else
-      @order = two_click @order, params
-    end
+      if order.save
+        session[:cart_id] = nil
+        redirect_to confirmation_checkout_path
+        flash.notice = "Order Successful"
+      end
 
-    if @order.save
-      session[:cart_id] = nil
-      redirect_to confirmation_checkout_path
-      flash.notice = "Order Successful"
     else
       flash.notice = "Could not create order"
       redirect_to root_path
     end
   end
 
-  def cart_checkout order, params
 
-    cart.products.each do |product|
-      @order.products << product
-      @order.order_products.each { |order_product| order_product.save }
-      quantity = cart.cart_products.find_by_product_id(product.id).quantity
-      order_product = @order.order_products.find_by_product_id(product.id)
-      order_product.quantity = quantity
-      order_product.save
-      return @order
+  def two_click
+     billing_info = {
+      credit_card_number: current_user.credit_card_number,
+      address_line1: current_user.address_line1,
+      city: current_user.city,
+      state: current_user.state,
+      zipcode: current_user.zipcode,
+      name: "#{current_user.first_name} #{current_user.last_name}"
+    }
+    checkout = Checkout.new(billing_info)
+
+    if checkout.valid? 
+      order = Order.new(user_id: session[:current_user_id])
+
+      product = Product.find_by_id(params[:product_id])
+      order.products << product
+      order.order_products.first.quantity = 1
+      order.order_products.first.save 
+      order.save
+
+      if order.save
+        session[:cart_id] = nil
+        redirect_to confirmation_checkout_path
+        flash.notice = "Order Successful"
+      end 
+    else
+      flash.notice = "Could not create order"
+      redirect_to root_path
     end
-  end 
-
-  def two_click order, params
-    product = Product.find_by_id(params[:product_id])
-    order.products << product
-    order.order_products.first.quantity = 1
-    order.order_products.first.save 
-    order.save
-    return order
   end 
 
   def confirmation
     @order = Order.last
-  end 
+  end
 
-  def valid_billing_info? params
-    # CreditCardValidator::Validator.valid?(params[:creditCardNumber])
-    true
+  def billing_info params
+    billing_info = {
+      credit_card_number: params[:creditCardNumber],
+      address_line1: params[:addressLine1],
+      address_line2: params[:addressLine2],
+      city: params[:city],
+      state: params[:state],
+      zipcode: params[:zipcode],
+      name: "#{params[:firstName]} #{params[:lastName]}"
+    }
   end
 end

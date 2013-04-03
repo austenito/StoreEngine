@@ -16,7 +16,6 @@ describe CheckoutsController do
       cart_product.save!
       cart.save!
       session[:cart_id] = cart.id
-      session[:current_user_id] = user.id
     end
 
     context "when the billing information is not valid" do
@@ -34,7 +33,7 @@ describe CheckoutsController do
 
       it "redirects to checkout with an error message " do
         post :create, {creditCardNumber: "123"}
-        expect(response).to redirect_to checkout_path
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -64,19 +63,38 @@ describe CheckoutsController do
         expect(order.order_products.find_by_product_id(product.id).quantity).to eq 3
       end
 
-      #TODO describe what is valid information
-
       it "redirects to checkout confirmation page" do
         post :create, valid_params
         expect(response).to redirect_to confirmation_checkout_path
       end
+    end
+
+  end
+
+  describe "a guest clicks checkout" do
+    it "should not be able to checkout" do
+      get :show, id: 1
+      expect(response).to redirect_to login_path
     end
   end
 
   describe "when a user clicks the two-click buy option" do 
 
     let!(:product){ Product.create!(name: "cool beans", description: "very cold beans", price: 2.00) }
-    let!(:user){ User.create!(first_name: "afirstname", last_name: "alastname", email: "email@email.com", password:"1234", password_confirmation:"1234") }
+    let!(:user) do  
+      User.create!(first_name: "afirstname", 
+        last_name: "alastname", 
+        email: "email@email.com", 
+        password:"1234", 
+        password_confirmation:"1234",
+        credit_card_number: "4242424242424242",
+        address_line1: "1062 Delaware Street",
+        city: "Denver",
+        state: "CO",
+        zipcode: "80204",) 
+    end 
+
+
 
     context "when that user is not logged in" do 
 
@@ -85,13 +103,11 @@ describe CheckoutsController do
       end
 
       it "redirects to the login page" do 
-        pending
         expect(response).to redirect_to login_path
       end 
 
       it "has a flash message that asks the user to first log in" do 
-        pending
-        expect(flash[:success]).to_not be_nil
+        expect(flash.notice).to_not be_nil
       end 
     end
 
@@ -102,7 +118,7 @@ describe CheckoutsController do
         before do 
           login_user(user)
           session[:current_user_id] = user.id
-          post :create, { product_id: product.id }
+          post :two_click, { product_id: product.id }
         end 
 
         it "creates an order after the user confirms they want to buy that product" do 
@@ -111,6 +127,16 @@ describe CheckoutsController do
       end 
 
       context "when that user does not have billing info" do 
+
+        before do 
+          login_user(user)
+          session[:current_user_id] = user.id
+          post :two_click, { product_id: product.id }
+        end 
+
+        it "has a flash message that asks the user to fill out their billing info" do 
+          expect(flash.notice).to_not be_nil
+        end 
       end 
     end  
   end 

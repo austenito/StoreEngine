@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130403034258) do
+=======
+ActiveRecord::Schema.define(:version => 20130403005609) do
+>>>>>>> master
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id"
@@ -90,12 +94,15 @@ ActiveRecord::Schema.define(:version => 20130403034258) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "display_name",                 :default => ""
+<<<<<<< HEAD
     t.string   "credit_card_number"
     t.string   "security_code"
     t.string   "address_line1"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
+=======
+>>>>>>> master
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
