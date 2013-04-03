@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     @orders = Order.find_all_by_user_id(current_user.id)
   end
 
-  def new
-
+  def show
+    @order = Order.find_by_id(params[:id])
   end
 end
