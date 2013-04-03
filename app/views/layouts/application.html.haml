@@ -63,7 +63,7 @@
                 = link_to "login", login_path
           %li
             %h4
-              %a{:href => cart_path} Cart
+              %p.big_cart= link_to image_tag( 'shopping_cart.png'), '/cart'
             %p
               - if session[:cart_id]
                 %strong= "#{Cart.find_by_id(session[:cart_id]).cart_products.count} Item(s)"

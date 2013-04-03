@@ -321,4 +321,8 @@ td.cart {
     width: 100px;
     max-width: 100px;
     max-height: 80px;
-}   
+} 
+p.big_cart {
+    height: 30px;
+    width: 30px;
+}  
