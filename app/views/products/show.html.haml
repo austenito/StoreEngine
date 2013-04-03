@@ -22,14 +22,11 @@
   .span4
     %ul.thumbnails
       %li.span12
-        .thumbnail
-          %a{:href => "product_detail.html"}
-            %img{:alt => "", :src => "img/product3.jpg"}/
-          .caption
-            %h2= @product.name.capitalize
-            %h3= "$#{@product.price}"
-            %br
-            %h4= @product.description
+        .caption
+          %h2= @product.name.capitalize
+          %h3= "$#{@product.price}"
+          %br
+          %h4= @product.description
       %p
         .control-group
           %label.control-label.t-left{:for => "select01"} Quantity
