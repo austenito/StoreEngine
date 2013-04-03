@@ -303,3 +303,8 @@ a:hover.no-underline{
 .span5 {
     padding-left: 100px;
 }
+
+img.thumb {
+    height: 40px;
+    width: 40px;
+}
