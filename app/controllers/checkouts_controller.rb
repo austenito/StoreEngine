@@ -31,7 +31,6 @@ class CheckoutsController < ApplicationController
       end
 
     else
-      flash.notice = "Could not create order"
       redirect_to root_path, notice: flash.notice
     end
   end
