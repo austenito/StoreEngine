@@ -1,10 +1,12 @@
 StoreEngine::Application.routes.draw do
 
+  resources :indices
+  match "/" => "indices#index"
   resources :user_sessions
 
   root :to => 'products#index'
 
-  resources :products, :only => [:show]
+  resources :products, :only => [:show, :index]
 
   resource :checkout, :only => [:create, :show] do
     get :confirmation
