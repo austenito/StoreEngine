@@ -1,6 +1,7 @@
-Edit Orders Page 
+Update Orders Page 
 
-%p
+%br
+%br
 
 %table
   %th Order ID
@@ -11,16 +12,19 @@ Edit Orders Page
     %td 
       = @order.status
 
-%p
+%br
+%br
 
 Change Quantity or Remove Products from Order if Order Status is "Pending" or "Paid"
 
+%br
+%br
 
-- if @order.status == "pending" || @order.status == "paid"
-  %table
-    %th Product ID
-    %th Product Name 
-    %th Quantity 
+%table
+  %th Product ID
+  %th Product Name 
+  %th Quantity 
+  - if @order.status == "pending" || @order.status == "paid"
     - @order.order_products.each do |order_product|
       %tr
         = Product.find_by_id(order_product.product_id).id
