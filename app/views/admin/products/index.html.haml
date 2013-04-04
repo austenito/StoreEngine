@@ -1,49 +1,40 @@
-Admin Products Page
+.row-fluid
+  .span
+    %h3 
+    Total Orders by Status
+    %table.orders
+      %tr.orders
+        %td.orders= link_to "Add a Product", new_admin_product_path
+        %td.orders= link_to "Add a Category", new_admin_category_path
+        %td.orders= link_to "View Orders Dashboard", admin_orders_path 
+    %br
+    %table.orders
+      %tr.orders
+        %th.orders Product Image
+        %th.orders Product Name
+        %th.orders Product Description 
+        %th.orders Product Price
+        %th.orders Product Status
+        %th.orders View & Edit Product
+        - @products.each do |product|
+          %tr
+            %td.orders-products
+              = image_tag product.image.url(:thumb)
+            %td.orders-products
+              = product.name
+            %td.orders-products
+              = product.description
+            %td.orders-products
+              = product.price
+            %td.orders-products
+              - if product.retired?
+                Retired
+              - else
+                = button_to "Retire", { action: "retire", id: product.id }
+            %td.orders-products
+              = link_to "View & Edit", admin_product_path(product), class: 'product', id: dom_id(product)
 
+      
 %br
 %br
-
-All Current Products 
-
 %br
-%br
-
-%table
-  %th Product Image
-  %th Product Name
-  %th Product Description 
-  %th Product Price
-  %th Product Status
-  %th View & Edit Product
-  - @products.each do |product|
-    %tr
-      %td
-        = image_tag product.image.url(:thumb)
-      %td
-        = product.name
-      %td
-        = product.description
-      %td
-        = product.price
-      %td
-        - if product.retired?
-          Retired
-        - else
-          = button_to "Retire", { action: "retire", id: product.id }
-      %td
-        = link_to "View & Edit", admin_product_path(product), class: 'product', id: dom_id(product)
-
-%br
-%br
-
-= link_to "Add a Product", new_admin_product_path
-
-%br 
-%br
-
-= link_to "Add a Category", new_admin_category_path
-
-%br
-%br 
-
-=link_to "View Orders Dashboard", admin_orders_path 
