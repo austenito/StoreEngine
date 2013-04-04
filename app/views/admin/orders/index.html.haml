@@ -1,75 +1,73 @@
-Orders Index
+.row-fluid
+  .span
+  %h3
+    Total Orders by Status
+    %table.orders
+      %tr.orders
+        %td.orders= link_to "View All Orders", admin_orders_path
+        %td.orders= link_to "View Shipped Orders", admin_orders_path(status: "shipped")
+        %td.orders= link_to "View Cancelled Orders", admin_orders_path(status: "cancelled")
+        %td.orders= link_to "View Pending Orders", admin_orders_path(status: "pending")
+        %td.orders= link_to "View Paid Orders", admin_orders_path(status: "paid")
+        %td.orders= link_to "View Returned Orders", admin_orders_path(status: "returned")
 
-%p
+  %br
+  %br
 
-Total Orders by Status
+  .span4.create-account
+    %table.checkout{id: 'statusCount'}
+      %th.checkout Status
+      %th.checkout # of Orders
+      %tr
+        %td.checkout
+          = "shipped"
+        %td.checkout
+          = Order.find_all_by_status("shipped").count
+      %tr
+        %td.checkout
+          ="cancelled"
+        %td.checkout
+          = Order.find_all_by_status("cancelled").count
+      %tr
+        %td.checkout
+          = "pending"
+        %td.checkout
+          = Order.find_all_by_status("pending").count
+      %tr
+        %td.checkout
+          = "paid"
+        %td.checkout
+          = Order.find_all_by_status("paid").count
+      %tr
+        %td.checkout
+          = "returned"
+        %td.checkout
+          = Order.find_all_by_status("returned").count
+   
+  .span6.login
+    %table.pull-right{id: 'all_orders'}
+      %th Order ID
+      %th Status
+      %th View Order
+      - @orders.each do |order|
+        %tr
+          %td.orders
+            = order.id
+          %td.orders
+            = order.status
+          %td.orders-button
+            = link_to "View Order", admin_order_path(order), class: 'order', id: dom_id(order)
+          - if order.status == "pending"
+            %td.orders-button
+              = button_to "Cancel Order", { action: "cancel", id: order.id }
+              = button_to "Mark as Paid", { action: "paid", id: order.id }
+          - if order.status == "shipped"
+            %td.orders-button
+              = button_to "Mark as Returned", { action: "return", id: order.id }
+          - if order.status == "paid"
+            %td.orders-button
+              = button_to "Mark as Shipped", { action: "ship", id: order.id }
+%br
+%br
 
-%p
-
-= link_to "View All Orders", admin_orders_path
-= link_to "View Shipped Orders", admin_orders_path(status: "shipped")
-= link_to "View Cancelled Orders", admin_orders_path(status: "cancelled")
-= link_to "View Pending Orders", admin_orders_path(status: "pending")
-= link_to "View Paid Orders", admin_orders_path(status: "paid")
-= link_to "View Returned Orders", admin_orders_path(status: "returned")
-
-%p
-
-%table{id: 'statusCount'}
-  %th Order Status
-  %th Number of Orders
-  %tr
-    %td
-      = "shipped"
-    %td
-      = Order.find_all_by_status("shipped").count
-  %tr
-    %td
-      ="cancelled"
-    %td
-      = Order.find_all_by_status("cancelled").count
-  %tr
-    %td
-      = "pending"
-    %td
-      = Order.find_all_by_status("pending").count
-  %tr
-    %td
-      = "paid"
-    %td
-      = Order.find_all_by_status("paid").count
-  %tr
-    %td
-      = "returned"
-    %td
-      = Order.find_all_by_status("returned").count
-
-%p
-
-All Orders
-
-%p
-
-%table{id: 'all_orders'}
-  %th Order ID
-  %th Order Status
-  %th View Order
-  - @orders.each do |order|
-    %tr
-      %td
-        = order.id
-      %td
-        = order.status
-      %td
-        = link_to "View Order", admin_order_path(order), class: 'order', id: dom_id(order)
-      - if order.status == "pending"
-        %td
-          = button_to "Cancel Order", { action: "cancel", id: order.id }
-          = button_to "Mark as Paid", { action: "paid", id: order.id }
-      - if order.status == "shipped"
-        %td
-          = button_to "Mark as Returned", { action: "return", id: order.id }
-      - if order.status == "paid"
-        %td
-          = button_to "Mark as Shipped", { action: "ship", id: order.id }
 

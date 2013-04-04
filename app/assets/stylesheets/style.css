@@ -352,6 +352,11 @@ td.orders {
     padding: 5px;
     border:1px solid gray;
 }
+td.orders-button {
+    padding-top: 18px;
+    border:1px solid gray;
+    padding-bottom: -5px;
+}
 
 table.checkout{
 border-collapse:collapse;
