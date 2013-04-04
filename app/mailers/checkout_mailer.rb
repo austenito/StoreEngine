@@ -1,19 +1,27 @@
 class CheckoutMailer < ActionMailer::Base
   default from: "yaaagoat@gmail.com"
 
-  def order_fulfillment(user, order, image_paths)
+  def file_path image_name
+    "#{Rails.root}/tmp/images/#{image_name}"
+  end
+
+  def order_fulfillment(user, order, images)
     @user = user
-    file_names = image_paths.collect do | image_path |
-      image_path.split("/").last.split("?").first
+
+    images.each do |image|
+      image_name = image.url.split("/").last.split("?").first
+      make_temp image_name, image
+      attachments[image_name] = File.read(file_path image_name)
     end
 
-    image_paths.each_with_index do |image_path, index|
-      file_name = file_names[index]
-      image_path = image_path.split("?").first
-      attachments[file_name] = File.read("#{Rails.root}/public#{image_path}")
+    mail(:to => "#{user.first_name} <#{user.email}>", :subject => "Here are your images.")
+
+  end
+
+  def make_temp image_name, image
+    open(file_path(image_name), "wb") do |f|
+      f << open(image.url).read
     end
-    mail(:to => "#{user.first_name} <#{user.email}>", :subject => "Here are your images...")
   end
 end
-
 
