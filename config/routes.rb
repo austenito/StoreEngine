@@ -1,5 +1,5 @@
 StoreEngine::Application.routes.draw do
-
+  
   resources :indices
   match "/" => "indices#index"
   resources :user_sessions
