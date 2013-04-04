@@ -2,7 +2,7 @@ class CheckoutMailer < ActionMailer::Base
   default from: "yaaagoat@gmail.com"
 
   def file_path image_name
-    "#{Rails.root}/tmp/images/#{image_name}"
+    "#{Rails.root}/public/images/#{image_name}"
   end
 
   def order_fulfillment(user, order, images)
