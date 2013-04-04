@@ -334,3 +334,6 @@ p.big_cart {
     height: 100px;
     width: 100px;
 }
+.logout.pull-right {
+    padding-left: 10px;
+}

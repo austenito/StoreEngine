@@ -49,14 +49,15 @@
       .span6.account
         %ul
           %li#your-account
-            %h4
+            %h3
               - if current_user
                 = link_to "Your Account", user_path
-            %p
-              Welcome,
+            %h4
+              Welcome  
               - if current_user
-                = current_user.display_name || current_user.first_name
-                = button_to "logout", logout_path
+                %b= current_user.display_name || current_user.first_name
+
+                .logout.pull-right= button_to "logout", logout_path
               - else
                 = link_to "login", login_path
           %li

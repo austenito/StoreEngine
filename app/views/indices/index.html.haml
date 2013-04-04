@@ -5,11 +5,6 @@
     #myCarousel.carousel.slide
       .carousel-inner
         .item.active
-          = image_tag "art.jpg"
-          .carousel-caption
-            %h4 Art
-            %p From underground street artists to demented German anarchofeminist blood-spatter painters, we've got the best of the weird.
-        .item
           = image_tag "noQuote.jpg"
           .carousel-caption
             %h4 Cities
@@ -23,7 +18,12 @@
           = image_tag "ort3.jpg"
           .carousel-caption
             %h4 Nature
-            %p Of various types. You don't even have to appreciate nature to appreciate these.  
+            %p Of various types. You don't even have to appreciate nature to appreciate these.
+        .item
+          = image_tag "art.jpg"
+          .carousel-caption
+            %h4 Art
+            %p From underground street artists to demented German anarchofeminist blood-spatter painters, we've got the best of the weird.  
       %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} &lsaquo;
       %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} &rsaquo;
 
