@@ -4,7 +4,7 @@ describe Admin::OrdersController do
 
   context "a real admin" do
     let(:product) { Product.create(name: "banana", description: "yummy", price: 2.00) }
-    let(:order) { Order.new(quantity: 2, status: "shipped", user_id: 1) }
+    let(:order) { Order.new(status: "shipped", user_id: 1) }
 
     before do
       user = User.create(
@@ -39,7 +39,7 @@ describe Admin::OrdersController do
       it "cancells an order that is currently pending" do
         pending
         Product.create(name: "banana", description: "yummy", price: 2.00)
-        order = Order.create(product_id: 1, quantity: 2, status: "shipped", user_id: 1)
+        order = Order.create(status: "shipped", user_id: 1)
       end
 
       it "returns the products associated with an order" do
@@ -79,7 +79,7 @@ describe Admin::OrdersController do
 
       it "filters all cancelled orders" do
         order.status = "cancelled"
-        other_order = Order.new(quantity: 2, status: "shipped", user_id: 1)
+        other_order = Order.new(status: "shipped", user_id: 1)
         other_order.products << product
         order.save
         cancelled_orders = Order.find_all_by_status("cancelled")
