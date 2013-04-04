@@ -5,19 +5,19 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem 'rspec-rails'
-gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip', "~> 3.0"
 gem 'sorcery'
 gem 'unicorn'
-gem 'rack_session_access'
+gem 'mail'
 
-group :development do
-
+group :development, :test do
+  gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'rack_session_access'
 end
 
 # Gems used only for assets and not required

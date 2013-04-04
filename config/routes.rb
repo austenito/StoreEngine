@@ -34,6 +34,7 @@ StoreEngine::Application.routes.draw do
         post :cancel
         post :return
         post :ship
+        post :paid
         post :update_quantity
       end
     end

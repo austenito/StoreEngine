@@ -313,6 +313,10 @@ td.cart {
     padding: 20px;
 }
 
+td.span4 {
+    padding-left: 20px;
+}
+
 #quantity {
     max-width: 15px;
 }
