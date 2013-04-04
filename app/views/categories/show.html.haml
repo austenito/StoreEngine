@@ -1,12 +1,14 @@
-- @products.each_slice(4).each do |group|
-  .row-fluid
-    %ul.thumbnails
-    - group.each do |product|
-      %li.span3
-        .thumbnail
-          %a{:href => "product_detail.html"}
-            %img{:alt => "", :src => "images/product1.jpg"}/
-          .caption
-            %h4= link_to "#{product.name}", product
-            %p=product.price
-            %p=product.description
+%br
+%br
+%br
+%br
+%table
+  %tr
+  - @category.products.all.sample(6).each do |p|
+    %td.span4= link_to image_tag(p.image(:thumb)), "/products/#{p.id}"
+%br
+%br
+%br
+%br
+%br
+%br
