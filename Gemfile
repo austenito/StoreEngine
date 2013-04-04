@@ -6,18 +6,13 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'rspec-rails'
-gem 'capybara'
 gem 'haml-rails'
 gem 'credit_card_validator'
 gem 'paperclip', "~> 3.0"
 gem 'sorcery'
 gem 'unicorn'
-gem 'rack_session_access'
-
-group :development do
 gem 'mail'
-end
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3'
