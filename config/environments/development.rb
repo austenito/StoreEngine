@@ -1,3 +1,7 @@
+ENV['AWS_BUCKET'] = "yaaagoat_dev"
+ENV['AWS_ACCESS_KEY_ID'] = 'AKIAIME5UWYQEFD3CZQQ'
+ENV['AWS_SECRET_ACCESS_KEY'] = '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'
+
 StoreEngine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -38,7 +42,7 @@ StoreEngine::Application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
-    s3_crednetials: {
+    s3_credentials: {
     bucket: ENV['AWS_BUCKET'],
     access_key_id: ENV['AWS_ACCESS_KEY_ID'],
     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']}
