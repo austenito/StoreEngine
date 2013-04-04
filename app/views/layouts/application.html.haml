@@ -95,12 +95,7 @@
             /   %li
             /     %a{:href => "#"} Skirts
           %li
-            %a{:href => "#"} FAQ
-          %li
             %a{:href => "/about"} About
-          %li
-            %a{:href => "contact.html"} Contact
-
           %br
           %br
     .flash
@@ -109,7 +104,7 @@
       = flash[:success]
     = yield
     .row-fluid.footer
-      .span3
+      .span4
         %h3 Information
         %ul
           %li
@@ -118,7 +113,7 @@
             %a{:href => "/faq"} FAQ
           %li
             %a{:href => "/tos"} Terms and condition
-      .span3
+      .span4
         %h3 Stay in touch
         %ul
           %li
@@ -135,7 +130,7 @@
                   %input#appendedPrependedInput.span6{:placeholder => "Enter your email", :size => "16", :type => "text"}
                     %input.btn{:name => "submit", :type => "submit", :value => "Subscribe"}/
         %p
-      .span3
+      .span4
         %h3 Companies we support
         %ul
           %li
@@ -146,17 +141,6 @@
             %a{:href => "http://www.waterforpeople.org/"} Water For People
           %li
             %a{:href => "http://www.denverbackyardfarms.org/"} Goats
-      .span3
-        %h3 Discover our store
-        %ul
-          %li
-            %a{:href => "#"} California
-          %li
-            %a{:href => "#"} Bali
-          %li
-            %a{:href => "#"} Singapore
-          %li
-            %a{:href => "#"} Canada
     %hr
       %footer
         %p &copy; YaaaGoat 2013. All right reserved.
