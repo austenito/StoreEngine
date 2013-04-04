@@ -10,7 +10,7 @@ describe Admin::OrdersController do
       banana
     end
     
-    let(:order) { Order.new(quantity: 2, status: "shipped", user_id: 1) }
+    let(:order) { Order.new(status: "shipped", user_id: 1) }
 
     before do
       user = User.create(
@@ -20,12 +20,20 @@ describe Admin::OrdersController do
         admin: true,
         first_name: "first",
         last_name: "last",
-        display_name: "display"
+        display_name: "display",
+        credit_card_number: "4916618311549608",
+        security_code: "034",
+        address_line1: "1062 Delaware Street",
+        city: "Denver",
+        state: "CO",
+        zipcode: "80204",
+        email: "bob_smith@gmail.com"
       )
 
       login_user(user)
 
       order.products << product
+      order.order_products.first.save
       order.save
     end
 
@@ -123,7 +131,14 @@ describe Admin::OrdersController do
           admin: false,
           first_name: "first",
           last_name: "last",
-          display_name: "display"
+          display_name: "display",
+          credit_card_number: "4916618311549608",
+          security_code: "034",
+          address_line1: "1062 Delaware Street",
+          city: "Denver",
+          state: "CO",
+          zipcode: "80204",
+          email: "bob_smith@gmail.com"
         )
 
         login_user(user)
