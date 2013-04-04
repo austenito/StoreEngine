@@ -6,7 +6,7 @@ describe Admin::OrdersController do
     let(:product) do
      banana = Product.create(name: "banana", description: "yummy", price: 2.00)
       banana.image = File.open("public/images/001.jpg")
-      banana.save
+      banana.save!
       banana
     end
     
@@ -34,7 +34,7 @@ describe Admin::OrdersController do
 
       order.products << product
       order.order_products.first.save
-      order.save
+      order.save!
     end
 
     context "an admin visits their order page" do
