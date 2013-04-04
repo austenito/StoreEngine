@@ -1,429 +1,438 @@
+bucket_name = 'yaaagoat_dev'
+s3 = AWS::S3.new
+
+@b = s3.buckets[bucket_name]
+def add_photo_to_product product, file_name
+    object = @b.objects[file_name]
+    product.image = object.url_for(:read)
+end
+
 ### Users
 
-User.create(:first_name => "Franklin", :last_name => "Webber", :email => "demoXX+franklin@jumpstartlab.com",
+User.create!(:first_name => "Franklin", :last_name => "Webber", :email => "demoXX+franklin@jumpstartlab.com",
             :password => 'password', :password_confirmation => 'password')
 
-User.create(:first_name => "Jeff", :last_name => "Casimir", :email => "demoXX+jeff@jumpstartlab.com",
+User.create!(:first_name => "Jeff", :last_name => "Casimir", :email => "demoXX+jeff@jumpstartlab.com",
             :password => 'password', :password_confirmation => 'password', :display_name => 'j3')
-User.create(:first_name => "Steve", :last_name => "Klabnik", :email => "demoXX+steve@jumpstartlab.com",
+User.create!(:first_name => "Steve", :last_name => "Klabnik", :email => "demoXX+steve@jumpstartlab.com",
             :password => 'password', :password_confirmation => 'password', :display_name => 'SkrilleX',
             :admin => true)
 
 ### Categories ###
-people        = Category.create(name: "People")
-architecture  = Category.create(name: "Architecture")
-animals       = Category.create(name: "Animals")
-abstract      = Category.create(name: "Abstract")
-grayscale     = Category.create(name: "Grayscale")
-computer      = Category.create(name: "Computer")
-nature        = Category.create(name: "Nature")
+people        = Category.create!(name: "People")
+architecture  = Category.create!(name: "Architecture")
+animals       = Category.create!(name: "Animals")
+abstract      = Category.create!(name: "Abstract")
+grayscale     = Category.create!(name: "Grayscale")
+computer      = Category.create!(name: "Computer")
+nature        = Category.create!(name: "Nature")
 
 ### Products ###
-http  =  Product.create(name: "http:",
+http  =  Product.new(name: "http:",
                         description: "Web browser address bar",
                         price: 1.99,
                         retired: false
                        )
-http.image =  File.open("public/images/001.jpg")
 http.categories << computer
-http.save
+add_photo_to_product(http, "001.jpg")
+http.save!
 
-blue_string = Product.create(name: "Blue String",
+blue_string = Product.new(name: "Blue String",
                         description: "Blue lines of string",
                         price: 0.99,
                         retired: false
                        )
-blue_string.image = File.open("public/images/002.jpg")
+add_photo_to_product(blue_string, "002.jpg")
 blue_string.categories << abstract
-blue_string.save
+blue_string.save!
 
-full_moon = Product.create(name: "Full Moon",
+full_moon = Product.new(name: "Full Moon",
                          description: "Silhouette of branches with full moon",
                          price: 2.99,
                          retired: false
                         )
-full_moon.image = File.open("public/images/003.jpg")
+add_photo_to_product(full_moon, "003.jpg")
 full_moon.categories << nature
-full_moon.save
+full_moon.save!
 
-kitten = Product.create(name: "Kitten",
+kitten = Product.new(name: "Kitten",
                         description: "Kitten looking out window",
                         price: 1.99,
                         retired: false
                         )
-kitten.image = File.open("public/images/004.jpg")
+add_photo_to_product(kitten, "004.jpg")
 kitten.categories << animals
-kitten.save
+kitten.save!
 
-family = Product.create(name: "Family",
+family = Product.new(name: "Family",
                         description: "Family with baby",
                         price: 0.99,
                         retired: false
                         )
-family.image = File.open("public/images/005.jpg")
+add_photo_to_product(family, "005.jpg")
 family.categories << people
 family.categories << grayscale
-family.save
+family.save!
 
-branches = Product.create(name: "Branches",
+branches = Product.new(name: "Branches",
                         description: "Curly branches",
                         price: 2.99,
                         retired: false
                         )
-branches.image = File.open("public/images/006.jpg")
+add_photo_to_product(branches, "006.jpg")
 branches.categories << nature
 branches.categories << abstract
-branches.save
+branches.save!
 
-dock = Product.create(name: "Dock",
+dock = Product.new(name: "Dock",
                         description: "Mountain lake with dock, boats",
                         price: 1.99,
                         retired: false
                         )
-dock.image = File.open("public/images/007.jpg")
+add_photo_to_product(dock, "007.jpg")
 dock.categories << nature
-dock.save
+dock.save!
 
-plug = Product.create(name: "Plug",
+plug = Product.new(name: "Plug",
                         description: "Electrical plug",
                         price: 0.99,
                         retired: false
                         )
-plug.image = File.open("public/images/008.jpg")
+add_photo_to_product(plug, "008.jpg")
 plug.categories << computer
-plug.save
+plug.save!
 
-rooster = Product.create(name: "Rooster",
+rooster = Product.new(name: "Rooster",
                         description: "Beautiful rooster on a farm",
                         price: 1.99,
                         retired: false
                         )
-rooster.image = File.open("public/images/009.jpg")
+add_photo_to_product(rooster, "009.jpg")
 rooster.categories << animals
-rooster.save
+rooster.save!
 
-steps = Product.create(name: "Steps",
+steps = Product.new(name: "Steps",
                         description: "Curving steps",
                         price: 1.99,
                         retired: false
                         )
-steps.image = File.open("public/images/010.jpg")
+add_photo_to_product(steps, "010.jpg")
 steps.categories << architecture
 steps.categories << abstract
-steps.save
+steps.save!
 
-high_tide = Product.create(name: "High Tide",
+high_tide = Product.new(name: "High Tide",
                         description: "Ocean waves at the beach",
                         price: 0.99,
                         retired: false
                         )
-high_tide.image = File.open("public/images/011.jpg")
+add_photo_to_product(high_tide, "011.jpg")
 high_tide.categories << nature
-high_tide.save
+high_tide.save!
 
-nebraska = Product.create(name: "Nebraska",
+nebraska = Product.new(name: "Nebraska",
                         description: "Farmhouse and tree in winter",
                         price: 0.99,
                         retired: false
                         )
-nebraska.image = File.open("public/images/012.jpg")
+add_photo_to_product(nebraska, "012.jpg")
 nebraska.categories << nature
 nebraska.categories << architecture
-nebraska.save
+nebraska.save!
 
-laughter = Product.create(name: "Laughter",
+laughter = Product.new(name: "Laughter",
                         description: "Children laughing",
                         price: 0.99,
                         retired: false
                         )
-laughter.image = File.open("public/images/013.jpg")
+add_photo_to_product(laughter, "013.jpg")
 laughter.categories << people
 laughter.categories << grayscale
-laughter.save
+laughter.save!
 
-glacier_rainbow = Product.create(name: "Glacier Rainbow",
+glacier_rainbow = Product.new(name: "Glacier Rainbow",
                         description: "Glacier National Park",
                         price: 3.99,
                         retired: false
                         )
-glacier_rainbow.image = File.open("public/images/014.jpg")
+add_photo_to_product(glacier_rainbow, "014.jpg")
 glacier_rainbow.categories << nature
-glacier_rainbow.save
+glacier_rainbow.save!
 
-slice_of_lime = Product.create(name: "Slice of Lime",
+slice_of_lime = Product.new(name: "Slice of Lime",
                         description: "A slice of lime, with bubbles",
                         price: 1.99,
                         retired: false
                         )
-slice_of_lime.image = File.open("public/images/015.jpg")
+add_photo_to_product(slice_of_lime, "015.jpg")
 slice_of_lime.categories << abstract
-slice_of_lime.save
+slice_of_lime.save!
 
-mountains = Product.create(name: "Mountains",
+mountains = Product.new(name: "Mountains",
                         description: "Mountains and lake",
                         price: 2.99,
                         retired: false
                         )
-mountains.image = File.open("public/images/016.jpg")
+add_photo_to_product(mountains, "016.jpg")
 mountains.categories << nature
-mountains.save
+mountains.save!
 
-tour_deiffel = Product.create(name: "Tour D'Eiffel",
+tour_deiffel = Product.new(name: "Tour D'Eiffel",
                         description: "The Eiffel Tower in Paris",
                         price: 1.99,
                         retired: false
                         )
-tour_deiffel.image = File.open("public/images/017.jpg")
+add_photo_to_product(tour_deiffel, "017.jpg")
 tour_deiffel.categories << architecture
-tour_deiffel.save
+tour_deiffel.save!
 
-tree = Product.create(name: "Tree",
+tree = Product.new(name: "Tree",
                         description: "Tree and grass in a breeze",
                         price: 0.99,
                         retired: false
                         )
-tree.image = File.open("public/images/018.jpg")
+add_photo_to_product(tree, "018.jpg")
 tree.categories << nature
-tree.save
+tree.save!
 
-door = Product.create(name: "Door",
+door = Product.new(name: "Door",
                         description: "Blue door",
                         price: 0.99,
                         retired: false
                         )
-door.image = File.open("public/images/019.jpg")
+add_photo_to_product(door, "019.jpg")
 door.categories << architecture
-door.save
+door.save!
 
-motherboard = Product.create(name: "Motherboard",
+motherboard = Product.new(name: "Motherboard",
                         description: "Close up of computer board",
                         price: 1.99,
                         retired: false
                         )
-motherboard.image = File.open("public/images/020.jpg")
+add_photo_to_product(motherboard, "020.jpg")
 motherboard.categories << computer
-motherboard.save
+motherboard.save!
 
-smoke = Product.create(name: "Smoke",
+smoke = Product.new(name: "Smoke",
                         description: "Blue smoke",
                         price: 1.99,
                         retired: false
                         )
-smoke.image = File.open("public/images/021.jpg")
+add_photo_to_product(smoke, "021.jpg")
 smoke.categories << abstract
-smoke.save
+smoke.save!
 
-swirls = Product.create(name: "Swirls",
+swirls = Product.new(name: "Swirls",
                         description: "Multi-colored swirls",
                         price: 2.99,
                         retired: false
                         )
-swirls.image = File.open("public/images/022.jpg")
+add_photo_to_product(swirls, "022.jpg")
 swirls.categories << abstract
-swirls.save
+swirls.save!
 
-binary = Product.create(name: "Binary",
+binary = Product.new(name: "Binary",
                         description: "Computer binary code",
                         price: 1.99,
                         retired: false
                         )
-binary.image = File.open("public/images/023.jpg")
+add_photo_to_product(binary, "023.jpg")
 binary.categories << computer
 binary.categories << abstract
-binary.save
+binary.save!
 
-mr_ed = Product.create(name: "Mr. Ed",
+mr_ed = Product.new(name: "Mr. Ed",
                         description: "A horse is a horse, of course, of course",
                         price: 0.99,
                         retired: false
                         )
-mr_ed.image = File.open("public/images/024.jpg")
+add_photo_to_product(mr_ed, "024.jpg")
 mr_ed.categories << animals
-mr_ed.save
+mr_ed.save!
 
-big_kitty = Product.create(name: "Big Kitty",
+big_kitty = Product.new(name: "Big Kitty",
                         description: "Close up of tiger",
                         price: 2.99,
                         retired: false
                         )
-big_kitty.image = File.open("public/images/025.jpg")
+add_photo_to_product(big_kitty, "025.jpg")
 big_kitty.categories << animals
-big_kitty.save
+big_kitty.save!
 
-rain = Product.create(name: "Rain",
+rain = Product.new(name: "Rain",
                         description: "Rain drops",
                         price: 2.99,
                         retired: false
                         )
-rain.image = File.open("public/images/026.jpg")
+add_photo_to_product(rain, "026.jpg")
 rain.categories << nature
 rain.categories << abstract
 rain.categories << grayscale
-rain.save
+rain.save!
 
-canoe = Product.create(name: "Canoe",
+canoe = Product.new(name: "Canoe",
                         description: "Canoe on a lake",
                         price: 1.99,
                         retired: false
                         )
-canoe.image = File.open("public/images/027.jpg")
+add_photo_to_product(canoe, "027.jpg")
 canoe.categories << nature
-canoe.save
+canoe.save!
 
-brooklyn = Product.create(name: "Brooklyn",
+brooklyn = Product.new(name: "Brooklyn",
                         description: "Brooklyn Bridge, New York",
                         price: 0.99,
                         retired: false
                         )
-brooklyn.image = File.open("public/images/028.jpg")
+add_photo_to_product(brooklyn, "028.jpg")
 brooklyn.categories << architecture
-brooklyn.save
+brooklyn.save!
 
-hello = Product.create(name: "Hello?",
+hello = Product.new(name: "Hello?",
                         description: "Raccoon peeking out",
                         price: 2.99,
                         retired: false
                         )
-hello.image = File.open("public/images/029.jpg")
+add_photo_to_product(hello, "029.jpg")
 hello.categories << animals
-hello.save
+hello.save!
 
-cool_as_ice = Product.create(name: "Cool as Ice",
+cool_as_ice = Product.new(name: "Cool as Ice",
                         description: "Polar Bear",
                         price: 1.99,
                         retired: false
                         )
-cool_as_ice.image = File.open("public/images/030.jpg")
+add_photo_to_product(cool_as_ice, "030.jpg")
 cool_as_ice.categories << animals
-cool_as_ice.save
+cool_as_ice.save!
 
-trail = Product.create(name: "Trail",
+trail = Product.new(name: "Trail",
                         description: "Woman and girl skip down trail",
                         price: 0.99,
                         retired: false
                         )
-trail.image = File.open("public/images/031.jpg")
+add_photo_to_product(trail, "031.jpg")
 trail.categories << people
 trail.categories << nature
-trail.save
+trail.save!
 
-coffee_break = Product.create(name: "Coffee Break",
+coffee_break = Product.new(name: "Coffee Break",
                         description: "Laptop and coffee",
                         price: 1.99,
                         retired: false
                         )
-coffee_break.image = File.open("public/images/032.jpg")
+add_photo_to_product(coffee_break, "032.jpg")
 coffee_break.categories << computer
-coffee_break.save
+coffee_break.save!
 
-downtown = Product.create(name: "Downtown",
+downtown = Product.new(name: "Downtown",
                         description: "Aerial view of a major city",
                         price: 0.99,
                         retired: false
                         )
-downtown.image = File.open("public/images/033.jpg")
+add_photo_to_product(downtown, "033.jpg")
 downtown.categories << architecture
-downtown.save
+downtown.save!
 
-green = Product.create(name: "Green",
+green = Product.new(name: "Green",
                         description: "Green glow and hand",
                         price: 1.99,
                         retired: false
                         )
-green.image = File.open("public/images/034.jpg")
+add_photo_to_product(green, "034.jpg")
 green.categories << people
 green.categories << abstract
-green.save
+green.save!
 
-fisherman = Product.create(name: "Fisherman",
+fisherman = Product.new(name: "Fisherman",
                         description: "Portrait of a fisherman",
                         price: 2.99,
                         retired: false
                         )
-fisherman.image = File.open("public/images/035.jpg")
+add_photo_to_product(fisherman, "035.jpg")
 fisherman.categories << people
 fisherman.categories << grayscale
-fisherman.save
+fisherman.save!
 
-office_space = Product.create(name: "Office Space",
+office_space = Product.new(name: "Office Space",
                         description: "Boring man in boring office",
                         price: 0.09,
                         retired: false
                         )
-office_space.image = File.open("public/images/036.jpg")
+add_photo_to_product(office_space, "036.jpg")
 office_space.categories << people
-office_space.save
+office_space.save!
 
-amanita_muscaria = Product.create(name: "Amanita Muscaria",
+amanita_muscaria = Product.new(name: "Amanita Muscaria",
                         description: "Wild mushroom",
                         price: 2.99,
                         retired: false
                         )
-amanita_muscaria.image = File.open("public/images/037.jpg")
+add_photo_to_product(amanita_muscaria, "037.jpg")
 amanita_muscaria.categories << nature
-amanita_muscaria.save
+amanita_muscaria.save!
 
-eagles_eye = Product.create(name: "Eagle's Eye",
+eagles_eye = Product.new(name: "Eagle's Eye",
                         description: "Bald Eagle",
                         price: 0.99,
                         retired: false
                         )
-eagles_eye.image = File.open("public/images/038.jpg")
+add_photo_to_product(eagles_eye, "038.jpg")
 eagles_eye.categories << animals
-eagles_eye.save
+eagles_eye.save!
 
-rose = Product.create(name: "Rose",
+rose = Product.new(name: "Rose",
                         description: "Dusty blue rose",
                         price: 1.99,
                         retired: false
                         )
-rose.image = File.open("public/images/039.jpg")
+add_photo_to_product(rose, "039.jpg")
 rose.categories << nature
 rose.categories << abstract
-rose.save
+rose.save!
 
-bubbles = Product.create(name: "Bubbles",
+bubbles = Product.new(name: "Bubbles",
                         description: "Air bubbles in water",
                         price: 1.99,
                         retired: false
                         )
-bubbles.image = File.open("public/images/040.jpg")
+add_photo_to_product(bubbles, "040.jpg")
 bubbles.categories << abstract
-bubbles.save
+bubbles.save!
 
 ### Orders ###
 
 order1        = Order.new(user_id: "1", status: "pending")
 order1.products << Product.first
-order1.order_products.first.save
+order1.order_products.first.save!
 order1.save!
 order2        = Order.new(user_id: "1", status: "pending")
 order2.products << Product.first
-order2.save
+order2.save!
 order3        = Order.new(user_id: "1", status: "paid")
 order3.products << Product.first
-order3.save
+order3.save!
 order4        = Order.new(user_id: "1", status: "paid")
 order4.products << Product.first
-order4.save
+order4.save!
 order5        = Order.new(user_id: "1", status: "shipped")
 order5.products << Product.first
-order5.save
+order5.save!
 order6        = Order.new(user_id: "1", status: "shipped")
 order6.products << Product.first
-order6.save
+order6.save!
 order7        = Order.new(user_id: "1", status: "cancelled")
 order7.products << Product.first
-order7.save
+order7.save!
 order8        = Order.new(user_id: "1", status: "cancelled")
 order8.products << Product.first
-order8.save
+order8.save!
 order9        = Order.new(user_id: "1", status: "returned")
 order9.products << Product.first
-order9.save
+order9.save!
 order10        = Order.new(user_id: "1", status: "returned")
 order10.products << Product.first
-order10.save
+order10.save!
 
 
 
