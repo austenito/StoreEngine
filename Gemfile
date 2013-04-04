@@ -12,7 +12,7 @@ gem 'sorcery'
 gem 'unicorn'
 gem 'mail'
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'rspec-rails'
