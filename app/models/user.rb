@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     :address_line1, :city, :state,:zipcode
 
   validates :email, :first_name, :last_name, presence: true
-
+  validates_uniqueness_of :email
   validates :email,
     :format => { :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/ }
 
