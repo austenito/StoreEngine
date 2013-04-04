@@ -13,11 +13,11 @@
           %h3= "$#{@product.price}"
           %br
           %h4= @product.description
-      %p
-        .control-group
-          %label.control-label.t-left{:for => "select01"} Quantity
-          .controls
-            %input.span4{:type => "text", :value => "1"}/
+      / %p
+      /   .control-group
+      /     %label.control-label.t-left{:for => "select01"} Quantity
+      /     .controls
+      /       %input.span4{:type => "text", :value => "1"}/
 
 - if @product.retired?
   This product is retired

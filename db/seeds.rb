@@ -404,34 +404,53 @@ bubbles.save!
 
 order1        = Order.new(user_id: "1", status: "pending")
 order1.products << Product.first
+order1.order_products.first.quantity = 1
 order1.order_products.first.save!
 order1.save!
 order2        = Order.new(user_id: "1", status: "pending")
 order2.products << Product.first
+order2.order_products.first.quantity = 1
+order2.order_products.first.save!
 order2.save!
 order3        = Order.new(user_id: "1", status: "paid")
 order3.products << Product.first
+order3.order_products.first.quantity = 1
+order3.order_products.first.save!
 order3.save!
 order4        = Order.new(user_id: "1", status: "paid")
 order4.products << Product.first
+order4.order_products.first.quantity = 1
+order4.order_products.first.save!
 order4.save!
 order5        = Order.new(user_id: "1", status: "shipped")
 order5.products << Product.first
+order5.order_products.first.quantity = 1
+order5.order_products.first.save!
 order5.save!
 order6        = Order.new(user_id: "1", status: "shipped")
 order6.products << Product.first
+order6.order_products.first.quantity = 1
+order6.order_products.first.save!
 order6.save!
 order7        = Order.new(user_id: "1", status: "cancelled")
 order7.products << Product.first
+order7.order_products.first.quantity = 1
+order7.order_products.first.save!
 order7.save!
 order8        = Order.new(user_id: "1", status: "cancelled")
 order8.products << Product.first
+order8.order_products.first.quantity = 1
+order8.order_products.first.save!
 order8.save!
 order9        = Order.new(user_id: "1", status: "returned")
 order9.products << Product.first
+order9.order_products.first.quantity = 1
+order9.order_products.first.save!
 order9.save!
 order10        = Order.new(user_id: "1", status: "returned")
 order10.products << Product.first
+order10.order_products.first.quantity = 1
+order10.order_products.first.save!
 order10.save!
 
 

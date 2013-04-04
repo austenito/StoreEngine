@@ -340,8 +340,15 @@ p.big_cart {
 th.checkout {
     padding: 5px;
 }
+th.orders {
+    padding: 5px;
+}
 
 td.checkout {
+    padding: 5px;
+    border:1px solid gray;
+}
+td.orders {
     padding: 5px;
     border:1px solid gray;
 }
@@ -350,4 +357,7 @@ table.checkout{
 border-collapse:collapse;
 border:1px solid gray;
 }
-
+table.orders{
+border-collapse:collapse;
+border:1px solid gray;
+}
