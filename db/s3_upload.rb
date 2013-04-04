@@ -46,3 +46,16 @@ end
 b.objects.each do |item|
   puts item
 end
+
+
+bucket_name = 'yaaagoat_dev'
+s3 = AWS::S3.new
+
+# create a bucket
+b = s3.buckets[bucket_name]
+
+@b = s3.buckets[bucket_name] def create_product product, file_name
+    object = @b.objects[file_name]
+    product.image = object.url_for(:read)
+    product.save!
+end
