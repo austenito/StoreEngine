@@ -3,7 +3,12 @@ require 'spec_helper'
 describe Admin::OrdersController do
 
   context "a real admin" do
-    let(:product) { Product.create(name: "banana", description: "yummy", price: 2.00) }
+    let(:product) do
+     banana = Product.create(name: "banana", description: "yummy", price: 2.00)
+      banana.image = File.open("public/images/001.jpg")
+      banana.save
+      banana
+    end
     let(:order) { Order.new(quantity: 2, status: "shipped", user_id: 1) }
 
     before do
@@ -69,9 +74,12 @@ describe Admin::OrdersController do
       end
 
     context "when an admin wants to ship the mutherfucker"
+
       it "marks as shipped orders that are currently paid" do
         order.status = "paid"
         post :ship, { id: order.id }
+        # CheckoutMailer.stub(:order_fulfillment).and_return(true)
+
         expect(assigns(:order).status).to eq "shipped"
       end
 
