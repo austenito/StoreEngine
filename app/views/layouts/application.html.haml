@@ -39,8 +39,6 @@
                           %ul.dropdown-menu
                             %li
                               %a{:href => "#"} EN
-                            %li
-                              %a{:href => "#"} FR
         / /.nav-collapse
   .container
     .row-fluid
@@ -108,7 +106,7 @@
         %h3 Information
         %ul
           %li
-            %a{:href => "#"} Contact
+            %a{:href => "/about"} About
           %li
             %a{:href => "/state"} State of the World
       .span4
@@ -118,15 +116,8 @@
             %a{:href => "https://www.facebook.com/heiferinternational"} Heifer Facebook
           %li
             %a{:href => "https://twitter.com/Heifer"} Heifer Twitter
-          %br/
-          %li
-            .control-group
-              .controls
-                .input-prepend.input-append
-                  %span.add-on
-                    %i.icon-envelope
-                  %input#appendedPrependedInput.span6{:placeholder => "Enter your email", :size => "16", :type => "text"}
-                    %input.btn{:name => "submit", :type => "submit", :value => "Subscribe"}/
+          %br
+
         %p
       .span4
         %h3 Companies we support
