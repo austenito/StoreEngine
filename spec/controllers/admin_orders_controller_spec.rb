@@ -6,11 +6,11 @@ describe Admin::OrdersController do
     let(:product) do
      banana = Product.create(name: "banana", description: "yummy", price: 2.00)
       banana.image = File.open("public/images/001.jpg")
-      banana.save
+      banana.save!
       banana
     end
     
-    let(:order) { Order.new(quantity: 2, status: "shipped", user_id: 1) }
+    let(:order) { Order.new(status: "shipped", user_id: 1) }
 
     before do
       user = User.create(
@@ -20,13 +20,21 @@ describe Admin::OrdersController do
         admin: true,
         first_name: "first",
         last_name: "last",
-        display_name: "display"
+        display_name: "display",
+        credit_card_number: "4916618311549608",
+        security_code: "034",
+        address_line1: "1062 Delaware Street",
+        city: "Denver",
+        state: "CO",
+        zipcode: "80204",
+        email: "bob_smith@gmail.com"
       )
 
       login_user(user)
 
       order.products << product
-      order.save
+      order.order_products.first.save
+      order.save!
     end
 
     context "an admin visits their order page" do
@@ -123,7 +131,14 @@ describe Admin::OrdersController do
           admin: false,
           first_name: "first",
           last_name: "last",
-          display_name: "display"
+          display_name: "display",
+          credit_card_number: "4916618311549608",
+          security_code: "034",
+          address_line1: "1062 Delaware Street",
+          city: "Denver",
+          state: "CO",
+          zipcode: "80204",
+          email: "bob_smith@gmail.com"
         )
 
         login_user(user)

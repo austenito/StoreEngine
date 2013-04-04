@@ -1,6 +1,5 @@
 StoreEngine::Application.routes.draw do
   
-  resources :indices
   match "/" => "indices#index"
   resources :user_sessions
 
@@ -60,4 +59,5 @@ StoreEngine::Application.routes.draw do
   post "/logout" => "user_sessions#destroy"
 
   get "/about" => "abouts#index"
+  get "/state" => "abouts#state"
 end
