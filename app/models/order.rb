@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
 
-   attr_accessible :products, :quantity, :product_id, :user_id, :status
+   attr_accessible :products, :user_id, :status
 
    validates :user_id, presence: true
 

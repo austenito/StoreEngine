@@ -380,5 +380,38 @@ bubbles.image = File.open("public/images/040.jpg")
 bubbles.categories << abstract
 bubbles.save
 
+### Orders ###
+
+order1        = Order.new(user_id: "1", status: "pending")
+order1.products << http
+order1.save
+order2        = Order.new(user_id: "1", status: "pending")
+order2.products << http
+order2.save
+order3        = Order.new(user_id: "1", status: "paid")
+order3.products << http
+order3.save
+order4        = Order.new(user_id: "1", status: "paid")
+order4.products << http
+order4.save
+order5        = Order.new(user_id: "1", status: "shipped")
+order5.products << http
+order5.save
+order6        = Order.new(user_id: "1", status: "shipped")
+order6.products << http
+order6.save
+order7        = Order.new(user_id: "1", status: "cancelled")
+order7.products << http
+order7.save
+order8        = Order.new(user_id: "1", status: "cancelled")
+order8.products << http
+order8.save
+order9        = Order.new(user_id: "1", status: "returned")
+order9.products << http
+order9.save
+order10        = Order.new(user_id: "1", status: "returned")
+order10.products << http
+order10.save
+
 
 
