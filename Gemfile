@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'rake'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,6 +14,10 @@ gem 'sorcery'
 gem 'unicorn'
 gem 'mail'
 gem 'aws-sdk'
+gem 'fabrication'
+gem 'launchy'
+gem 'cane'
+gem 'reek'
 
 group :development, :test do
   gem 'sqlite3'
