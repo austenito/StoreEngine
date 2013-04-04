@@ -28,7 +28,7 @@ class CartsController < ApplicationController
       else
         cart.products << product
       end
-      redirect_to root_path, flash: { success: "#{product.name} was added to your cart!" }
+      redirect_to cart_path
     else
       redirect_to root_path, flash: { error: "An error occurred while adding the item to your cart" }
     end
