@@ -13,18 +13,14 @@
           %h3= "$#{@product.price}"
           %br
           %h4= @product.description
-      / %p
-      /   .control-group
-      /     %label.control-label.t-left{:for => "select01"} Quantity
-      /     .controls
-      /       %input.span4{:type => "text", :value => "1"}/
-
-- if @product.retired?
-  This product is retired
-- else
-  = form_tag add_item_cart_path do
-    = hidden_field_tag "product_id", @product.id
-    = submit_tag "Add to Cart"
-  = form_tag two_click_checkout_path do
-    = hidden_field_tag "product_id", @product.id
-    = submit_tag "Two Click Checkout", :onclick => "alert('Place this order for #{@product.name}?')"
+      
+      - if @product.retired?
+        This product is retired
+      - else
+        = form_tag add_item_cart_path do
+          = hidden_field_tag "product_id", @product.id
+          = submit_tag "Add to Cart"
+        = form_tag two_click_checkout_path do
+          = hidden_field_tag "product_id", @product.id
+          = submit_tag "Two Click Checkout", :onclick => "alert('Place this order for #{@product.name}?')"
+%br
