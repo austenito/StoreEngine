@@ -59,5 +59,4 @@ StoreEngine::Application.routes.draw do
   post "/logout" => "user_sessions#destroy"
 
   get "/about" => "abouts#index"
-  get "/state" => "abouts#state"
 end
