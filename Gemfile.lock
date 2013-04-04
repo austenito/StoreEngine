@@ -195,6 +195,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   haml-rails
   jquery-rails
+  mail
   paperclip (~> 3.0)
   pg
   quiet_assets

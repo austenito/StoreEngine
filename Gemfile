@@ -16,8 +16,15 @@ gem 'unicorn'
 gem 'rack_session_access'
 
 group :development do
+gem 'mail'
+end
+
+group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'rack_session_access'
 end
 
 # Gems used only for assets and not required

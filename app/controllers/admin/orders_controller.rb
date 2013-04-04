@@ -37,6 +37,9 @@ class Admin::OrdersController < Admin::AdminController
     @order = Order.find_by_id(params[:id])
     @order.status = "shipped"
     @order.save
+    user = User.find_by_id(@order.user_id)
+    image_paths = @order.products.collect { |product| product.image.url }
+    CheckoutMailer.order_fulfillment(user, @order, image_paths).deliver
     redirect_to admin_orders_path
   end
 
@@ -44,6 +47,12 @@ class Admin::OrdersController < Admin::AdminController
     @order = Order.find_by_id(params[:id])
   end
 
+  def paid
+    @order = Order.find_by_id(params[:id])
+    @order.status = "paid"
+    @order.save
+    redirect_to admin_orders_path
+  end
 ## create order products for that order
 
 end
