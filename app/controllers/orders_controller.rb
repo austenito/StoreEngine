@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.find_all_by_user_id(current_user.id)
+    @orders = current_user.orders
   end
 
   def show
-    @order = Order.find_by_id(params[:id])
+    @order = current_user.orders.find(params[:id])
   end
 end
