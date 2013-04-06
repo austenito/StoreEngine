@@ -1,4 +1,5 @@
 class Admin::OrdersController < Admin::AdminController
+  before_filter :order, only: [:show, :update_quantity]
 
   def index
     if params[:status] == nil
@@ -9,14 +10,16 @@ class Admin::OrdersController < Admin::AdminController
   end
 
   def show
-    @order = Order.find_by_id(params[:id])
   end
 
   def update_quantity
-    order_product = OrderProduct.find_by_id(params[:order_product_id])
-    order_product.quantity = params[:quantity]
-    order_product.save
+    order_product = order.order_products.find(params[:order_product_id])
+    order_product.update_attributes(quantity: params[:quantity])
     redirect_to admin_orders_path
+  end
+
+  def order
+    @order ||= Order.find(params[:id])
   end
 
   def cancel
@@ -34,13 +37,9 @@ class Admin::OrdersController < Admin::AdminController
   end
 
   def ship
-    @order = Order.find_by_id(params[:id])
-    @order.status = "shipped"
-    @order.save
-    user = User.find_by_id(@order.user_id)
-    images = @order.products.collect { |product| product.image }
-    CheckoutMailer.order_fulfillment(user, @order, images).deliver
+    order.ship
     redirect_to admin_orders_path
+
   end
 
   def edit

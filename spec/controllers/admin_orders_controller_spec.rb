@@ -62,6 +62,16 @@ describe Admin::OrdersController do
       end
     end
 
+    context "an admin updates product quantity" do
+      it "should update the quantity" do
+        op = order.order_products.first
+        op.update_attributes(quantity: 1)
+        expect {
+          post :update_quantity, { id: order.id, order_product_id: op.id, quantity: 3 }
+        }.to change{ op.reload.quantity }.from(1).to(3) 
+      end
+    end
+
     context "an admin clicks to update an order" do
 
       it "cancels a pending order" do
@@ -87,8 +97,7 @@ describe Admin::OrdersController do
       it "marks as shipped orders that are currently paid" do
         order.status = "paid"
         post :ship, { id: order.id }
-        # CheckoutMailer.stub(:order_fulfillment).and_return(true)
-
+        CheckoutMailer.stub(:order_fulfillment)
         expect(assigns(:order).status).to eq "shipped"
       end
 

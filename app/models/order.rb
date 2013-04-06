@@ -29,6 +29,15 @@ class Order < ActiveRecord::Base
      end 
      total
    end 
+
+   def ship
+     update_attributes(status: "shipped")
+     CheckoutMailer.fill_order(self)#user, self, images).deliver
+   end
+
+   def images
+     products.collect { |product| product.image }
+   end
 end
 
 
