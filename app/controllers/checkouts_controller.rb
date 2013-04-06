@@ -11,21 +11,8 @@ class CheckoutsController < ApplicationController
 
     if checkout.valid?
       order = Order.new(user_id: current_user.id)
-      order.place(current_cart)
-
-      current_cart.products.each do |product|
-        order.products << product
-        order.save
-        order.order_products.each { |order_product| order_product.save }
-        quantity = current_cart.cart_products.find_by_product_id(product.id).quantity
-        order_product = order.order_products.find_by_product_id(product.id)
-        order_product.quantity = quantity
-        order_product.save
-      end
-
-      if order.save
+      if order.place(current_cart)
         session[:cart_id] = nil
-
         redirect_to confirmation_checkout_path
       end
     else
