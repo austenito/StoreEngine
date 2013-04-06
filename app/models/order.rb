@@ -10,16 +10,24 @@ class Order < ActiveRecord::Base
 
    validate :has_products? 
 
+   def place(cart)
+     cart.products.each do |product|
+       quantity = cart.cart_products.find(product.id).quantity
+       OrderProduct.create(order_id: id, product_id: product.id, quantity: quantity)
+     end
+     save
+   end
+
    def has_products?
-    errors.add :base, "Order must have at least one product" if self.products.blank?
+     errors.add :base, "Order must have at least one product" if self.products.blank?
    end 
 
    def total
-    total = 0
-    self.order_products.each do |order_product|
-      total += order_product.quantity * Product.find_by_id(order_product.product_id).price 
-    end 
-    total
+     total = 0
+     self.order_products.each do |order_product|
+       total += order_product.quantity * Product.find_by_id(order_product.product_id).price 
+     end 
+     total
    end 
 end
 

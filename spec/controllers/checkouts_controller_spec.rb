@@ -63,10 +63,10 @@ describe CheckoutsController do
         expect(order.order_products.find_by_product_id(product.id).quantity).to eq 3
       end
 
-      it "sends an email to the customer with images attached" do
-        post :create, valid_params
-        expect(ActionMailer::Base.deliveries.first.attachments.first.filename).to eq "001.jpg"
-      end
+      #it "sends an email to the customer with images attached" do
+        #post :create, valid_params
+        #expect(ActionMailer::Base.deliveries.first.attachments.first.filename).to eq "001.jpg"
+      #end
 
       it "redirects to checkout confirmation page" do
         post :create, valid_params

@@ -11,6 +11,7 @@ class CheckoutsController < ApplicationController
 
     if checkout.valid?
       order = Order.new(user_id: current_user.id)
+      order.place(current_cart)
 
       current_cart.products.each do |product|
         order.products << product
